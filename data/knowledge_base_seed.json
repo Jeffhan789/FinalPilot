@@ -1,0 +1,232 @@
+{
+  "project": "FinalPilot",
+  "version": "0.1",
+  "created_at": "2026-05-01",
+  "courses": [
+    {
+      "id": "course_multi_agent",
+      "name": "多智能体系统",
+      "difficulty": 4,
+      "knowledge_points": [
+        {
+          "id": "mas_agent_basic",
+          "chapter": "基础概念",
+          "title": "Agent 基本概念",
+          "difficulty": 2,
+          "initial_mastery_score": 0.35
+        },
+        {
+          "id": "mas_perception_action",
+          "chapter": "智能体结构",
+          "title": "感知、决策与行动",
+          "difficulty": 3,
+          "initial_mastery_score": 0.30
+        },
+        {
+          "id": "mas_communication",
+          "chapter": "协作机制",
+          "title": "多智能体通信",
+          "difficulty": 4,
+          "initial_mastery_score": 0.25
+        },
+        {
+          "id": "mas_coordination",
+          "chapter": "协作机制",
+          "title": "协作与协调",
+          "difficulty": 4,
+          "initial_mastery_score": 0.25
+        },
+        {
+          "id": "mas_task_decomposition",
+          "chapter": "任务规划",
+          "title": "任务分解",
+          "difficulty": 3,
+          "initial_mastery_score": 0.30
+        },
+        {
+          "id": "mas_consensus",
+          "chapter": "群体决策",
+          "title": "一致性与共识",
+          "difficulty": 5,
+          "initial_mastery_score": 0.20
+        }
+      ],
+      "sample_questions": [
+        {
+          "id": "q_mas_001",
+          "knowledge_point_id": "mas_agent_basic",
+          "type": "single_choice",
+          "difficulty": "easy",
+          "question": "在多智能体系统中，Agent 最核心的特征是什么？",
+          "options": ["只负责存储数据", "能够感知环境并自主决策", "只能执行固定脚本", "只能和用户聊天"],
+          "answer": "能够感知环境并自主决策",
+          "explanation": "Agent 通常具备感知、决策和行动能力，可以根据环境变化自主选择行为。"
+        },
+        {
+          "id": "q_mas_002",
+          "knowledge_point_id": "mas_coordination",
+          "type": "true_false",
+          "difficulty": "medium",
+          "question": "多智能体协作中，协调机制的目标之一是减少多个 Agent 之间的冲突。",
+          "answer": "true",
+          "explanation": "协调机制用于让多个 Agent 在目标、资源或行动存在冲突时仍能有效协作。"
+        }
+      ]
+    },
+    {
+      "id": "course_cloud",
+      "name": "云计算",
+      "difficulty": 4,
+      "knowledge_points": [
+        {
+          "id": "cloud_service_models",
+          "chapter": "云服务模型",
+          "title": "IaaS、PaaS、SaaS",
+          "difficulty": 2,
+          "initial_mastery_score": 0.40
+        },
+        {
+          "id": "cloud_virtualization",
+          "chapter": "基础设施",
+          "title": "虚拟化",
+          "difficulty": 3,
+          "initial_mastery_score": 0.35
+        },
+        {
+          "id": "cloud_container",
+          "chapter": "云原生",
+          "title": "容器与 Docker",
+          "difficulty": 3,
+          "initial_mastery_score": 0.30
+        },
+        {
+          "id": "cloud_kubernetes",
+          "chapter": "云原生",
+          "title": "Kubernetes 基础",
+          "difficulty": 5,
+          "initial_mastery_score": 0.20
+        },
+        {
+          "id": "cloud_serverless",
+          "chapter": "计算模型",
+          "title": "Serverless",
+          "difficulty": 4,
+          "initial_mastery_score": 0.25
+        },
+        {
+          "id": "cloud_scaling",
+          "chapter": "弹性伸缩",
+          "title": "自动扩缩容",
+          "difficulty": 4,
+          "initial_mastery_score": 0.25
+        }
+      ],
+      "sample_questions": [
+        {
+          "id": "q_cloud_001",
+          "knowledge_point_id": "cloud_service_models",
+          "type": "single_choice",
+          "difficulty": "easy",
+          "question": "以下哪一项最接近 SaaS 的例子？",
+          "options": ["虚拟机实例", "数据库运行环境", "在线文档协作软件", "裸金属服务器"],
+          "answer": "在线文档协作软件",
+          "explanation": "SaaS 指用户直接使用云端软件服务，不需要管理底层运行环境。"
+        },
+        {
+          "id": "q_cloud_002",
+          "knowledge_point_id": "cloud_serverless",
+          "type": "true_false",
+          "difficulty": "medium",
+          "question": "Serverless 表示完全没有服务器存在。",
+          "answer": "false",
+          "explanation": "Serverless 并不是没有服务器，而是开发者不需要直接管理服务器。"
+        }
+      ]
+    },
+    {
+      "id": "course_neural_network",
+      "name": "神经网络",
+      "difficulty": 5,
+      "knowledge_points": [
+        {
+          "id": "nn_perceptron",
+          "chapter": "基础模型",
+          "title": "感知机",
+          "difficulty": 2,
+          "initial_mastery_score": 0.40
+        },
+        {
+          "id": "nn_activation",
+          "chapter": "基础组件",
+          "title": "激活函数",
+          "difficulty": 3,
+          "initial_mastery_score": 0.35
+        },
+        {
+          "id": "nn_loss",
+          "chapter": "训练目标",
+          "title": "损失函数",
+          "difficulty": 3,
+          "initial_mastery_score": 0.35
+        },
+        {
+          "id": "nn_gradient_descent",
+          "chapter": "模型训练",
+          "title": "梯度下降",
+          "difficulty": 4,
+          "initial_mastery_score": 0.25
+        },
+        {
+          "id": "nn_backpropagation",
+          "chapter": "模型训练",
+          "title": "反向传播",
+          "difficulty": 5,
+          "initial_mastery_score": 0.20
+        },
+        {
+          "id": "nn_regularization",
+          "chapter": "泛化能力",
+          "title": "过拟合与正则化",
+          "difficulty": 4,
+          "initial_mastery_score": 0.25
+        },
+        {
+          "id": "nn_cnn",
+          "chapter": "网络结构",
+          "title": "CNN",
+          "difficulty": 4,
+          "initial_mastery_score": 0.25
+        },
+        {
+          "id": "nn_transformer",
+          "chapter": "网络结构",
+          "title": "Transformer",
+          "difficulty": 5,
+          "initial_mastery_score": 0.20
+        }
+      ],
+      "sample_questions": [
+        {
+          "id": "q_nn_001",
+          "knowledge_point_id": "nn_backpropagation",
+          "type": "single_choice",
+          "difficulty": "medium",
+          "question": "反向传播算法的主要作用是什么？",
+          "options": ["随机初始化权重", "计算损失函数对参数的梯度", "增加训练数据数量", "将模型转换为移动端格式"],
+          "answer": "计算损失函数对参数的梯度",
+          "explanation": "反向传播通过链式法则计算损失函数对各层参数的梯度，用于后续参数更新。"
+        },
+        {
+          "id": "q_nn_002",
+          "knowledge_point_id": "nn_regularization",
+          "type": "true_false",
+          "difficulty": "medium",
+          "question": "正则化方法通常用于缓解模型过拟合。",
+          "answer": "true",
+          "explanation": "L1、L2、Dropout 等正则化方法都可以帮助模型提升泛化能力。"
+        }
+      ]
+    }
+  ]
+}
+
