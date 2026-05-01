@@ -24,5 +24,13 @@ enum AppTheme {
         case .skip: secondaryText
         }
     }
-}
 
+    static func phaseColor(_ phase: SprintPlanPhase) -> Color {
+        switch phase {
+        case .foundation: primary
+        case .highFrequency: orange
+        case .pastPaper: Color(red: 0.18, green: 0.42, blue: 0.78)
+        case .examSwitch: green
+        }
+    }
+}

@@ -33,10 +33,12 @@ FinalPilot_期末复习App/
 │   ├── Theme.swift
 │   ├── Components.swift
 │   ├── DashboardView.swift
+│   ├── PlanView.swift
 │   ├── CoursesView.swift
 │   ├── PracticeView.swift
 │   ├── AnalyticsView.swift
-│   └── CareerView.swift
+│   ├── CareerView.swift
+│   └── Assets.xcassets/
 ├── docs/
 │   ├── 01_需求规格说明书.md
 │   ├── 02_落地执行方案.md
@@ -47,9 +49,13 @@ FinalPilot_期末复习App/
 │   ├── 07_市场调研与考前冲刺重估.md
 │   ├── 08_复习与校招面试双轨调度.md
 │   ├── 09_v0.1第一版交付说明.md
-│   └── 10_真实考试规划同步.md
+│   ├── 10_真实考试规划同步.md
+│   └── 11_App图标与A4计划同步说明.md
 ├── data/
-│   └── knowledge_base_seed.json
+│   ├── knowledge_base_seed.json
+│   └── a4_sprint_plan_seed.json
+├── tools/
+│   └── generate_finalpilot_icon.swift
 └── records/
     └── 进展日志.md
 ```
@@ -83,10 +89,12 @@ FinalPilot_期末复习App/
 - 已补充竞品调研与 2026-05-13、2026-05-14 连续考试冲刺场景重估。
 - 已新增考试复习与春季校招面试并行的双轨调度设计。
 - 已创建 SwiftUI iOS 工程 `FinalPilotApp.xcodeproj`。
-- 已实现 v0.1 本地 MVP：今日、课程、练习、分析、校招五个 Tab。
+- 已实现 v0.1 本地 MVP：今日、计划、课程、练习、校招五个 Tab。
 - 已通过 generic iOS device 构建验证。
 - 已根据真实规划同步考试日期：C310 为 2026-05-13，E320 为 2026-05-14，C315 为 2026-05-26。
 - 已把今日任务改为 C310 / E320 双考试优先，C315 在 5 月 14 日后进入主复习。
+- 已设计并生成 FinalPilot App 图标，写入 `Assets.xcassets/AppIcon.appiconset`。
+- 已将 A4 两周复习进度规划表同步为 App 内 `计划` 页面。
 
 ## 运行方式
 

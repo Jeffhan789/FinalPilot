@@ -1,0 +1,114 @@
+{
+  "source_pdf": "/Users/jeffhan/Library/Mobile Documents/com~apple~CloudDocs/0.UoL/#Y3-S1 S2/Y3S2 1+2/00-C310_E320-高效复习总控/A4-两周复习进度规划表.pdf",
+  "title": "C310 + E320 两周冲刺复习进度规划表",
+  "exam_dates": {
+    "C310": "2026-05-13",
+    "E320": "2026-05-14",
+    "C315": "2026-05-26"
+  },
+  "daily_loop": "课件 -> 1 页笔记 -> 1-2 道题 -> 错题记录 -> 睡前主动回忆",
+  "daily_minimum": [
+    "C310：1 个核心概念 + 1 道相关题",
+    "E320：1 个公式 / 算法 + 1 道相关计算题"
+  ],
+  "days": [
+    {
+      "date": "2026-05-01",
+      "phase": "搭骨架",
+      "c310": "C1-C2：Agent 基础、定义、环境、rationality。",
+      "e320": "C1-C2：NN 引言、结构特性、学习目标。",
+      "output": "术语表 + 真题矩阵初版。"
+    },
+    {
+      "date": "2026-05-02",
+      "phase": "搭骨架",
+      "c310": "C3-C4：演绎推理、BDI、practical reasoning。",
+      "e320": "C3-C4：学习过程、single-layer perceptron。",
+      "output": "BDI / Perceptron 各 1 页 + 各 1 题。"
+    },
+    {
+      "date": "2026-05-03",
+      "phase": "搭骨架",
+      "c310": "C5-C7：reactive / hybrid、ontology、communication。",
+      "e320": "C5：MLP、backpropagation、activation。",
+      "output": "手写 BDI / Backprop 典型题。"
+    },
+    {
+      "date": "2026-05-04",
+      "phase": "搭骨架",
+      "c310": "C8/C11：协同工作、多智能体交互。",
+      "e320": "Tutorial T1/T2：基础计算与模型理解。",
+      "output": "C310 题型模板初版；半天机动。"
+    },
+    {
+      "date": "2026-05-05",
+      "phase": "补高频",
+      "c310": "C12：group decision、social choice、voting。",
+      "e320": "C6：RBF networks、centres、widths。",
+      "output": "Arrow / Gibbard / RBF 对比笔记。"
+    },
+    {
+      "date": "2026-05-06",
+      "phase": "补高频",
+      "c310": "C13：coalition formation、core、Shapley value。",
+      "e320": "C7：SVM、margin、support vectors、kernel。",
+      "output": "Shapley / Core / SVM 题型模板。"
+    },
+    {
+      "date": "2026-05-07",
+      "phase": "补高频",
+      "c310": "C14：scarce resource allocation、fairness、efficiency。",
+      "e320": "C8：SOM、winner neuron、neighbourhood update。",
+      "output": "分配机制 + SOM 算法步骤。"
+    },
+    {
+      "date": "2026-05-08",
+      "phase": "补高频",
+      "c310": "C15-C16-C18：negotiation、argumentation、planning。",
+      "e320": "C9-C10：modern networks、总复习校准。",
+      "output": "两门课各完成一版总目录。"
+    },
+    {
+      "date": "2026-05-09",
+      "phase": "真题闭环",
+      "c310": "真题：先做有 model solutions 的年份。",
+      "e320": "21/22 真题：主计算题完整手写。",
+      "output": "真题矩阵第 1 轮；标出高频题型。"
+    },
+    {
+      "date": "2026-05-10",
+      "phase": "真题闭环",
+      "c310": "按题型集中刷：定义、比较、机制分析。",
+      "e320": "22/23 真题：公式、步骤、变量解释。",
+      "output": "错题分为概念 / 计算 / 英文表达。"
+    },
+    {
+      "date": "2026-05-11",
+      "phase": "真题闭环",
+      "c310": "限时写 1 套或半套；复盘结构化答案。",
+      "e320": "23/24 真题：主计算题 + 概念题。",
+      "output": "C310 答题模板定稿；半天机动。"
+    },
+    {
+      "date": "2026-05-12",
+      "phase": "真题闭环",
+      "c310": "最后一轮主动回忆：高频概念、易错题。",
+      "e320": "轻量保持：公式、算法、错题重做。",
+      "output": "C310 考前 2 页清单。"
+    },
+    {
+      "date": "2026-05-13",
+      "phase": "考试切换",
+      "c310": "C310 考试；考前只看 2 页清单，不学新内容。",
+      "e320": "考后恢复，再切 E320 24/25 真题和全错题。",
+      "output": "E320 考前公式 / 算法清单。"
+    },
+    {
+      "date": "2026-05-14",
+      "phase": "考试切换",
+      "c310": "不再投入 C310；整理考试后事项。",
+      "e320": "E320 考前主动回忆；E320 考试。",
+      "output": "只看错题和公式，不大范围学新内容。"
+    }
+  ]
+}

@@ -19,6 +19,8 @@
 		AA0000000000000000000010 /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000110 /* PracticeView.swift */; };
 		AA0000000000000000000011 /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000111 /* AnalyticsView.swift */; };
 		AA0000000000000000000012 /* CareerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000112 /* CareerView.swift */; };
+		AA0000000000000000000013 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000113 /* PlanView.swift */; };
+		AA0000000000000000000014 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000114 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		AA0000000000000000000110 /* PracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeView.swift; sourceTree = "<group>"; };
 		AA0000000000000000000111 /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
 		AA0000000000000000000112 /* CareerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000113 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000114 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA0000000000000000000201 /* FinalPilotApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalPilotApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -67,10 +71,12 @@
 				AA0000000000000000000106 /* Theme.swift */,
 				AA0000000000000000000107 /* Components.swift */,
 				AA0000000000000000000108 /* DashboardView.swift */,
+				AA0000000000000000000113 /* PlanView.swift */,
 				AA0000000000000000000109 /* CoursesView.swift */,
 				AA0000000000000000000110 /* PracticeView.swift */,
 				AA0000000000000000000111 /* AnalyticsView.swift */,
 				AA0000000000000000000112 /* CareerView.swift */,
+				AA0000000000000000000114 /* Assets.xcassets */,
 			);
 			path = FinalPilotApp;
 			sourceTree = "<group>";
@@ -141,6 +147,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA0000000000000000000014 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +166,7 @@
 				AA0000000000000000000006 /* Theme.swift in Sources */,
 				AA0000000000000000000007 /* Components.swift in Sources */,
 				AA0000000000000000000008 /* DashboardView.swift in Sources */,
+				AA0000000000000000000013 /* PlanView.swift in Sources */,
 				AA0000000000000000000009 /* CoursesView.swift in Sources */,
 				AA0000000000000000000010 /* PracticeView.swift in Sources */,
 				AA0000000000000000000011 /* AnalyticsView.swift in Sources */,
@@ -287,6 +295,8 @@
 		AA0000000000000000000803 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
@@ -314,6 +324,8 @@
 		AA0000000000000000000804 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;

@@ -8,6 +8,11 @@ struct ContentView: View {
                     Label("今日", systemImage: "bolt.horizontal.circle")
                 }
 
+            PlanView()
+                .tabItem {
+                    Label("计划", systemImage: "calendar.badge.clock")
+                }
+
             CoursesView()
                 .tabItem {
                     Label("课程", systemImage: "books.vertical")
@@ -16,11 +21,6 @@ struct ContentView: View {
             PracticeView()
                 .tabItem {
                     Label("练习", systemImage: "checklist.checked")
-                }
-
-            AnalyticsView()
-                .tabItem {
-                    Label("分析", systemImage: "chart.xyaxis.line")
                 }
 
             CareerView()
