@@ -57,7 +57,8 @@ FinalPilot_期末复习App/
 │   ├── 12_固定路径实时同步方案.md
 │   ├── 13_GitHub安全审计报告.md
 │   ├── 14_XYX图标候选方案.md
-│   └── 15_iOS安装包与分发说明.md
+│   ├── 15_iOS安装包与分发说明.md
+│   └── 16_TestFlight发布流程.md
 ├── data/
 │   ├── knowledge_base_seed.json
 │   ├── a4_sprint_plan_seed.json
@@ -109,7 +110,8 @@ FinalPilot_期末复习App/
 - 已将 A4 两周复习进度规划表同步为 App 内 `计划` 页面。
 - 已新增固定路径同步桥，从 C310、E320、总控目录挑选进度文件并生成 App 可读取的快照。
 - 已优化 `计划` 页面右侧对齐，长内容会收敛在手机屏幕内。
-- 已在桌面生成转签用 IPA、源码分享包和图标预览图。
+- 已在桌面只保留转签用 IPA 和图标预览图。
+- 已明确后续分发目标改为 TestFlight，并准备 App Store Connect 填写文案。
 
 ## 固定路径同步
 
