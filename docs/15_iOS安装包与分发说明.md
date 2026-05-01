@@ -6,11 +6,13 @@
 
 - `学呀学_App图标.png`
 - `学呀学_unsigned_for_resigning.ipa`
-- `学呀学_FinalPilot_source_762f718.zip`
+- `学呀学_FinalPilot_source_<commit>.zip`
 
 其中 `学呀学_unsigned_for_resigning.ipa` 是未签名 IPA，用于后续转签或 Ad Hoc 导出流程，不建议直接发给普通用户安装。iPhone 安装 App 必须通过 Apple 签名验证。
 
-`学呀学_FinalPilot_source_762f718.zip` 是源码分享包，不包含 `.git` 历史，适合发给同学、导师或面试准备对象查看工程结构。
+该 IPA 使用 Release 配置构建，并已剥离调试符号，避免把本机源码绝对路径带入分享包。
+
+`学呀学_FinalPilot_source_<commit>.zip` 是源码分享包，不包含 `.git` 历史，适合发给同学、导师或面试准备对象查看工程结构。
 
 ## 2. 为什么不能直接把 IPA 发给别人装
 
