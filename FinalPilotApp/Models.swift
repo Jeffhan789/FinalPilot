@@ -15,7 +15,7 @@ enum TaskTrack: String, CaseIterable, Identifiable {
 
     var subtitle: String {
         switch self {
-        case .exam: "考试优先，先保住 5 月 13 / 14"
+        case .exam: "考试优先，先保住 C310 / E320"
         case .career: "校招保温，只保留高收益短任务"
         }
     }
@@ -184,4 +184,3 @@ extension Date {
         return components.date ?? Date()
     }
 }
-

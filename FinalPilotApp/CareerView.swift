@@ -7,7 +7,7 @@ struct CareerView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    SectionHeader(title: "校招保温", subtitle: "考试窗口内只做最低准备，不展开大工程")
+                    SectionHeader(title: "校招保温", subtitle: "C310/E320 考前只做最低准备，不展开大工程")
                     nextInterview
                     minimumPack
                     projectPitch

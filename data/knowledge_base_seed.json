@@ -1,232 +1,272 @@
 {
   "project": "FinalPilot",
-  "version": "0.1",
+  "version": "0.2",
   "created_at": "2026-05-01",
+  "updated_at": "2026-05-01",
+  "source_plan": "/Users/jeffhan/Library/Mobile Documents/com~apple~CloudDocs/0.UoL/#Y3-S1 S2/Y3S2 1+2/C310-多智能体/复习规划同步",
+  "exam_window": [
+    {
+      "course_code": "C310",
+      "name": "多智能体系统",
+      "exam_date": "2026-05-13",
+      "priority": "highest"
+    },
+    {
+      "course_code": "E320",
+      "name": "神经网络",
+      "exam_date": "2026-05-14",
+      "priority": "high"
+    },
+    {
+      "course_code": "C315",
+      "name": "电子商务云计算",
+      "exam_date": "2026-05-26",
+      "priority": "deferred_until_after_2026-05-14"
+    }
+  ],
+  "daily_template": {
+    "name": "4 + 1 + 1",
+    "blocks": [
+      "C310 官方课件 + 章节笔记",
+      "C310 tutorial / past paper 小题",
+      "E320 官方课件 + 公式/算法笔记",
+      "E320 tutorial / past paper 计算题",
+      "真题矩阵 / 错题重做 / 主动回忆",
+      "面试准备 / 面试 / 突发事务缓冲"
+    ],
+    "career_buffer_minutes": [90, 120]
+  },
+  "day_modes": [
+    {
+      "id": "mode_a",
+      "name": "A 正常日",
+      "net_study_hours": "6-7",
+      "rule": "C310 两块，E320 两块，真题/错题一块，面试缓冲一块。"
+    },
+    {
+      "id": "mode_b",
+      "name": "B 有面试日",
+      "net_study_hours": "3-4",
+      "rule": "C310 一块，E320 一块，真题/错题 30-45 分钟，面试准备与复盘优先。"
+    },
+    {
+      "id": "mode_c",
+      "name": "C 低状态日",
+      "net_study_hours": "1.5-2",
+      "rule": "C310 主动回忆，E320 公式/算法重做，错题 1 道，不学新课。"
+    }
+  ],
   "courses": [
     {
-      "id": "course_multi_agent",
-      "name": "多智能体系统",
-      "difficulty": 4,
+      "id": "c310_multi_agent",
+      "course_code": "C310",
+      "name": "C310 多智能体系统",
+      "exam_date": "2026-05-13",
+      "difficulty": 5,
+      "current_strategy": "first_priority_until_exam",
       "knowledge_points": [
         {
-          "id": "mas_agent_basic",
-          "chapter": "基础概念",
-          "title": "Agent 基本概念",
-          "difficulty": 2,
-          "initial_mastery_score": 0.35
-        },
-        {
-          "id": "mas_perception_action",
-          "chapter": "智能体结构",
-          "title": "感知、决策与行动",
+          "id": "c310_agent_basic",
+          "chapter": "C1-C2",
+          "title": "Agent 基础、环境与 Expected Utility",
           "difficulty": 3,
-          "initial_mastery_score": 0.30
+          "initial_mastery_score": 0.34
         },
         {
-          "id": "mas_communication",
-          "chapter": "协作机制",
-          "title": "多智能体通信",
-          "difficulty": 4,
-          "initial_mastery_score": 0.25
-        },
-        {
-          "id": "mas_coordination",
-          "chapter": "协作机制",
-          "title": "协作与协调",
-          "difficulty": 4,
-          "initial_mastery_score": 0.25
-        },
-        {
-          "id": "mas_task_decomposition",
-          "chapter": "任务规划",
-          "title": "任务分解",
-          "difficulty": 3,
-          "initial_mastery_score": 0.30
-        },
-        {
-          "id": "mas_consensus",
-          "chapter": "群体决策",
-          "title": "一致性与共识",
+          "id": "c310_bdi",
+          "chapter": "C3-C4",
+          "title": "演绎推理、BDI 与实践推理",
           "difficulty": 5,
-          "initial_mastery_score": 0.20
+          "initial_mastery_score": 0.24
+        },
+        {
+          "id": "c310_architecture",
+          "chapter": "C5",
+          "title": "反应式与混合智能体架构",
+          "difficulty": 4,
+          "initial_mastery_score": 0.30
+        },
+        {
+          "id": "c310_ontology",
+          "chapter": "C6&7",
+          "title": "本体论、通信与 Shared Ontology",
+          "difficulty": 4,
+          "initial_mastery_score": 0.28
+        },
+        {
+          "id": "c310_social_choice",
+          "chapter": "C12",
+          "title": "群体决策与 Social Choice",
+          "difficulty": 5,
+          "initial_mastery_score": 0.22
+        },
+        {
+          "id": "c310_negotiation",
+          "chapter": "C15-C16",
+          "title": "谈判协商与论证",
+          "difficulty": 4,
+          "initial_mastery_score": 0.24
         }
       ],
       "sample_questions": [
         {
-          "id": "q_mas_001",
-          "knowledge_point_id": "mas_agent_basic",
+          "id": "q_c310_001",
+          "knowledge_point_id": "c310_agent_basic",
           "type": "single_choice",
           "difficulty": "easy",
-          "question": "在多智能体系统中，Agent 最核心的特征是什么？",
-          "options": ["只负责存储数据", "能够感知环境并自主决策", "只能执行固定脚本", "只能和用户聊天"],
-          "answer": "能够感知环境并自主决策",
-          "explanation": "Agent 通常具备感知、决策和行动能力，可以根据环境变化自主选择行为。"
-        },
-        {
-          "id": "q_mas_002",
-          "knowledge_point_id": "mas_coordination",
-          "type": "true_false",
-          "difficulty": "medium",
-          "question": "多智能体协作中，协调机制的目标之一是减少多个 Agent 之间的冲突。",
-          "answer": "true",
-          "explanation": "协调机制用于让多个 Agent 在目标、资源或行动存在冲突时仍能有效协作。"
+          "question": "在 C310 中，Agent 最核心的特征是什么？",
+          "options": ["只负责存储数据", "能够在环境中感知并自主行动", "只能执行固定脚本", "只能和用户聊天"],
+          "answer": "能够在环境中感知并自主行动",
+          "explanation": "C310 Day 1 计划强调 agent、autonomy、environment、rationality 和 expected utility。"
         }
       ]
     },
     {
-      "id": "course_cloud",
-      "name": "云计算",
-      "difficulty": 4,
+      "id": "e320_neural_network",
+      "course_code": "E320",
+      "name": "E320 神经网络",
+      "exam_date": "2026-05-14",
+      "difficulty": 5,
+      "current_strategy": "daily_formula_algorithm_loop",
       "knowledge_points": [
         {
-          "id": "cloud_service_models",
-          "chapter": "云服务模型",
-          "title": "IaaS、PaaS、SaaS",
-          "difficulty": 2,
-          "initial_mastery_score": 0.40
+          "id": "e320_intro_structure",
+          "chapter": "C1-C2",
+          "title": "NN 引言、结构特性与符号表",
+          "difficulty": 3,
+          "initial_mastery_score": 0.38
         },
         {
-          "id": "cloud_virtualization",
-          "chapter": "基础设施",
-          "title": "虚拟化",
+          "id": "e320_learning",
+          "chapter": "C3",
+          "title": "学习过程、训练/验证/测试",
           "difficulty": 3,
-          "initial_mastery_score": 0.35
+          "initial_mastery_score": 0.34
         },
         {
-          "id": "cloud_container",
-          "chapter": "云原生",
-          "title": "容器与 Docker",
-          "difficulty": 3,
+          "id": "e320_perceptron",
+          "chapter": "C4",
+          "title": "单层感知机与 Decision Boundary",
+          "difficulty": 4,
           "initial_mastery_score": 0.30
         },
         {
-          "id": "cloud_kubernetes",
-          "chapter": "云原生",
-          "title": "Kubernetes 基础",
+          "id": "e320_backprop",
+          "chapter": "C5",
+          "title": "MLP 与 Backpropagation",
           "difficulty": 5,
           "initial_mastery_score": 0.20
         },
         {
-          "id": "cloud_serverless",
-          "chapter": "计算模型",
-          "title": "Serverless",
+          "id": "e320_rbf",
+          "chapter": "C6",
+          "title": "RBF 网络",
           "difficulty": 4,
-          "initial_mastery_score": 0.25
+          "initial_mastery_score": 0.24
         },
         {
-          "id": "cloud_scaling",
-          "chapter": "弹性伸缩",
-          "title": "自动扩缩容",
-          "difficulty": 4,
-          "initial_mastery_score": 0.25
+          "id": "e320_svm",
+          "chapter": "C7",
+          "title": "SVM",
+          "difficulty": 5,
+          "initial_mastery_score": 0.22
         }
       ],
       "sample_questions": [
         {
-          "id": "q_cloud_001",
-          "knowledge_point_id": "cloud_service_models",
+          "id": "q_e320_001",
+          "knowledge_point_id": "e320_backprop",
+          "type": "single_choice",
+          "difficulty": "medium",
+          "question": "Backpropagation 的主要作用是什么？",
+          "options": ["随机初始化权重", "计算 loss 对参数的梯度并更新权重", "删除 hidden layer", "把模型转换为移动端格式"],
+          "answer": "计算 loss 对参数的梯度并更新权重",
+          "explanation": "E320 计划把 backprop 拆成 forward、error、output delta、hidden delta、weight update 五步。"
+        }
+      ]
+    },
+    {
+      "id": "c315_cloud",
+      "course_code": "C315",
+      "name": "C315 电子商务云计算",
+      "exam_date": "2026-05-26",
+      "difficulty": 4,
+      "current_strategy": "warm_keep_before_2026-05-14",
+      "knowledge_points": [
+        {
+          "id": "c315_service_models",
+          "chapter": "云服务模型",
+          "title": "IaaS、PaaS、SaaS",
+          "difficulty": 2,
+          "initial_mastery_score": 0.48
+        },
+        {
+          "id": "c315_virtualization",
+          "chapter": "基础设施",
+          "title": "虚拟化",
+          "difficulty": 3,
+          "initial_mastery_score": 0.40
+        },
+        {
+          "id": "c315_container",
+          "chapter": "云原生",
+          "title": "容器与 Docker",
+          "difficulty": 3,
+          "initial_mastery_score": 0.34
+        },
+        {
+          "id": "c315_kubernetes",
+          "chapter": "云原生",
+          "title": "Kubernetes 基础",
+          "difficulty": 5,
+          "initial_mastery_score": 0.24
+        },
+        {
+          "id": "c315_serverless",
+          "chapter": "计算模型",
+          "title": "Serverless",
+          "difficulty": 4,
+          "initial_mastery_score": 0.30
+        }
+      ],
+      "sample_questions": [
+        {
+          "id": "q_c315_001",
+          "knowledge_point_id": "c315_service_models",
           "type": "single_choice",
           "difficulty": "easy",
           "question": "以下哪一项最接近 SaaS 的例子？",
           "options": ["虚拟机实例", "数据库运行环境", "在线文档协作软件", "裸金属服务器"],
           "answer": "在线文档协作软件",
           "explanation": "SaaS 指用户直接使用云端软件服务，不需要管理底层运行环境。"
-        },
-        {
-          "id": "q_cloud_002",
-          "knowledge_point_id": "cloud_serverless",
-          "type": "true_false",
-          "difficulty": "medium",
-          "question": "Serverless 表示完全没有服务器存在。",
-          "answer": "false",
-          "explanation": "Serverless 并不是没有服务器，而是开发者不需要直接管理服务器。"
-        }
-      ]
-    },
-    {
-      "id": "course_neural_network",
-      "name": "神经网络",
-      "difficulty": 5,
-      "knowledge_points": [
-        {
-          "id": "nn_perceptron",
-          "chapter": "基础模型",
-          "title": "感知机",
-          "difficulty": 2,
-          "initial_mastery_score": 0.40
-        },
-        {
-          "id": "nn_activation",
-          "chapter": "基础组件",
-          "title": "激活函数",
-          "difficulty": 3,
-          "initial_mastery_score": 0.35
-        },
-        {
-          "id": "nn_loss",
-          "chapter": "训练目标",
-          "title": "损失函数",
-          "difficulty": 3,
-          "initial_mastery_score": 0.35
-        },
-        {
-          "id": "nn_gradient_descent",
-          "chapter": "模型训练",
-          "title": "梯度下降",
-          "difficulty": 4,
-          "initial_mastery_score": 0.25
-        },
-        {
-          "id": "nn_backpropagation",
-          "chapter": "模型训练",
-          "title": "反向传播",
-          "difficulty": 5,
-          "initial_mastery_score": 0.20
-        },
-        {
-          "id": "nn_regularization",
-          "chapter": "泛化能力",
-          "title": "过拟合与正则化",
-          "difficulty": 4,
-          "initial_mastery_score": 0.25
-        },
-        {
-          "id": "nn_cnn",
-          "chapter": "网络结构",
-          "title": "CNN",
-          "difficulty": 4,
-          "initial_mastery_score": 0.25
-        },
-        {
-          "id": "nn_transformer",
-          "chapter": "网络结构",
-          "title": "Transformer",
-          "difficulty": 5,
-          "initial_mastery_score": 0.20
-        }
-      ],
-      "sample_questions": [
-        {
-          "id": "q_nn_001",
-          "knowledge_point_id": "nn_backpropagation",
-          "type": "single_choice",
-          "difficulty": "medium",
-          "question": "反向传播算法的主要作用是什么？",
-          "options": ["随机初始化权重", "计算损失函数对参数的梯度", "增加训练数据数量", "将模型转换为移动端格式"],
-          "answer": "计算损失函数对参数的梯度",
-          "explanation": "反向传播通过链式法则计算损失函数对各层参数的梯度，用于后续参数更新。"
-        },
-        {
-          "id": "q_nn_002",
-          "knowledge_point_id": "nn_regularization",
-          "type": "true_false",
-          "difficulty": "medium",
-          "question": "正则化方法通常用于缓解模型过拟合。",
-          "answer": "true",
-          "explanation": "L1、L2、Dropout 等正则化方法都可以帮助模型提升泛化能力。"
         }
       ]
     }
+  ],
+  "today_seed_tasks": [
+    {
+      "id": "task_c310_day1",
+      "track": "exam",
+      "bucket": "must",
+      "title": "C310 C1-C2 Agent 基础闭环",
+      "minutes": 70,
+      "source": "00-每日任务看板.md"
+    },
+    {
+      "id": "task_e320_day1",
+      "track": "exam",
+      "bucket": "must",
+      "title": "E320 C1-C2 网络结构与符号表",
+      "minutes": 60,
+      "source": "README-总计划.md"
+    },
+    {
+      "id": "task_career_buffer",
+      "track": "career",
+      "bucket": "should",
+      "title": "面试 / 突发缓冲",
+      "minutes": 90,
+      "source": "README-总计划.md"
+    }
   ]
 }
-
