@@ -20,7 +20,9 @@ struct PlanView: View {
                     dayTimeline
                     executionRules
                 }
-                .padding()
+                .padding(.horizontal, 16)
+                .padding(.vertical, 16)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
             .background(AppTheme.background.ignoresSafeArea())
             .navigationTitle("两周计划")
@@ -29,10 +31,11 @@ struct PlanView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack(spacing: 12) {
+            HStack(alignment: .top, spacing: 12) {
                 Image(systemName: "paperplane.circle.fill")
                     .font(.system(size: 42))
                     .foregroundStyle(AppTheme.orange)
+                    .frame(width: 46)
                 VStack(alignment: .leading, spacing: 4) {
                     Text("C310 + E320 冲刺航线")
                         .font(.title3.weight(.bold))
@@ -40,7 +43,9 @@ struct PlanView: View {
                     Text("5/1-5/14：课件 -> 1 页笔记 -> 1-2 道题 -> 错题重做 -> 睡前主动回忆")
                         .font(.subheadline)
                         .foregroundStyle(AppTheme.secondaryText)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
 
             HStack(spacing: 10) {
@@ -50,6 +55,7 @@ struct PlanView: View {
             }
         }
         .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppTheme.card, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
     }
 
@@ -65,6 +71,7 @@ struct PlanView: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private func phaseButton(title: String, subtitle: String, phase: SprintPlanPhase?) -> some View {
@@ -101,6 +108,7 @@ struct PlanView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(AppTheme.primary.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var dayTimeline: some View {
@@ -110,6 +118,7 @@ struct PlanView: View {
                 SprintPlanDayCard(day: day)
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var executionRules: some View {
@@ -126,11 +135,13 @@ struct PlanView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(AppTheme.card, in: RoundedRectangle(cornerRadius: 8))
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
 private struct SprintPlanDayCard: View {
     let day: SprintPlanDay
+    private let checklistColumns = [GridItem(.adaptive(minimum: 86), spacing: 8)]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -157,20 +168,24 @@ private struct SprintPlanDayCard: View {
                     planLine(title: "E320", text: day.e320Task, color: AppTheme.primary)
                     planLine(title: "输出", text: day.output, color: AppTheme.green)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
 
-            HStack(spacing: 8) {
+            LazyVGrid(columns: checklistColumns, alignment: .leading, spacing: 8) {
                 ForEach(day.checklist, id: \.self) { item in
                     Label(item, systemImage: "square")
                         .font(.caption2.weight(.semibold))
                         .foregroundStyle(AppTheme.secondaryText)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 5)
                         .background(AppTheme.background, in: Capsule())
                 }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppTheme.card, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
         .overlay {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
@@ -196,6 +211,9 @@ private struct SprintPlanDayCard: View {
                 .font(.subheadline)
                 .foregroundStyle(AppTheme.ink)
                 .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .layoutPriority(1)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
