@@ -24,6 +24,49 @@ func color(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat =
     NSColor(calibratedRed: red, green: green, blue: blue, alpha: alpha)
 }
 
+func roundedRect(_ rect: CGRect, radius: CGFloat) -> CGPath {
+    CGPath(roundedRect: rect, cornerWidth: radius, cornerHeight: radius, transform: nil)
+}
+
+func drawCenteredText(
+    _ text: String,
+    in rect: CGRect,
+    fontSize: CGFloat,
+    weight: NSFont.Weight,
+    fill: NSColor,
+    stroke: NSColor? = nil,
+    strokeWidth: CGFloat = 0,
+    kern: CGFloat = 0
+) {
+    let paragraph = NSMutableParagraphStyle()
+    paragraph.alignment = .center
+
+    var attributes: [NSAttributedString.Key: Any] = [
+        .font: NSFont.systemFont(ofSize: fontSize, weight: weight),
+        .foregroundColor: fill,
+        .paragraphStyle: paragraph,
+        .kern: kern
+    ]
+
+    if let stroke {
+        attributes[.strokeColor] = stroke
+        attributes[.strokeWidth] = -strokeWidth
+    }
+
+    let attributedText = NSAttributedString(string: text, attributes: attributes)
+    let bounds = attributedText.boundingRect(
+        with: CGSize(width: rect.width, height: rect.height),
+        options: [.usesLineFragmentOrigin, .usesFontLeading]
+    )
+    let drawRect = CGRect(
+        x: rect.minX,
+        y: rect.midY - bounds.height / 2,
+        width: rect.width,
+        height: bounds.height + fontSize * 0.08
+    )
+    attributedText.draw(in: drawRect)
+}
+
 func drawIcon(size: Int) -> NSBitmapImageRep {
     let side = CGFloat(size)
     guard let representation = NSBitmapImageRep(
@@ -49,11 +92,11 @@ func drawIcon(size: Int) -> NSBitmapImageRep {
     let gradient = CGGradient(
         colorsSpace: colorSpace,
         colors: [
-            color(0.06, 0.16, 0.22).cgColor,
-            color(0.10, 0.42, 0.47).cgColor,
-            color(0.08, 0.22, 0.42).cgColor
+            color(0.04, 0.12, 0.18).cgColor,
+            color(0.05, 0.40, 0.42).cgColor,
+            color(0.14, 0.18, 0.38).cgColor
         ] as CFArray,
-        locations: [0.0, 0.55, 1.0]
+        locations: [0.0, 0.52, 1.0]
     )!
     context.drawLinearGradient(
         gradient,
@@ -74,22 +117,51 @@ func drawIcon(size: Int) -> NSBitmapImageRep {
         context.strokePath()
     }
 
+    let glow = CGGradient(
+        colorsSpace: colorSpace,
+        colors: [
+            color(0.95, 0.60, 0.23, 0.36).cgColor,
+            color(0.95, 0.60, 0.23, 0.00).cgColor
+        ] as CFArray,
+        locations: [0.0, 1.0]
+    )!
+    context.drawRadialGradient(
+        glow,
+        startCenter: CGPoint(x: side * 0.70, y: side * 0.22),
+        startRadius: side * 0.02,
+        endCenter: CGPoint(x: side * 0.70, y: side * 0.22),
+        endRadius: side * 0.58,
+        options: []
+    )
+
+    let badge = CGRect(x: side * 0.115, y: side * 0.185, width: side * 0.77, height: side * 0.63)
+    context.setShadow(offset: CGSize(width: 0, height: side * 0.045), blur: side * 0.07, color: color(0, 0, 0, 0.27).cgColor)
+    context.setFillColor(color(0.02, 0.08, 0.12, 0.58).cgColor)
+    context.addPath(roundedRect(badge, radius: side * 0.12))
+    context.fillPath()
+    context.setShadow(offset: .zero, blur: 0, color: nil)
+
+    context.setStrokeColor(color(1, 1, 1, 0.20).cgColor)
+    context.setLineWidth(side * 0.012)
+    context.addPath(roundedRect(badge.insetBy(dx: side * 0.018, dy: side * 0.018), radius: side * 0.10))
+    context.strokePath()
+
     context.setLineCap(.round)
     context.setLineJoin(.round)
-    context.setLineWidth(side * 0.055)
-    context.setStrokeColor(color(0.94, 0.56, 0.23).cgColor)
-    context.move(to: CGPoint(x: side * 0.20, y: side * 0.70))
+    context.setLineWidth(side * 0.045)
+    context.setStrokeColor(color(0.96, 0.64, 0.25).cgColor)
+    context.move(to: CGPoint(x: side * 0.22, y: side * 0.67))
     context.addCurve(
-        to: CGPoint(x: side * 0.82, y: side * 0.30),
-        control1: CGPoint(x: side * 0.34, y: side * 0.40),
-        control2: CGPoint(x: side * 0.58, y: side * 0.66)
+        to: CGPoint(x: side * 0.80, y: side * 0.33),
+        control1: CGPoint(x: side * 0.34, y: side * 0.38),
+        control2: CGPoint(x: side * 0.58, y: side * 0.62)
     )
     context.strokePath()
 
     let nodes: [(CGFloat, CGFloat, CGFloat)] = [
-        (0.20, 0.70, 0.040),
-        (0.52, 0.50, 0.034),
-        (0.82, 0.30, 0.040)
+        (0.22, 0.67, 0.036),
+        (0.50, 0.49, 0.030),
+        (0.80, 0.33, 0.036)
     ]
     for (x, y, radius) in nodes {
         let r = side * radius
@@ -100,41 +172,88 @@ func drawIcon(size: Int) -> NSBitmapImageRep {
         context.fillEllipse(in: rect)
     }
 
-    let plane = CGMutablePath()
-    plane.move(to: CGPoint(x: side * 0.27, y: side * 0.30))
-    plane.addLine(to: CGPoint(x: side * 0.76, y: side * 0.45))
-    plane.addLine(to: CGPoint(x: side * 0.38, y: side * 0.56))
-    plane.addLine(to: CGPoint(x: side * 0.45, y: side * 0.42))
-    plane.closeSubpath()
+    let leftPage = CGMutablePath()
+    leftPage.move(to: CGPoint(x: side * 0.24, y: side * 0.71))
+    leftPage.addCurve(
+        to: CGPoint(x: side * 0.48, y: side * 0.74),
+        control1: CGPoint(x: side * 0.32, y: side * 0.67),
+        control2: CGPoint(x: side * 0.41, y: side * 0.68)
+    )
+    leftPage.addLine(to: CGPoint(x: side * 0.48, y: side * 0.84))
+    leftPage.addCurve(
+        to: CGPoint(x: side * 0.24, y: side * 0.80),
+        control1: CGPoint(x: side * 0.40, y: side * 0.79),
+        control2: CGPoint(x: side * 0.31, y: side * 0.78)
+    )
+    leftPage.closeSubpath()
 
-    context.setShadow(offset: CGSize(width: 0, height: side * 0.025), blur: side * 0.035, color: color(0, 0, 0, 0.22).cgColor)
+    let rightPage = CGMutablePath()
+    rightPage.move(to: CGPoint(x: side * 0.52, y: side * 0.74))
+    rightPage.addCurve(
+        to: CGPoint(x: side * 0.76, y: side * 0.71),
+        control1: CGPoint(x: side * 0.59, y: side * 0.68),
+        control2: CGPoint(x: side * 0.68, y: side * 0.67)
+    )
+    rightPage.addLine(to: CGPoint(x: side * 0.76, y: side * 0.80))
+    rightPage.addCurve(
+        to: CGPoint(x: side * 0.52, y: side * 0.84),
+        control1: CGPoint(x: side * 0.69, y: side * 0.78),
+        control2: CGPoint(x: side * 0.60, y: side * 0.79)
+    )
+    rightPage.closeSubpath()
+
+    context.setShadow(offset: CGSize(width: 0, height: side * 0.018), blur: side * 0.030, color: color(0, 0, 0, 0.20).cgColor)
     context.setFillColor(color(1, 1, 1).cgColor)
-    context.addPath(plane)
+    context.addPath(leftPage)
+    context.fillPath()
+    context.addPath(rightPage)
     context.fillPath()
     context.setShadow(offset: .zero, blur: 0, color: nil)
 
-    let fold = CGMutablePath()
-    fold.move(to: CGPoint(x: side * 0.45, y: side * 0.42))
-    fold.addLine(to: CGPoint(x: side * 0.76, y: side * 0.45))
-    fold.addLine(to: CGPoint(x: side * 0.38, y: side * 0.56))
-    context.addPath(fold)
-    context.setStrokeColor(color(0.10, 0.42, 0.47, 0.28).cgColor)
-    context.setLineWidth(side * 0.018)
+    context.setStrokeColor(color(0.08, 0.32, 0.36, 0.24).cgColor)
+    context.setLineWidth(side * 0.012)
+    context.move(to: CGPoint(x: side * 0.50, y: side * 0.72))
+    context.addLine(to: CGPoint(x: side * 0.50, y: side * 0.84))
     context.strokePath()
 
-    let bolt = CGMutablePath()
-    bolt.move(to: CGPoint(x: side * 0.53, y: side * 0.63))
-    bolt.addLine(to: CGPoint(x: side * 0.45, y: side * 0.78))
-    bolt.addLine(to: CGPoint(x: side * 0.56, y: side * 0.74))
-    bolt.addLine(to: CGPoint(x: side * 0.50, y: side * 0.88))
-    bolt.addLine(to: CGPoint(x: side * 0.66, y: side * 0.68))
-    bolt.addLine(to: CGPoint(x: side * 0.56, y: side * 0.71))
-    bolt.closeSubpath()
-    context.setFillColor(color(0.94, 0.56, 0.23).cgColor)
-    context.addPath(bolt)
-    context.fillPath()
+    for y in [0.765, 0.795] as [CGFloat] {
+        context.move(to: CGPoint(x: side * 0.29, y: side * y))
+        context.addCurve(
+            to: CGPoint(x: side * 0.44, y: side * (y + 0.015)),
+            control1: CGPoint(x: side * 0.34, y: side * (y - 0.012)),
+            control2: CGPoint(x: side * 0.39, y: side * y)
+        )
+        context.move(to: CGPoint(x: side * 0.56, y: side * (y + 0.015)))
+        context.addCurve(
+            to: CGPoint(x: side * 0.71, y: side * y),
+            control1: CGPoint(x: side * 0.61, y: side * y),
+            control2: CGPoint(x: side * 0.66, y: side * (y - 0.012))
+        )
+    }
+    context.strokePath()
 
     context.restoreGState()
+
+    drawCenteredText(
+        "XYX",
+        in: CGRect(x: side * 0.11, y: side * 0.315, width: side * 0.78, height: side * 0.28),
+        fontSize: side * 0.205,
+        weight: .black,
+        fill: color(0.98, 1.00, 0.96),
+        stroke: color(0.02, 0.10, 0.12, 0.42),
+        strokeWidth: side * 0.010,
+        kern: side * 0.004
+    )
+
+    drawCenteredText(
+        "学呀学",
+        in: CGRect(x: side * 0.22, y: side * 0.575, width: side * 0.56, height: side * 0.08),
+        fontSize: side * 0.058,
+        weight: .semibold,
+        fill: color(0.96, 0.64, 0.25),
+        kern: side * 0.004
+    )
+
     NSGraphicsContext.restoreGraphicsState()
     return representation
 }
