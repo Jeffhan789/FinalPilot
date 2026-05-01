@@ -53,13 +53,17 @@ FinalPilot_期末复习App/
 │   ├── 09_v0.1第一版交付说明.md
 │   ├── 10_真实考试规划同步.md
 │   ├── 11_App图标与A4计划同步说明.md
-│   └── 12_固定路径实时同步方案.md
+│   ├── 12_固定路径实时同步方案.md
+│   ├── 13_GitHub安全审计报告.md
+│   └── 14_XYX图标候选方案.md
 ├── data/
 │   ├── knowledge_base_seed.json
 │   ├── a4_sprint_plan_seed.json
 │   └── study_sync_snapshot.json
 ├── tools/
-│   ├── generate_finalpilot_icon.swift
+│   ├── generate_icon_from_reference.py
+│   ├── generate_icon_candidates.swift
+│   ├── generate_icon_shortlist.swift
 │   └── sync_study_sources.mjs
 └── records/
     └── 进展日志.md
@@ -98,7 +102,7 @@ FinalPilot_期末复习App/
 - 已通过 generic iOS device 构建验证。
 - 已根据真实规划同步考试日期：C310 为 2026-05-13，E320 为 2026-05-14，C315 为 2026-05-26。
 - 已把今日任务改为 C310 / E320 双考试优先，C315 在 5 月 14 日后进入主复习。
-- 已设计并生成 FinalPilot App 图标，写入 `Assets.xcassets/AppIcon.appiconset`。
+- 已根据手绘参考图提取 FinalPilot App 图标，写入 `Assets.xcassets/AppIcon.appiconset`。
 - 已将 A4 两周复习进度规划表同步为 App 内 `计划` 页面。
 - 已新增固定路径同步桥，从 C310、E320、总控目录挑选进度文件并生成 App 可读取的快照。
 
