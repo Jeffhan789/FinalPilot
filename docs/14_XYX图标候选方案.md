@@ -57,3 +57,16 @@
 3. 运行 Xcode 构建验证。
 4. 更新图标说明文档和进展日志。
 5. 同步到 GitHub。
+
+## 5. 最新决策
+
+用户后续提供了手绘 `XYX + 学` 参考图，并要求从图片中提取图形作为软件图标。
+
+因此当前正式 AppIcon 已改为手绘参考图提取版：
+
+- 白底：常规软件图标白。
+- 蓝色：从手绘图中提取的马克笔蓝。
+- 生成脚本：`tools/generate_icon_from_reference.py`。
+- 预览图：`design/reference_icon/FinalPilot_reference_extracted_icon.png`。
+
+本文件保留前两轮候选稿，作为视觉探索记录。
