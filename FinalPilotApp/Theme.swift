@@ -33,4 +33,14 @@ enum AppTheme {
         case .examSwitch: green
         }
     }
+
+    static func questionSourceColor(_ source: QuestionSourceType) -> Color {
+        switch source {
+        case .lecture: primary
+        case .tutorial: green
+        case .pastPaper: Color(red: 0.18, green: 0.42, blue: 0.78)
+        case .finalExam: orange
+        case .sprintNote: Color(red: 0.48, green: 0.36, blue: 0.72)
+        }
+    }
 }

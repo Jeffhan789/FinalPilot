@@ -100,6 +100,8 @@ struct MetricTile: View {
             Text(value)
                 .font(.title3.weight(.bold))
                 .foregroundStyle(AppTheme.ink)
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
             Text(title)
                 .font(.caption)
                 .foregroundStyle(AppTheme.secondaryText)
@@ -142,6 +144,14 @@ struct CourseCard: View {
             ProgressView(value: course.masteryAverage)
                 .tint(AppTheme.courseColor(course.colorKey))
 
+            VStack(alignment: .leading, spacing: 5) {
+                if let durationText {
+                    Label(durationText, systemImage: "clock")
+                }
+            }
+            .font(.caption)
+            .foregroundStyle(AppTheme.secondaryText)
+
             HStack {
                 Label("\(course.knowledgePoints.count) 知识点", systemImage: "square.grid.2x2")
                 Spacer()
@@ -159,9 +169,35 @@ struct CourseCard: View {
             return "项目展示与知识保温"
         }
         if daysUntilExam <= 0 {
-            return "考试日"
+            return "考试日 · \(examDateText)"
         }
-        return "距离考试 \(daysUntilExam) 天"
+        return "距离考试 \(daysUntilExam) 天 · \(examDateText)"
+    }
+
+    private var examDateText: String {
+        guard let examDate = course.examDate else {
+            return "时间待定"
+        }
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "zh_Hans_CN")
+        formatter.timeZone = TimeZone(identifier: "Europe/London")
+        formatter.dateFormat = "M/d HH:mm"
+        return formatter.string(from: examDate)
+    }
+
+    private var durationText: String? {
+        guard let minutes = course.examDurationMinutes else {
+            return nil
+        }
+        let hours = minutes / 60
+        let remainingMinutes = minutes % 60
+        if hours > 0 && remainingMinutes > 0 {
+            return "\(hours)小时\(remainingMinutes)分钟"
+        }
+        if hours > 0 {
+            return "\(hours)小时"
+        }
+        return "\(minutes)分钟"
     }
 }
 
@@ -188,4 +224,3 @@ struct EmptyStateView: View {
         .background(AppTheme.card, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
     }
 }
-
