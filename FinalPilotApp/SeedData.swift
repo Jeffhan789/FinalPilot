@@ -3,67 +3,111 @@ import Foundation
 enum SeedData {
     static let courses: [Course] = [
         Course(
-            id: "neural_network",
-            name: "神经网络",
+            id: "c310_multi_agent",
+            name: "C310 多智能体系统",
             examDate: .finalPilotDate(month: 5, day: 13, hour: 9),
             difficulty: 5,
-            colorKey: "teal",
-            symbol: "point.3.connected.trianglepath.dotted",
+            colorKey: "orange",
+            symbol: "person.3.sequence",
             knowledgePoints: [
-                KnowledgePoint(id: "nn_perceptron", chapter: "基础模型", title: "感知机", difficulty: 2, mastery: 0.48, status: .inProgress),
-                KnowledgePoint(id: "nn_activation", chapter: "基础组件", title: "激活函数", difficulty: 3, mastery: 0.54, status: .inProgress),
-                KnowledgePoint(id: "nn_loss", chapter: "训练目标", title: "损失函数", difficulty: 3, mastery: 0.52, status: .inProgress),
-                KnowledgePoint(id: "nn_gradient_descent", chapter: "模型训练", title: "梯度下降", difficulty: 4, mastery: 0.36, status: .weak),
-                KnowledgePoint(id: "nn_backpropagation", chapter: "模型训练", title: "反向传播", difficulty: 5, mastery: 0.24, status: .weak),
-                KnowledgePoint(id: "nn_regularization", chapter: "泛化能力", title: "过拟合与正则化", difficulty: 4, mastery: 0.32, status: .weak),
-                KnowledgePoint(id: "nn_cnn", chapter: "网络结构", title: "CNN", difficulty: 4, mastery: 0.38, status: .inProgress),
-                KnowledgePoint(id: "nn_transformer", chapter: "网络结构", title: "Transformer", difficulty: 5, mastery: 0.26, status: .weak)
+                KnowledgePoint(id: "c310_agent_basic", chapter: "C1-C2", title: "Agent 基础、环境与 Expected Utility", difficulty: 3, mastery: 0.34, status: .weak),
+                KnowledgePoint(id: "c310_bdi", chapter: "C3-C4", title: "演绎推理、BDI 与实践推理", difficulty: 5, mastery: 0.24, status: .weak),
+                KnowledgePoint(id: "c310_architecture", chapter: "C5", title: "反应式与混合智能体架构", difficulty: 4, mastery: 0.30, status: .weak),
+                KnowledgePoint(id: "c310_ontology", chapter: "C6&7", title: "本体论、通信与 Shared Ontology", difficulty: 4, mastery: 0.28, status: .weak),
+                KnowledgePoint(id: "c310_cooperation", chapter: "C8-C11", title: "协同工作与多智能体交互", difficulty: 4, mastery: 0.32, status: .weak),
+                KnowledgePoint(id: "c310_social_choice", chapter: "C12", title: "群体决策与 Social Choice", difficulty: 5, mastery: 0.22, status: .weak),
+                KnowledgePoint(id: "c310_coalition", chapter: "C13", title: "联盟形成与 Coalition Formation", difficulty: 5, mastery: 0.20, status: .weak),
+                KnowledgePoint(id: "c310_resource", chapter: "C14", title: "稀缺资源分配", difficulty: 4, mastery: 0.26, status: .weak),
+                KnowledgePoint(id: "c310_negotiation", chapter: "C15-C16", title: "谈判协商与论证", difficulty: 4, mastery: 0.24, status: .weak),
+                KnowledgePoint(id: "c310_planning", chapter: "C18", title: "高级自动规划", difficulty: 5, mastery: 0.18, status: .weak)
             ],
             questions: [
                 QuizQuestion(
-                    id: "q_nn_001",
-                    courseID: "neural_network",
-                    knowledgePointID: "nn_backpropagation",
+                    id: "q_c310_001",
+                    courseID: "c310_multi_agent",
+                    knowledgePointID: "c310_agent_basic",
                     type: "single_choice",
-                    difficulty: "medium",
-                    question: "反向传播算法的主要作用是什么？",
-                    options: ["随机初始化权重", "计算损失函数对参数的梯度", "增加训练数据数量", "将模型转换为移动端格式"],
-                    answer: "计算损失函数对参数的梯度",
-                    explanation: "反向传播通过链式法则计算损失函数对各层参数的梯度，用于后续参数更新。"
+                    difficulty: "easy",
+                    question: "在 C310 中，Agent 最核心的特征是什么？",
+                    options: ["只负责存储数据", "能够在环境中感知并自主行动", "只能执行固定脚本", "只能和用户聊天"],
+                    answer: "能够在环境中感知并自主行动",
+                    explanation: "C310 Day 1 计划强调 agent、autonomy、environment、rationality 和 expected utility。"
                 ),
                 QuizQuestion(
-                    id: "q_nn_002",
-                    courseID: "neural_network",
-                    knowledgePointID: "nn_regularization",
-                    type: "true_false",
+                    id: "q_c310_002",
+                    courseID: "c310_multi_agent",
+                    knowledgePointID: "c310_bdi",
+                    type: "single_choice",
                     difficulty: "medium",
-                    question: "正则化方法通常用于缓解模型过拟合。",
-                    options: ["正确", "错误"],
-                    answer: "正确",
-                    explanation: "L1、L2、Dropout 等正则化方法都可以帮助模型提升泛化能力。"
+                    question: "BDI 架构中的 intention 更接近下列哪一项？",
+                    options: ["环境中的所有事实", "智能体已承诺执行的目标或计划", "随机生成的动作", "不需要筛选的所有 desire"],
+                    answer: "智能体已承诺执行的目标或计划",
+                    explanation: "BDI 的复习重点是 belief、desire、intention、deliberation、means-end reasoning 与 plan。"
                 )
             ]
         ),
         Course(
-            id: "cloud",
-            name: "云计算",
+            id: "e320_neural_network",
+            name: "E320 神经网络",
             examDate: .finalPilotDate(month: 5, day: 14, hour: 9),
+            difficulty: 5,
+            colorKey: "teal",
+            symbol: "point.3.connected.trianglepath.dotted",
+            knowledgePoints: [
+                KnowledgePoint(id: "e320_intro_structure", chapter: "C1-C2", title: "NN 引言、结构特性与符号表", difficulty: 3, mastery: 0.38, status: .inProgress),
+                KnowledgePoint(id: "e320_learning", chapter: "C3", title: "学习过程、训练/验证/测试", difficulty: 3, mastery: 0.34, status: .weak),
+                KnowledgePoint(id: "e320_perceptron", chapter: "C4", title: "单层感知机与 Decision Boundary", difficulty: 4, mastery: 0.30, status: .weak),
+                KnowledgePoint(id: "e320_backprop", chapter: "C5", title: "MLP 与 Backpropagation", difficulty: 5, mastery: 0.20, status: .weak),
+                KnowledgePoint(id: "e320_rbf", chapter: "C6", title: "RBF 网络", difficulty: 4, mastery: 0.24, status: .weak),
+                KnowledgePoint(id: "e320_svm", chapter: "C7", title: "SVM", difficulty: 5, mastery: 0.22, status: .weak),
+                KnowledgePoint(id: "e320_som", chapter: "C8", title: "SOM 算法步骤", difficulty: 4, mastery: 0.24, status: .weak),
+                KnowledgePoint(id: "e320_modern", chapter: "C9-C10", title: "现代网络与总复习", difficulty: 4, mastery: 0.26, status: .weak)
+            ],
+            questions: [
+                QuizQuestion(
+                    id: "q_e320_001",
+                    courseID: "e320_neural_network",
+                    knowledgePointID: "e320_backprop",
+                    type: "single_choice",
+                    difficulty: "medium",
+                    question: "Backpropagation 的主要作用是什么？",
+                    options: ["随机初始化权重", "计算 loss 对参数的梯度并更新权重", "删除 hidden layer", "把模型转换为移动端格式"],
+                    answer: "计算 loss 对参数的梯度并更新权重",
+                    explanation: "E320 计划把 backprop 拆成 forward、error、output delta、hidden delta、weight update 五步。"
+                ),
+                QuizQuestion(
+                    id: "q_e320_002",
+                    courseID: "e320_neural_network",
+                    knowledgePointID: "e320_perceptron",
+                    type: "true_false",
+                    difficulty: "medium",
+                    question: "Perceptron 复习时只需要记结论，不需要写出 weight update rule。",
+                    options: ["正确", "错误"],
+                    answer: "错误",
+                    explanation: "实际计划要求默写 perceptron decision rule 和 weight update rule，并手写计算题。"
+                )
+            ]
+        ),
+        Course(
+            id: "c315_cloud",
+            name: "C315 电子商务云计算",
+            examDate: .finalPilotDate(month: 5, day: 26, hour: 9),
             difficulty: 4,
             colorKey: "blue",
             symbol: "cloud",
             knowledgePoints: [
-                KnowledgePoint(id: "cloud_service_models", chapter: "云服务模型", title: "IaaS、PaaS、SaaS", difficulty: 2, mastery: 0.58, status: .inProgress),
-                KnowledgePoint(id: "cloud_virtualization", chapter: "基础设施", title: "虚拟化", difficulty: 3, mastery: 0.44, status: .inProgress),
-                KnowledgePoint(id: "cloud_container", chapter: "云原生", title: "容器与 Docker", difficulty: 3, mastery: 0.38, status: .inProgress),
-                KnowledgePoint(id: "cloud_kubernetes", chapter: "云原生", title: "Kubernetes 基础", difficulty: 5, mastery: 0.22, status: .weak),
-                KnowledgePoint(id: "cloud_serverless", chapter: "计算模型", title: "Serverless", difficulty: 4, mastery: 0.30, status: .weak),
-                KnowledgePoint(id: "cloud_scaling", chapter: "弹性伸缩", title: "自动扩缩容", difficulty: 4, mastery: 0.34, status: .weak)
+                KnowledgePoint(id: "c315_service_models", chapter: "云服务模型", title: "IaaS、PaaS、SaaS", difficulty: 2, mastery: 0.48, status: .inProgress),
+                KnowledgePoint(id: "c315_virtualization", chapter: "基础设施", title: "虚拟化", difficulty: 3, mastery: 0.40, status: .inProgress),
+                KnowledgePoint(id: "c315_container", chapter: "云原生", title: "容器与 Docker", difficulty: 3, mastery: 0.34, status: .weak),
+                KnowledgePoint(id: "c315_kubernetes", chapter: "云原生", title: "Kubernetes 基础", difficulty: 5, mastery: 0.24, status: .weak),
+                KnowledgePoint(id: "c315_serverless", chapter: "计算模型", title: "Serverless", difficulty: 4, mastery: 0.30, status: .weak),
+                KnowledgePoint(id: "c315_scaling", chapter: "弹性伸缩", title: "自动扩缩容", difficulty: 4, mastery: 0.30, status: .weak)
             ],
             questions: [
                 QuizQuestion(
-                    id: "q_cloud_001",
-                    courseID: "cloud",
-                    knowledgePointID: "cloud_service_models",
+                    id: "q_c315_001",
+                    courseID: "c315_cloud",
+                    knowledgePointID: "c315_service_models",
                     type: "single_choice",
                     difficulty: "easy",
                     question: "以下哪一项最接近 SaaS 的例子？",
@@ -72,9 +116,9 @@ enum SeedData {
                     explanation: "SaaS 指用户直接使用云端软件服务，不需要管理底层运行环境。"
                 ),
                 QuizQuestion(
-                    id: "q_cloud_002",
-                    courseID: "cloud",
-                    knowledgePointID: "cloud_serverless",
+                    id: "q_c315_002",
+                    courseID: "c315_cloud",
+                    knowledgePointID: "c315_serverless",
                     type: "true_false",
                     difficulty: "medium",
                     question: "Serverless 表示完全没有服务器存在。",
@@ -83,81 +127,63 @@ enum SeedData {
                     explanation: "Serverless 并不是没有服务器，而是开发者不需要直接管理服务器。"
                 )
             ]
-        ),
-        Course(
-            id: "multi_agent",
-            name: "多智能体系统",
-            examDate: nil,
-            difficulty: 4,
-            colorKey: "orange",
-            symbol: "person.3.sequence",
-            knowledgePoints: [
-                KnowledgePoint(id: "mas_agent_basic", chapter: "基础概念", title: "Agent 基本概念", difficulty: 2, mastery: 0.55, status: .inProgress),
-                KnowledgePoint(id: "mas_perception_action", chapter: "智能体结构", title: "感知、决策与行动", difficulty: 3, mastery: 0.42, status: .inProgress),
-                KnowledgePoint(id: "mas_communication", chapter: "协作机制", title: "多智能体通信", difficulty: 4, mastery: 0.34, status: .weak),
-                KnowledgePoint(id: "mas_coordination", chapter: "协作机制", title: "协作与协调", difficulty: 4, mastery: 0.36, status: .weak),
-                KnowledgePoint(id: "mas_task_decomposition", chapter: "任务规划", title: "任务分解", difficulty: 3, mastery: 0.46, status: .inProgress),
-                KnowledgePoint(id: "mas_consensus", chapter: "群体决策", title: "一致性与共识", difficulty: 5, mastery: 0.24, status: .weak)
-            ],
-            questions: [
-                QuizQuestion(
-                    id: "q_mas_001",
-                    courseID: "multi_agent",
-                    knowledgePointID: "mas_agent_basic",
-                    type: "single_choice",
-                    difficulty: "easy",
-                    question: "在多智能体系统中，Agent 最核心的特征是什么？",
-                    options: ["只负责存储数据", "能够感知环境并自主决策", "只能执行固定脚本", "只能和用户聊天"],
-                    answer: "能够感知环境并自主决策",
-                    explanation: "Agent 通常具备感知、决策和行动能力，可以根据环境变化自主选择行为。"
-                ),
-                QuizQuestion(
-                    id: "q_mas_002",
-                    courseID: "multi_agent",
-                    knowledgePointID: "mas_coordination",
-                    type: "true_false",
-                    difficulty: "medium",
-                    question: "多智能体协作中，协调机制的目标之一是减少多个 Agent 之间的冲突。",
-                    options: ["正确", "错误"],
-                    answer: "正确",
-                    explanation: "协调机制用于让多个 Agent 在目标、资源或行动存在冲突时仍能有效协作。"
-                )
-            ]
         )
     ]
 
     static let tasks: [StudyTask] = [
         StudyTask(
-            id: "task_nn_backprop",
+            id: "task_c310_day1",
             track: .exam,
             bucket: .must,
-            title: "反向传播错题复盘",
-            subtitle: "神经网络 · 模型训练",
-            minutes: 35,
-            reason: "高难度、高错误风险，且 5 月 13 考试更近。",
-            linkedCourseID: "neural_network",
+            title: "C310 C1-C2 Agent 基础闭环",
+            subtitle: "C310 · Agent / Environment / EU",
+            minutes: 70,
+            reason: "真实计划 Day 1：精读 C1-C2，输出术语表、Agent definition 和环境属性比较。",
+            linkedCourseID: "c310_multi_agent",
             status: .pending
         ),
         StudyTask(
-            id: "task_cloud_serverless",
+            id: "task_e320_day1",
             track: .exam,
             bucket: .must,
-            title: "Serverless 与容器对比",
-            subtitle: "云计算 · 计算模型",
-            minutes: 25,
-            reason: "容易在概念题和场景题中混淆。",
-            linkedCourseID: "cloud",
+            title: "E320 C1-C2 网络结构与符号表",
+            subtitle: "E320 · NN 引言 / 结构特性",
+            minutes: 60,
+            reason: "E320 只晚一天考试，不能等 C310 考完再开始；今天要建立公式和术语页。",
+            linkedCourseID: "e320_neural_network",
             status: .pending
         ),
         StudyTask(
-            id: "task_mas_comm",
+            id: "task_c310_truth_matrix",
             track: .exam,
             bucket: .should,
-            title: "多智能体通信速览",
-            subtitle: "多智能体系统 · 协作机制",
-            minutes: 20,
-            reason: "同时服务课程复习和项目展示话术。",
-            linkedCourseID: "multi_agent",
+            title: "C310 真题矩阵定位 Q1",
+            subtitle: "C310 · 09/10、10/11、12/13、15/16、17/18",
+            minutes: 35,
+            reason: "计划要求不要等课件全过完才碰真题，今天先定位 Q1 类题。",
+            linkedCourseID: "c310_multi_agent",
+            status: .pending
+        ),
+        StudyTask(
+            id: "task_e320_structure_output",
+            track: .exam,
+            bucket: .should,
+            title: "E320 手画 2-input 小网络",
+            subtitle: "E320 · 输入、权重、bias、activation、output",
+            minutes: 30,
+            reason: "今天的完成标准不是看完，而是能画结构图并写变量含义。",
+            linkedCourseID: "e320_neural_network",
+            status: .pending
+        ),
+        StudyTask(
+            id: "task_career_buffer",
+            track: .career,
+            bucket: .should,
+            title: "面试 / 突发缓冲",
+            subtitle: "Career Track · 1.5-2 小时保护区",
+            minutes: 90,
+            reason: "真实总控要求每天预留缓冲；有面试就处理面试，没有面试就做术语默写和轻量主动回忆。",
+            linkedCourseID: nil,
             status: .pending
         ),
         StudyTask(
@@ -172,15 +198,15 @@ enum SeedData {
             status: .pending
         ),
         StudyTask(
-            id: "task_career_self_intro",
-            track: .career,
-            bucket: .should,
-            title: "1 分钟自我介绍",
-            subtitle: "校招 · 通用面试",
-            minutes: 15,
-            reason: "突发面试前的最低准备。",
-            linkedCourseID: nil,
-            status: .pending
+            id: "task_skip_c315_deep",
+            track: .exam,
+            bucket: .skip,
+            title: "C315 深度复习",
+            subtitle: "C315 · 5 月 26 日考试",
+            minutes: 60,
+            reason: "C315 在 5 月 26 日，当前阶段只保留低频保温，不抢 C310/E320 的黄金时间。",
+            linkedCourseID: "c315_cloud",
+            status: .deferred
         ),
         StudyTask(
             id: "task_skip_applications",
@@ -189,7 +215,7 @@ enum SeedData {
             title: "新增大批量投递",
             subtitle: "校招 · 可延期",
             minutes: 45,
-            reason: "考试窗口前收益低，建议 5 月 14 考后恢复。",
+            reason: "5 月 13/14 连续考试前收益低，建议 E320 考后恢复。",
             linkedCourseID: nil,
             status: .deferred
         )

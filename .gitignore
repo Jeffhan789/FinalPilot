@@ -1,2 +1,6 @@
 .DS_Store
-
+DerivedData/
+*.xcuserstate
+xcuserdata/
+FinalPilotApp.xcodeproj/project.xcworkspace/xcuserdata/
+FinalPilotApp.xcodeproj/xcuserdata/
