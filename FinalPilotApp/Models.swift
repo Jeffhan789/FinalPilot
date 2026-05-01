@@ -98,6 +98,36 @@ enum ConfidenceLevel: String, CaseIterable, Identifiable {
     }
 }
 
+enum QuestionSourceType: String, CaseIterable, Identifiable {
+    case lecture
+    case tutorial
+    case pastPaper
+    case finalExam
+    case sprintNote
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .lecture: "课件"
+        case .tutorial: "辅导课"
+        case .pastPaper: "真题"
+        case .finalExam: "期末题型"
+        case .sprintNote: "冲刺笔记"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .lecture: "text.book.closed"
+        case .tutorial: "person.wave.2"
+        case .pastPaper: "doc.text.magnifyingglass"
+        case .finalExam: "target"
+        case .sprintNote: "bolt"
+        }
+    }
+}
+
 struct KnowledgePoint: Identifiable, Hashable {
     let id: String
     let chapter: String
@@ -105,6 +135,20 @@ struct KnowledgePoint: Identifiable, Hashable {
     var difficulty: Int
     var mastery: Double
     var status: KnowledgeStatus
+}
+
+struct KnowledgeFlashcard: Identifiable, Hashable {
+    let id: String
+    let courseID: String
+    let knowledgePointID: String
+    let dayLabel: String
+    let title: String
+    let prompt: String
+    let answer: String
+    let examHint: String
+    let sourceTitle: String
+    let tags: [String]
+    let priority: Int
 }
 
 struct QuizQuestion: Identifiable, Hashable {
@@ -117,12 +161,19 @@ struct QuizQuestion: Identifiable, Hashable {
     let options: [String]
     let answer: String
     let explanation: String
+    let sourceType: QuestionSourceType
+    let sourceTitle: String
+    let sourceDetail: String
+    let examValue: Int
+    let examPrompt: String
 }
 
 struct Course: Identifiable, Hashable {
     let id: String
     var name: String
     var examDate: Date?
+    var examDurationMinutes: Int? = nil
+    var examLocation: String? = nil
     var difficulty: Int
     var colorKey: String
     var symbol: String
@@ -216,7 +267,7 @@ struct QuizAttempt: Identifiable, Hashable {
 }
 
 extension Date {
-    static func finalPilotDate(month: Int, day: Int, hour: Int = 9) -> Date {
+    static func finalPilotDate(month: Int, day: Int, hour: Int = 9, minute: Int = 0) -> Date {
         var components = DateComponents()
         components.calendar = Calendar(identifier: .gregorian)
         components.timeZone = TimeZone(identifier: "Europe/London")
@@ -224,6 +275,7 @@ extension Date {
         components.month = month
         components.day = day
         components.hour = hour
+        components.minute = minute
         return components.date ?? Date()
     }
 }

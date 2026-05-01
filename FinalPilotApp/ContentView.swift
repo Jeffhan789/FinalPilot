@@ -13,19 +13,14 @@ struct ContentView: View {
                     Label("计划", systemImage: "calendar.badge.clock")
                 }
 
-            CoursesView()
-                .tabItem {
-                    Label("课程", systemImage: "books.vertical")
-                }
-
             PracticeView()
                 .tabItem {
                     Label("练习", systemImage: "checklist.checked")
                 }
 
-            CareerView()
+            CoursesView()
                 .tabItem {
-                    Label("校招", systemImage: "briefcase")
+                    Label("课程", systemImage: "books.vertical")
                 }
         }
         .tint(AppTheme.primary)

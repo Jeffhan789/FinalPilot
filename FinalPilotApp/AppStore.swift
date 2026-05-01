@@ -5,6 +5,7 @@ final class FinalPilotStore: ObservableObject {
     @Published var tasks: [StudyTask]
     @Published var careerEvents: [CareerEvent]
     @Published var sprintPlanDays: [SprintPlanDay]
+    @Published var flashcards: [KnowledgeFlashcard]
     @Published var attempts: [QuizAttempt]
 
     init(
@@ -12,12 +13,14 @@ final class FinalPilotStore: ObservableObject {
         tasks: [StudyTask] = SeedData.tasks,
         careerEvents: [CareerEvent] = SeedData.careerEvents,
         sprintPlanDays: [SprintPlanDay] = SeedData.sprintPlanDays,
+        flashcards: [KnowledgeFlashcard] = SeedData.flashcards,
         attempts: [QuizAttempt] = []
     ) {
         self.courses = courses
         self.tasks = tasks
         self.careerEvents = careerEvents
         self.sprintPlanDays = sprintPlanDays
+        self.flashcards = flashcards
         self.attempts = attempts
     }
 
@@ -114,10 +117,11 @@ final class FinalPilotStore: ObservableObject {
         careerEvents.append(event)
     }
 
-    func daysUntil(_ date: Date?) -> Int? {
+    func daysUntil(_ date: Date?, from now: Date = Date()) -> Int? {
         guard let date else { return nil }
-        let calendar = Calendar.current
-        let start = calendar.startOfDay(for: Date())
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Europe/London") ?? .current
+        let start = calendar.startOfDay(for: now)
         let end = calendar.startOfDay(for: date)
         return calendar.dateComponents([.day], from: start, to: end).day
     }
@@ -157,9 +161,9 @@ final class FinalPilotStore: ObservableObject {
             track: .exam,
             bucket: .must,
             title: title,
-            subtitle: "根据刚才答题自动加入",
+            subtitle: "\(question.sourceType.label) · \(question.sourceTitle)",
             minutes: confidence == .high ? 20 : 15,
-            reason: confidence == .high ? "高自信错误比普通错误更危险。" : "错题需要在 24 小时内回看。",
+            reason: confidence == .high ? "高自信错误比普通错误更危险。回到 \(question.sourceDetail) 做一次变体。" : "错题需要在 24 小时内回看。来源：\(question.sourceDetail)",
             linkedCourseID: question.courseID,
             status: .pending
         )

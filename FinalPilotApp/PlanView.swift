@@ -16,6 +16,7 @@ struct PlanView: View {
                     header
                     phasePicker
                     StudySyncPanel()
+                    careerBranch
                     dailyBaseline
                     dayTimeline
                     executionRules
@@ -49,9 +50,9 @@ struct PlanView: View {
             }
 
             HStack(spacing: 10) {
-                MetricTile(title: "C310", value: "5/13", icon: "person.3.sequence", color: AppTheme.orange)
-                MetricTile(title: "E320", value: "5/14", icon: "point.3.connected.trianglepath.dotted", color: AppTheme.primary)
-                MetricTile(title: "C315", value: "5/26", icon: "cloud", color: AppTheme.courseColor("blue"))
+                MetricTile(title: "C310", value: "5/13 10:00", icon: "person.3.sequence", color: AppTheme.orange)
+                MetricTile(title: "E320", value: "5/14 14:30", icon: "point.3.connected.trianglepath.dotted", color: AppTheme.primary)
+                MetricTile(title: "C315", value: "5/26 10:00", icon: "cloud", color: AppTheme.courseColor("blue"))
             }
         }
         .padding(16)
@@ -109,6 +110,72 @@ struct PlanView: View {
             .background(AppTheme.primary.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var careerBranch: some View {
+        NavigationLink {
+            CareerView()
+        } label: {
+            VStack(alignment: .leading, spacing: 14) {
+                HStack(alignment: .top, spacing: 12) {
+                    Image(systemName: "briefcase.fill")
+                        .foregroundStyle(.white)
+                        .frame(width: 38, height: 38)
+                        .background(AppTheme.orange, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("校招保温分支")
+                            .font(.headline)
+                            .foregroundStyle(AppTheme.ink)
+                        Text(careerBranchSubtitle)
+                            .font(.caption)
+                            .foregroundStyle(AppTheme.secondaryText)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+
+                    Spacer()
+
+                    Image(systemName: "chevron.right")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(AppTheme.secondaryText)
+                        .padding(.top, 4)
+                }
+
+                HStack(spacing: 8) {
+                    branchPill(title: "模式", value: "隐藏")
+                    branchPill(title: "任务", value: "\(store.tasks(track: .career, bucket: .should).count) 项")
+                    branchPill(title: "原则", value: "不抢主线")
+                }
+            }
+            .padding(14)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(AppTheme.card, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var careerBranchSubtitle: String {
+        guard let event = store.careerEvents.sorted(by: { $0.date < $1.date }).first else {
+            return "校招不放在底部主导航；需要时进入这里看最低准备包。"
+        }
+        return "下一场：\(event.company) · \(event.round)，只保留最低准备包。"
+    }
+
+    private func branchPill(title: String, value: String) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(value)
+                .font(.subheadline.weight(.bold))
+                .foregroundStyle(AppTheme.ink)
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
+            Text(title)
+                .font(.caption2)
+                .foregroundStyle(AppTheme.secondaryText)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
+        .background(AppTheme.background, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
     }
 
     private var dayTimeline: some View {
