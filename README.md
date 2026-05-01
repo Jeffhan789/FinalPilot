@@ -2,7 +2,7 @@
 
 项目名称：FinalPilot  
 项目定位：基于多智能体协作、云计算与神经网络分析的 iOS 期末复习助手  
-当前阶段：项目立项与方案设计  
+当前阶段：v0.1 本地 MVP 已构建  
 创建日期：2026-05-01
 GitHub 仓库：https://github.com/Jeffhan789/FinalPilot_App
 
@@ -23,6 +23,20 @@ App 的核心闭环是：
 ```text
 FinalPilot_期末复习App/
 ├── README.md
+├── FinalPilotApp.xcodeproj/
+├── FinalPilotApp/
+│   ├── FinalPilotApp.swift
+│   ├── ContentView.swift
+│   ├── Models.swift
+│   ├── SeedData.swift
+│   ├── AppStore.swift
+│   ├── Theme.swift
+│   ├── Components.swift
+│   ├── DashboardView.swift
+│   ├── CoursesView.swift
+│   ├── PracticeView.swift
+│   ├── AnalyticsView.swift
+│   └── CareerView.swift
 ├── docs/
 │   ├── 01_需求规格说明书.md
 │   ├── 02_落地执行方案.md
@@ -31,7 +45,8 @@ FinalPilot_期末复习App/
 │   ├── 05_数据模型与题库规划.md
 │   ├── 06_术语解释.md
 │   ├── 07_市场调研与考前冲刺重估.md
-│   └── 08_复习与校招面试双轨调度.md
+│   ├── 08_复习与校招面试双轨调度.md
+│   └── 09_v0.1第一版交付说明.md
 ├── data/
 │   └── knowledge_base_seed.json
 └── records/
@@ -66,3 +81,33 @@ FinalPilot_期末复习App/
 - 已建立项目进展记录机制。
 - 已补充竞品调研与 2026-05-13、2026-05-14 连续考试冲刺场景重估。
 - 已新增考试复习与春季校招面试并行的双轨调度设计。
+- 已创建 SwiftUI iOS 工程 `FinalPilotApp.xcodeproj`。
+- 已实现 v0.1 本地 MVP：今日、课程、练习、分析、校招五个 Tab。
+- 已通过 generic iOS device 构建验证。
+
+## 运行方式
+
+用 Xcode 打开：
+
+```text
+FinalPilotApp.xcodeproj
+```
+
+命令行验证：
+
+```text
+xcodebuild -project FinalPilotApp.xcodeproj \
+  -scheme FinalPilotApp \
+  -configuration Debug \
+  -sdk iphoneos \
+  -destination 'generic/platform=iOS' \
+  -derivedDataPath /private/tmp/FinalPilotDeviceDerived \
+  CODE_SIGNING_ALLOWED=NO \
+  build
+```
+
+当前验证结果：
+
+```text
+BUILD SUCCEEDED
+```
