@@ -190,7 +190,7 @@ enum SeedData {
             id: "task_career_pitch",
             track: .career,
             bucket: .should,
-            title: "FinalPilot 项目 2 分钟介绍",
+            title: "学呀学 项目 2 分钟介绍",
             subtitle: "校招 · 项目展示",
             minutes: 20,
             reason: "面试保温任务，短时间高收益。",

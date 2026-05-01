@@ -66,7 +66,7 @@ struct CareerView: View {
             SectionHeader(title: "Career Minimum Pack", subtitle: "突发面试前至少有这 5 件东西")
             let items = [
                 ("1 分钟自我介绍", "person.text.rectangle"),
-                ("2 分钟 FinalPilot 项目介绍", "app.badge"),
+                ("2 分钟 学呀学 项目介绍", "app.badge"),
                 ("3 个技术亮点：多智能体、云端、掌握度预测", "sparkles"),
                 ("3 个常见问题回答", "questionmark.bubble"),
                 ("1 个反问面试官的问题", "arrowshape.turn.up.left")

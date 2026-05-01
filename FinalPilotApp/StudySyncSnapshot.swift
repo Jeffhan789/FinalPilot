@@ -97,6 +97,7 @@ struct StudySyncPanel: View {
                     Label(sourceLabel, systemImage: sourceLabel == "实时服务" ? "dot.radiowaves.left.and.right" : "shippingbox")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(sourceLabel == "实时服务" ? AppTheme.green : AppTheme.primary)
+                        .lineLimit(1)
                     Spacer()
                     Button {
                         Task { await refresh(preferLive: true) }
@@ -120,8 +121,10 @@ struct StudySyncPanel: View {
                 }
             }
             .padding(14)
+            .frame(maxWidth: .infinity, alignment: .leading)
             .background(AppTheme.card, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .task {
             await refresh(preferLive: true)
         }
@@ -192,9 +195,11 @@ struct StudySyncPanel: View {
                             .font(.caption2)
                             .foregroundStyle(AppTheme.secondaryText)
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private func suggestedTasks(_ snapshot: StudySyncSnapshot) -> some View {
@@ -218,9 +223,11 @@ struct StudySyncPanel: View {
                             .font(.caption2)
                             .foregroundStyle(AppTheme.secondaryText)
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private func selectedFileList(_ snapshot: StudySyncSnapshot) -> some View {
@@ -245,8 +252,10 @@ struct StudySyncPanel: View {
                     }
                 }
                 .padding(8)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .background(AppTheme.background, in: RoundedRectangle(cornerRadius: 8))
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
