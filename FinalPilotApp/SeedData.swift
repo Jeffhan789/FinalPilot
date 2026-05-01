@@ -232,5 +232,161 @@ enum SeedData {
             preparationStatus: "最低准备包已建立"
         )
     ]
-}
 
+    static let sprintPlanDays: [SprintPlanDay] = [
+        SprintPlanDay(
+            id: "plan_0501",
+            dateLabel: "5/1",
+            weekday: "周五",
+            phase: .foundation,
+            marker: "启动",
+            c310Task: "C1-C2：Agent 基础、定义、环境、rationality。",
+            e320Task: "C1-C2：NN 引言、结构特性、学习目标。",
+            output: "术语表 + 真题矩阵初版。",
+            checklist: ["课件", "题目", "错题", "复盘"]
+        ),
+        SprintPlanDay(
+            id: "plan_0502",
+            dateLabel: "5/2",
+            weekday: "周六",
+            phase: .foundation,
+            marker: nil,
+            c310Task: "C3-C4：演绎推理、BDI、practical reasoning。",
+            e320Task: "C3-C4：学习过程、single-layer perceptron。",
+            output: "BDI / Perceptron 各 1 页 + 各 1 题。",
+            checklist: ["课件", "题目", "错题", "复盘"]
+        ),
+        SprintPlanDay(
+            id: "plan_0503",
+            dateLabel: "5/3",
+            weekday: "周日",
+            phase: .foundation,
+            marker: nil,
+            c310Task: "C5-C7：reactive / hybrid、ontology、communication。",
+            e320Task: "C5：MLP、backpropagation、activation。",
+            output: "手写 BDI / Backprop 典型题。",
+            checklist: ["课件", "题目", "错题", "复盘"]
+        ),
+        SprintPlanDay(
+            id: "plan_0504",
+            dateLabel: "5/4",
+            weekday: "周一",
+            phase: .foundation,
+            marker: "机动",
+            c310Task: "C8/C11：协同工作、多智能体交互。",
+            e320Task: "Tutorial T1/T2：基础计算与模型理解。",
+            output: "C310 题型模板初版；半天机动。",
+            checklist: ["课件", "题目", "错题", "复盘"]
+        ),
+        SprintPlanDay(
+            id: "plan_0505",
+            dateLabel: "5/5",
+            weekday: "周二",
+            phase: .highFrequency,
+            marker: nil,
+            c310Task: "C12：group decision、social choice、voting。",
+            e320Task: "C6：RBF networks、centres、widths。",
+            output: "Arrow / Gibbard / RBF 对比笔记。",
+            checklist: ["课件", "题目", "错题", "复盘"]
+        ),
+        SprintPlanDay(
+            id: "plan_0506",
+            dateLabel: "5/6",
+            weekday: "周三",
+            phase: .highFrequency,
+            marker: nil,
+            c310Task: "C13：coalition formation、core、Shapley value。",
+            e320Task: "C7：SVM、margin、support vectors、kernel。",
+            output: "Shapley / Core / SVM 题型模板。",
+            checklist: ["课件", "题目", "错题", "复盘"]
+        ),
+        SprintPlanDay(
+            id: "plan_0507",
+            dateLabel: "5/7",
+            weekday: "周四",
+            phase: .highFrequency,
+            marker: nil,
+            c310Task: "C14：scarce resource allocation、fairness、efficiency。",
+            e320Task: "C8：SOM、winner neuron、neighbourhood update。",
+            output: "分配机制 + SOM 算法步骤。",
+            checklist: ["课件", "题目", "错题", "复盘"]
+        ),
+        SprintPlanDay(
+            id: "plan_0508",
+            dateLabel: "5/8",
+            weekday: "周五",
+            phase: .highFrequency,
+            marker: "机动",
+            c310Task: "C15-C16-C18：negotiation、argumentation、planning。",
+            e320Task: "C9-C10：modern networks、总复习校准。",
+            output: "两门课各完成一版总目录。",
+            checklist: ["课件", "题目", "错题", "复盘"]
+        ),
+        SprintPlanDay(
+            id: "plan_0509",
+            dateLabel: "5/9",
+            weekday: "周六",
+            phase: .pastPaper,
+            marker: nil,
+            c310Task: "真题：先做有 model solutions 的年份。",
+            e320Task: "21/22 真题：主计算题完整手写。",
+            output: "真题矩阵第 1 轮；标出高频题型。",
+            checklist: ["限时", "订正", "模板", "复盘"]
+        ),
+        SprintPlanDay(
+            id: "plan_0510",
+            dateLabel: "5/10",
+            weekday: "周日",
+            phase: .pastPaper,
+            marker: nil,
+            c310Task: "按题型集中刷：定义、比较、机制分析。",
+            e320Task: "22/23 真题：公式、步骤、变量解释。",
+            output: "错题分为概念 / 计算 / 英文表达。",
+            checklist: ["限时", "订正", "模板", "复盘"]
+        ),
+        SprintPlanDay(
+            id: "plan_0511",
+            dateLabel: "5/11",
+            weekday: "周一",
+            phase: .pastPaper,
+            marker: "机动",
+            c310Task: "限时写 1 套或半套；复盘结构化答案。",
+            e320Task: "23/24 真题：主计算题 + 概念题。",
+            output: "C310 答题模板定稿；半天机动。",
+            checklist: ["限时", "订正", "模板", "复盘"]
+        ),
+        SprintPlanDay(
+            id: "plan_0512",
+            dateLabel: "5/12",
+            weekday: "周二",
+            phase: .pastPaper,
+            marker: nil,
+            c310Task: "最后一轮主动回忆：高频概念、易错题。",
+            e320Task: "轻量保持：公式、算法、错题重做。",
+            output: "C310 考前 2 页清单。",
+            checklist: ["清单", "错题", "早睡", "复盘"]
+        ),
+        SprintPlanDay(
+            id: "plan_0513",
+            dateLabel: "5/13",
+            weekday: "周三",
+            phase: .examSwitch,
+            marker: "C310 考试",
+            c310Task: "C310 考试；考前只看 2 页清单，不学新内容。",
+            e320Task: "考后恢复，再切 E320 24/25 真题和全错题。",
+            output: "E320 考前公式 / 算法清单。",
+            checklist: ["考试", "恢复", "E320清单"]
+        ),
+        SprintPlanDay(
+            id: "plan_0514",
+            dateLabel: "5/14",
+            weekday: "周四",
+            phase: .examSwitch,
+            marker: "E320 考试",
+            c310Task: "不再投入 C310；整理考试后事项。",
+            e320Task: "E320 考前主动回忆；E320 考试。",
+            output: "只看错题和公式，不大范围学新内容。",
+            checklist: ["回忆", "考试", "收尾"]
+        )
+    ]
+}

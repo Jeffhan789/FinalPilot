@@ -4,17 +4,20 @@ final class FinalPilotStore: ObservableObject {
     @Published var courses: [Course]
     @Published var tasks: [StudyTask]
     @Published var careerEvents: [CareerEvent]
+    @Published var sprintPlanDays: [SprintPlanDay]
     @Published var attempts: [QuizAttempt]
 
     init(
         courses: [Course] = SeedData.courses,
         tasks: [StudyTask] = SeedData.tasks,
         careerEvents: [CareerEvent] = SeedData.careerEvents,
+        sprintPlanDays: [SprintPlanDay] = SeedData.sprintPlanDays,
         attempts: [QuizAttempt] = []
     ) {
         self.courses = courses
         self.tasks = tasks
         self.careerEvents = careerEvents
+        self.sprintPlanDays = sprintPlanDays
         self.attempts = attempts
     }
 
@@ -171,4 +174,3 @@ final class FinalPilotStore: ObservableObject {
         }
     }
 }
-

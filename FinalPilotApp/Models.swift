@@ -162,6 +162,49 @@ struct CareerEvent: Identifiable, Hashable {
     var preparationStatus: String
 }
 
+enum SprintPlanPhase: String, CaseIterable, Identifiable {
+    case foundation
+    case highFrequency
+    case pastPaper
+    case examSwitch
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .foundation: "搭骨架"
+        case .highFrequency: "补高频"
+        case .pastPaper: "真题闭环"
+        case .examSwitch: "考试切换"
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .foundation: "5/1-5/4"
+        case .highFrequency: "5/5-5/8"
+        case .pastPaper: "5/9-5/12"
+        case .examSwitch: "5/13-5/14"
+        }
+    }
+}
+
+struct SprintPlanDay: Identifiable, Hashable {
+    let id: String
+    var dateLabel: String
+    var weekday: String
+    var phase: SprintPlanPhase
+    var marker: String?
+    var c310Task: String
+    var e320Task: String
+    var output: String
+    var checklist: [String]
+
+    var isExamDay: Bool {
+        marker?.contains("考试") == true
+    }
+}
+
 struct QuizAttempt: Identifiable, Hashable {
     let id: String
     let questionID: String
