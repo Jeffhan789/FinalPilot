@@ -4,6 +4,7 @@
 项目定位：基于多智能体协作、云计算与神经网络分析的 iOS 期末复习助手  
 当前阶段：项目立项与方案设计  
 创建日期：2026-05-01
+GitHub 仓库：https://github.com/Jeffhan789/FinalPilot_App
 
 ## 项目目标
 
@@ -52,6 +53,7 @@ FinalPilot_期末复习App/
 - 将需求拆成开发任务
 - 设计 iOS 页面与交互
 - 准备简历描述、README、演示脚本
+- 每次重要更新后同步到 GitHub 仓库 `Jeffhan789/FinalPilot_App`
 
 ## 当前首版成果
 
