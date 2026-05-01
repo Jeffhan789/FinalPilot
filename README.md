@@ -34,6 +34,8 @@ FinalPilot_期末复习App/
 │   ├── Components.swift
 │   ├── DashboardView.swift
 │   ├── PlanView.swift
+│   ├── StudySyncSnapshot.swift
+│   ├── StudySyncSnapshot.json
 │   ├── CoursesView.swift
 │   ├── PracticeView.swift
 │   ├── AnalyticsView.swift
@@ -50,12 +52,15 @@ FinalPilot_期末复习App/
 │   ├── 08_复习与校招面试双轨调度.md
 │   ├── 09_v0.1第一版交付说明.md
 │   ├── 10_真实考试规划同步.md
-│   └── 11_App图标与A4计划同步说明.md
+│   ├── 11_App图标与A4计划同步说明.md
+│   └── 12_固定路径实时同步方案.md
 ├── data/
 │   ├── knowledge_base_seed.json
-│   └── a4_sprint_plan_seed.json
+│   ├── a4_sprint_plan_seed.json
+│   └── study_sync_snapshot.json
 ├── tools/
-│   └── generate_finalpilot_icon.swift
+│   ├── generate_finalpilot_icon.swift
+│   └── sync_study_sources.mjs
 └── records/
     └── 进展日志.md
 ```
@@ -95,6 +100,23 @@ FinalPilot_期末复习App/
 - 已把今日任务改为 C310 / E320 双考试优先，C315 在 5 月 14 日后进入主复习。
 - 已设计并生成 FinalPilot App 图标，写入 `Assets.xcassets/AppIcon.appiconset`。
 - 已将 A4 两周复习进度规划表同步为 App 内 `计划` 页面。
+- 已新增固定路径同步桥，从 C310、E320、总控目录挑选进度文件并生成 App 可读取的快照。
+
+## 固定路径同步
+
+生成一次快照：
+
+```text
+node tools/sync_study_sources.mjs --write
+```
+
+开启实时同步服务：
+
+```text
+node tools/sync_study_sources.mjs --serve
+```
+
+然后在 App 的 `计划` 页点击 `刷新`。如果服务开着，会显示 `实时服务`；如果没开，会显示打包进 App 的 `内置快照`。
 
 ## 运行方式
 

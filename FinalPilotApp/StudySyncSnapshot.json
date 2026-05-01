@@ -1,0 +1,722 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-05-01T16:55:47.991Z",
+  "localServiceUrl": "http://127.0.0.1:8787/study-sync-snapshot.json",
+  "syncMode": "local_fixed_paths",
+  "selectionPolicy": "优先同步每日任务看板、总计划、每日具体安排、A4 两周规划、真题矩阵、错题和执行清单；普通课件 PDF 只做低优先级元数据。",
+  "sources": [
+    {
+      "id": "c310",
+      "courseCode": "C310",
+      "title": "C310 多智能体",
+      "rootPath": "固定路径已隐藏；本机实时服务会读取真实路径",
+      "exists": true,
+      "filesScanned": 99,
+      "selectedFiles": 14,
+      "latestModifiedAt": "2026-05-01T16:19:01.305Z"
+    },
+    {
+      "id": "e320",
+      "courseCode": "E320",
+      "title": "E320 神经网络",
+      "rootPath": "固定路径已隐藏；本机实时服务会读取真实路径",
+      "exists": true,
+      "filesScanned": 81,
+      "selectedFiles": 14,
+      "latestModifiedAt": "2026-05-01T16:55:27.420Z"
+    },
+    {
+      "id": "control",
+      "courseCode": "C310+E320",
+      "title": "C310_E320 高效复习总控",
+      "rootPath": "固定路径已隐藏；本机实时服务会读取真实路径",
+      "exists": true,
+      "filesScanned": 34,
+      "selectedFiles": 14,
+      "latestModifiedAt": "2026-05-01T15:59:17.059Z"
+    }
+  ],
+  "metrics": {
+    "selectedFiles": 42,
+    "totalTasks": 1055,
+    "doneTasks": 0,
+    "openTasks": 1055,
+    "completionRate": 0
+  },
+  "suggestedToday": [],
+  "selectedFiles": [
+    {
+      "id": "redacted_file_001",
+      "sourceId": "c310",
+      "courseCode": "C310",
+      "title": "00-每日任务看板.md",
+      "relativePath": "复习规划同步/00-每日任务看板.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "daily_board",
+      "score": 266,
+      "modifiedAt": "2026-05-01T15:52:25.041Z",
+      "size": 2363,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_002",
+      "sourceId": "c310",
+      "courseCode": "C310",
+      "title": "00-每日任务看板.md",
+      "relativePath": "00-C310_E320-高效复习总控/00-每日任务看板.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "daily_board",
+      "score": 254,
+      "modifiedAt": "2026-05-01T15:52:25.104Z",
+      "size": 1426,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_003",
+      "sourceId": "c310",
+      "courseCode": "C310",
+      "title": "C310-Day1-智能体基础-术语与真题矩阵.md",
+      "relativePath": "复习规划同步/C310-Day1-智能体基础-术语与真题矩阵.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "practice_feedback",
+      "score": 192,
+      "modifiedAt": "2026-05-01T15:52:25.072Z",
+      "size": 5833,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_004",
+      "sourceId": "c310",
+      "courseCode": "C310",
+      "title": "06-C310-每日具体任务安排-2026-05-01至05-13.md",
+      "relativePath": "复习规划同步/06-C310-每日具体任务安排-2026-05-01至05-13.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "daily_plan",
+      "score": 136,
+      "modifiedAt": "2026-05-01T15:59:37.279Z",
+      "size": 8697,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_005",
+      "sourceId": "c310",
+      "courseCode": "C310",
+      "title": "06-每日具体任务安排-总版-2026-05-01至05-14.md",
+      "relativePath": "复习规划同步/06-每日具体任务安排-总版-2026-05-01至05-14.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "daily_plan",
+      "score": 136,
+      "modifiedAt": "2026-05-01T15:59:37.279Z",
+      "size": 24056,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_006",
+      "sourceId": "c310",
+      "courseCode": "C310",
+      "title": "README-总计划.md",
+      "relativePath": "复习规划同步/README-总计划.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "master_plan",
+      "score": 128,
+      "modifiedAt": "2026-05-01T15:45:50.451Z",
+      "size": 5509,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_007",
+      "sourceId": "c310",
+      "courseCode": "C310",
+      "title": "A4-两周复习进度规划表.html",
+      "relativePath": "复习规划同步/A4-两周复习进度规划表.html",
+      "absolutePath": "",
+      "extension": "html",
+      "kind": "a4_plan",
+      "score": 124,
+      "modifiedAt": "2026-05-01T15:45:50.451Z",
+      "size": 19245,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_008",
+      "sourceId": "c310",
+      "courseCode": "C310",
+      "title": "A4-两周复习进度规划表.pdf",
+      "relativePath": "复习规划同步/A4-两周复习进度规划表.pdf",
+      "absolutePath": "",
+      "extension": "pdf",
+      "kind": "a4_plan",
+      "score": 124,
+      "modifiedAt": "2026-05-01T15:45:50.451Z",
+      "size": 637929,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_009",
+      "sourceId": "c310",
+      "courseCode": "C310",
+      "title": "C310-Day1-A4双列黑白打印版.docx",
+      "relativePath": "复习规划同步/C310-Day1-A4双列黑白打印版.docx",
+      "absolutePath": "",
+      "extension": "docx",
+      "kind": "execution_log",
+      "score": 118,
+      "modifiedAt": "2026-05-01T16:19:01.305Z",
+      "size": 43791,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_010",
+      "sourceId": "c310",
+      "courseCode": "C310",
+      "title": "C310-Day1-A4打印版.docx",
+      "relativePath": "复习规划同步/C310-Day1-A4打印版.docx",
+      "absolutePath": "",
+      "extension": "docx",
+      "kind": "execution_log",
+      "score": 118,
+      "modifiedAt": "2026-05-01T16:09:03.451Z",
+      "size": 46057,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_011",
+      "sourceId": "c310",
+      "courseCode": "C310",
+      "title": "2026-05-01-Day1-复习执行清单.md",
+      "relativePath": "复习规划同步/2026-05-01-Day1-复习执行清单.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "execution_log",
+      "score": 118,
+      "modifiedAt": "2026-05-01T15:52:25.057Z",
+      "size": 3416,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_012",
+      "sourceId": "c310",
+      "courseCode": "C310",
+      "title": "README-总计划.md",
+      "relativePath": "00-C310_E320-高效复习总控/README-总计划.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "master_plan",
+      "score": 116,
+      "modifiedAt": "2026-05-01T15:06:38.629Z",
+      "size": 3429,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_013",
+      "sourceId": "c310",
+      "courseCode": "C310",
+      "title": "05-科学复习计划-含面试缓冲.md",
+      "relativePath": "复习规划同步/05-科学复习计划-含面试缓冲.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "scheduling_rule",
+      "score": 100,
+      "modifiedAt": "2026-05-01T15:45:50.452Z",
+      "size": 2829,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_014",
+      "sourceId": "c310",
+      "courseCode": "C310",
+      "title": "错题记录模板.md",
+      "relativePath": "00-C310_E320-高效复习总控/模板/错题记录模板.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "practice_feedback",
+      "score": 98,
+      "modifiedAt": "2026-05-01T15:06:38.756Z",
+      "size": 250,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_015",
+      "sourceId": "e320",
+      "courseCode": "E320",
+      "title": "00-每日任务看板.md",
+      "relativePath": "复习规划同步/00-每日任务看板.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "daily_board",
+      "score": 266,
+      "modifiedAt": "2026-05-01T15:45:50.460Z",
+      "size": 949,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_016",
+      "sourceId": "e320",
+      "courseCode": "E320",
+      "title": "06-E320-每日具体任务安排-2026-05-01至05-14.md",
+      "relativePath": "复习规划同步/06-E320-每日具体任务安排-2026-05-01至05-14.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "daily_plan",
+      "score": 136,
+      "modifiedAt": "2026-05-01T15:59:37.290Z",
+      "size": 8528,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_017",
+      "sourceId": "e320",
+      "courseCode": "E320",
+      "title": "06-每日具体任务安排-总版-2026-05-01至05-14.md",
+      "relativePath": "复习规划同步/06-每日具体任务安排-总版-2026-05-01至05-14.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "daily_plan",
+      "score": 136,
+      "modifiedAt": "2026-05-01T15:59:37.290Z",
+      "size": 24056,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_018",
+      "sourceId": "e320",
+      "courseCode": "E320",
+      "title": "README-总计划.md",
+      "relativePath": "复习规划同步/README-总计划.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "master_plan",
+      "score": 128,
+      "modifiedAt": "2026-05-01T15:45:50.460Z",
+      "size": 5509,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_019",
+      "sourceId": "e320",
+      "courseCode": "E320",
+      "title": "A4-两周复习进度规划表.html",
+      "relativePath": "复习规划同步/A4-两周复习进度规划表.html",
+      "absolutePath": "",
+      "extension": "html",
+      "kind": "a4_plan",
+      "score": 124,
+      "modifiedAt": "2026-05-01T15:45:50.459Z",
+      "size": 19245,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_020",
+      "sourceId": "e320",
+      "courseCode": "E320",
+      "title": "A4-两周复习进度规划表.pdf",
+      "relativePath": "复习规划同步/A4-两周复习进度规划表.pdf",
+      "absolutePath": "",
+      "extension": "pdf",
+      "kind": "a4_plan",
+      "score": 124,
+      "modifiedAt": "2026-05-01T15:45:50.459Z",
+      "size": 637929,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_021",
+      "sourceId": "e320",
+      "courseCode": "E320",
+      "title": "05-科学复习计划-含面试缓冲.md",
+      "relativePath": "复习规划同步/05-科学复习计划-含面试缓冲.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "scheduling_rule",
+      "score": 100,
+      "modifiedAt": "2026-05-01T15:45:50.460Z",
+      "size": 2829,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_022",
+      "sourceId": "e320",
+      "courseCode": "E320",
+      "title": "E320-Day1-C1C2-双列课件笔记优化版.docx",
+      "relativePath": "E320-Day1-C1C2-双列课件笔记优化版.docx",
+      "absolutePath": "",
+      "extension": "docx",
+      "kind": "execution_log",
+      "score": 82,
+      "modifiedAt": "2026-05-01T16:55:27.420Z",
+      "size": 46801,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_023",
+      "sourceId": "e320",
+      "courseCode": "E320",
+      "title": "E320-Day1-C1C2-双列课件笔记优化版.pdf",
+      "relativePath": "E320-Day1-C1C2-双列课件笔记优化版.pdf",
+      "absolutePath": "",
+      "extension": "pdf",
+      "kind": "execution_log",
+      "score": 82,
+      "modifiedAt": "2026-05-01T16:54:03.846Z",
+      "size": 440155,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_024",
+      "sourceId": "e320",
+      "courseCode": "E320",
+      "title": "E320-Day1-从0开始高效复习讲义.pdf",
+      "relativePath": "E320-Day1-从0开始高效复习讲义.pdf",
+      "absolutePath": "",
+      "extension": "pdf",
+      "kind": "execution_log",
+      "score": 82,
+      "modifiedAt": "2026-05-01T15:48:47.231Z",
+      "size": 555101,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_025",
+      "sourceId": "e320",
+      "courseCode": "E320",
+      "title": "E320-Day1-从0开始高效复习讲义.docx",
+      "relativePath": "E320-Day1-从0开始高效复习讲义.docx",
+      "absolutePath": "",
+      "extension": "docx",
+      "kind": "execution_log",
+      "score": 82,
+      "modifiedAt": "2026-05-01T15:47:42.853Z",
+      "size": 52607,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_026",
+      "sourceId": "e320",
+      "courseCode": "E320",
+      "title": "E320_期末题型整理.md",
+      "relativePath": "E320-0-期末考试—100%/E320_期末题型整理.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "reference_index",
+      "score": 66,
+      "modifiedAt": "2026-04-30T15:11:58.187Z",
+      "size": 6972,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_027",
+      "sourceId": "e320",
+      "courseCode": "E320",
+      "title": "C310_E320_科学复习计划_含面试缓冲.md",
+      "relativePath": "C310_E320_科学复习计划_含面试缓冲.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "scheduling_rule",
+      "score": 64,
+      "modifiedAt": "2026-05-01T15:23:07.552Z",
+      "size": 9898,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_028",
+      "sourceId": "e320",
+      "courseCode": "E320",
+      "title": "E320_必考题型从零详解_手机版.html",
+      "relativePath": "E320-0-期末考试—100%/E320_必考题型从零详解_手机版.html",
+      "absolutePath": "",
+      "extension": "html",
+      "kind": "reference",
+      "score": 18,
+      "modifiedAt": "2026-04-30T20:29:57.601Z",
+      "size": 37771,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_029",
+      "sourceId": "control",
+      "courseCode": "C310+E320",
+      "title": "00-每日任务看板.md",
+      "relativePath": "E320/复习规划同步/00-每日任务看板.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "daily_board",
+      "score": 290,
+      "modifiedAt": "2026-05-01T15:44:28.278Z",
+      "size": 949,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_030",
+      "sourceId": "control",
+      "courseCode": "C310+E320",
+      "title": "00-每日任务看板.md",
+      "relativePath": "C310/复习规划同步/00-每日任务看板.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "daily_board",
+      "score": 290,
+      "modifiedAt": "2026-05-01T15:44:28.266Z",
+      "size": 949,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_031",
+      "sourceId": "control",
+      "courseCode": "C310+E320",
+      "title": "00-每日任务看板.md",
+      "relativePath": "00-每日任务看板.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "daily_board",
+      "score": 254,
+      "modifiedAt": "2026-05-01T15:20:05.336Z",
+      "size": 949,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_032",
+      "sourceId": "control",
+      "courseCode": "C310+E320",
+      "title": "README-总计划.md",
+      "relativePath": "E320/复习规划同步/README-总计划.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "master_plan",
+      "score": 152,
+      "modifiedAt": "2026-05-01T15:44:28.277Z",
+      "size": 5509,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_033",
+      "sourceId": "control",
+      "courseCode": "C310+E320",
+      "title": "README-总计划.md",
+      "relativePath": "C310/复习规划同步/README-总计划.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "master_plan",
+      "score": 152,
+      "modifiedAt": "2026-05-01T15:44:28.266Z",
+      "size": 5509,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_034",
+      "sourceId": "control",
+      "courseCode": "C310+E320",
+      "title": "A4-两周复习进度规划表.html",
+      "relativePath": "E320/复习规划同步/A4-两周复习进度规划表.html",
+      "absolutePath": "",
+      "extension": "html",
+      "kind": "a4_plan",
+      "score": 148,
+      "modifiedAt": "2026-05-01T15:44:28.277Z",
+      "size": 19245,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_035",
+      "sourceId": "control",
+      "courseCode": "C310+E320",
+      "title": "A4-两周复习进度规划表.pdf",
+      "relativePath": "E320/复习规划同步/A4-两周复习进度规划表.pdf",
+      "absolutePath": "",
+      "extension": "pdf",
+      "kind": "a4_plan",
+      "score": 148,
+      "modifiedAt": "2026-05-01T15:44:28.277Z",
+      "size": 637929,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_036",
+      "sourceId": "control",
+      "courseCode": "C310+E320",
+      "title": "A4-两周复习进度规划表.html",
+      "relativePath": "C310/复习规划同步/A4-两周复习进度规划表.html",
+      "absolutePath": "",
+      "extension": "html",
+      "kind": "a4_plan",
+      "score": 148,
+      "modifiedAt": "2026-05-01T15:44:28.266Z",
+      "size": 19245,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_037",
+      "sourceId": "control",
+      "courseCode": "C310+E320",
+      "title": "A4-两周复习进度规划表.pdf",
+      "relativePath": "C310/复习规划同步/A4-两周复习进度规划表.pdf",
+      "absolutePath": "",
+      "extension": "pdf",
+      "kind": "a4_plan",
+      "score": 148,
+      "modifiedAt": "2026-05-01T15:44:28.265Z",
+      "size": 637929,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_038",
+      "sourceId": "control",
+      "courseCode": "C310+E320",
+      "title": "06-E320-每日具体任务安排-2026-05-01至05-14.md",
+      "relativePath": "06-E320-每日具体任务安排-2026-05-01至05-14.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "daily_plan",
+      "score": 124,
+      "modifiedAt": "2026-05-01T15:59:17.059Z",
+      "size": 8528,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_039",
+      "sourceId": "control",
+      "courseCode": "C310+E320",
+      "title": "06-C310-每日具体任务安排-2026-05-01至05-13.md",
+      "relativePath": "06-C310-每日具体任务安排-2026-05-01至05-13.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "daily_plan",
+      "score": 124,
+      "modifiedAt": "2026-05-01T15:59:17.040Z",
+      "size": 8697,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_040",
+      "sourceId": "control",
+      "courseCode": "C310+E320",
+      "title": "06-每日具体任务安排-总版-2026-05-01至05-14.md",
+      "relativePath": "06-每日具体任务安排-总版-2026-05-01至05-14.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "daily_plan",
+      "score": 124,
+      "modifiedAt": "2026-05-01T15:59:17.020Z",
+      "size": 24056,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_041",
+      "sourceId": "control",
+      "courseCode": "C310+E320",
+      "title": "05-科学复习计划-含面试缓冲.md",
+      "relativePath": "E320/复习规划同步/05-科学复习计划-含面试缓冲.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "scheduling_rule",
+      "score": 124,
+      "modifiedAt": "2026-05-01T15:44:28.277Z",
+      "size": 2829,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    },
+    {
+      "id": "redacted_file_042",
+      "sourceId": "control",
+      "courseCode": "C310+E320",
+      "title": "05-科学复习计划-含面试缓冲.md",
+      "relativePath": "C310/复习规划同步/05-科学复习计划-含面试缓冲.md",
+      "absolutePath": "",
+      "extension": "md",
+      "kind": "scheduling_rule",
+      "score": 124,
+      "modifiedAt": "2026-05-01T15:44:28.266Z",
+      "size": 2829,
+      "excerpt": [
+        "已选中该进度文件；开启本地实时服务后显示真实摘要。"
+      ]
+    }
+  ],
+  "privacyNote": "This tracked snapshot is redacted for GitHub. Run --serve locally to view full fixed-path details in the simulator."
+}

@@ -1,0 +1,22 @@
+{
+  "sources": [
+    {
+      "id": "c310",
+      "courseCode": "C310",
+      "title": "C310 多智能体",
+      "rootPath": "<local fixed path to C310 folder>"
+    },
+    {
+      "id": "e320",
+      "courseCode": "E320",
+      "title": "E320 神经网络",
+      "rootPath": "<local fixed path to E320 folder>"
+    },
+    {
+      "id": "control",
+      "courseCode": "C310+E320",
+      "title": "C310_E320 高效复习总控",
+      "rootPath": "<local fixed path to C310_E320 control folder>"
+    }
+  ]
+}

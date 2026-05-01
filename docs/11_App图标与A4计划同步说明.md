@@ -2,7 +2,7 @@
 
 文档版本：v0.1  
 日期：2026-05-01  
-来源 PDF：`/Users/jeffhan/Library/Mobile Documents/com~apple~CloudDocs/0.UoL/#Y3-S1 S2/Y3S2 1+2/00-C310_E320-高效复习总控/A4-两周复习进度规划表.pdf`
+来源 PDF：本机 `A4-两周复习进度规划表.pdf`
 
 ## 1. 图标设计
 
