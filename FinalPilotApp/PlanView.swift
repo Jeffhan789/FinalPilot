@@ -15,6 +15,7 @@ struct PlanView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     header
                     phasePicker
+                    StudySyncPanel()
                     dailyBaseline
                     dayTimeline
                     executionRules

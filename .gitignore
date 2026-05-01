@@ -4,3 +4,6 @@ DerivedData/
 xcuserdata/
 FinalPilotApp.xcodeproj/project.xcworkspace/xcuserdata/
 FinalPilotApp.xcodeproj/xcuserdata/
+FinalPilotApp/StudySyncSnapshot.local.json
+data/study_sync_snapshot.local.json
+tools/sync_sources.local.json
