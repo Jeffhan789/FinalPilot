@@ -1,8 +1,19 @@
+# FinalPilot（学呀学）
+
+![Version](https://img.shields.io/badge/version-v2.0.0-orange?style=flat-square)
+![Swift](https://img.shields.io/badge/Swift-5.9+-f05138?style=flat-square&logo=swift)
+![iOS](https://img.shields.io/badge/iOS-17+-007AFF?style=flat-square&logo=apple)
+![SwiftUI](https://img.shields.io/badge/SwiftUI-blue?style=flat-square&logo=swift)
+![CoreData](https://img.shields.io/badge/Core%20Data-green?style=flat-square)
+![WidgetKit](https://img.shields.io/badge/WidgetKit-purple?style=flat-square)
+![Charts](https://img.shields.io/badge/Charts-Framework-pink?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+
+> English first. 中文版见后文。
+
 [English](#english) | [中文](#中文)
 
 ## English
-
-# FinalPilot
 
 > **Exam Sprint Decision System**
 
