@@ -1,8 +1,11 @@
-# 学呀学 FinalPilot
+# FinalPilot（学呀学）
+
+> English first. 中文版见后文。
+> [English](#english) | [中文](#中文)
 
 > **Exam Sprint Decision System**
 
-项目名称：学呀学
+项目名：FinalPilot（学呀学）
 工程代号：FinalPilot
 项目定位：基于多智能体协作、云计算与神经网络分析的 iOS 期末复习冲刺决策系统
 当前阶段：v0.1 本地 MVP 已构建
@@ -12,7 +15,7 @@ GitHub 仓库：https://github.com/Jeffhan789/FinalPilot
 
 ## 项目目标
 
-学呀学面向准备期末考试的大学生，围绕三门真实考试内容进行智能复习规划：
+FinalPilot（学呀学）面向准备期末考试的大学生，围绕三门真实考试内容进行智能复习规划：
 
 - C310 多智能体系统：2026-05-13
 - E320 神经网络：2026-05-14
@@ -108,8 +111,8 @@ FinalPilot_期末复习App/
 - 已通过 generic iOS device 构建验证。
 - 已根据真实规划同步考试日期：C310 为 2026-05-13，E320 为 2026-05-14，C315 为 2026-05-26。
 - 已把今日任务改为 C310 / E320 双考试优先，C315 在 5 月 14 日后进入主复习。
-- 已将手机桌面显示名称改为 `学呀学`。
-- 已根据手绘参考图提取 `学呀学` App 图标，写入 `Assets.xcassets/AppIcon.appiconset`。
+- 已将手机桌面显示名称改为 `FinalPilot（学呀学）`。
+- 已根据手绘参考图提取 `FinalPilot（学呀学）` App 图标，写入 `Assets.xcassets/AppIcon.appiconset`。
 - 已将 A4 两周复习进度规划表同步为 App 内 `计划` 页面。
 - 已新增固定路径同步桥，从 C310、E320、总控目录挑选进度文件并生成 App 可读取的快照。
 - 已优化 `计划` 页面右侧对齐，长内容会收敛在手机屏幕内。
@@ -146,7 +149,7 @@ FinalPilotApp.xcodeproj
 2. Xcode 顶部设备栏选择你的 iPhone，不要选 `Any iOS Device`。
 3. 打开项目 Target 的 `Signing & Capabilities`，勾选 `Automatically manage signing`，`Team` 选择你的 Apple ID / Personal Team。
 4. 如果 Bundle Identifier 冲突，把 `com.jeffhan.FinalPilot` 改成你自己的唯一标识，例如 `com.jeffhan.XueYaXue`。
-5. 点击 Xcode 左上角运行按钮。安装完成后，手机桌面会显示 `学呀学`。
+5. 点击 Xcode 左上角运行按钮。安装完成后，手机桌面会显示 `FinalPilot（学呀学）`。
 6. 如果手机提示未信任开发者，进入 `设置 > 通用 > VPN 与设备管理`，信任你的 Apple ID 证书。
 
 说明：这不是从 App Store 下载，而是 Xcode 对 App 临时签名后直接安装到你的手机。以后改完代码，再点击运行即可覆盖安装。
