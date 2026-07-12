@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23507" systemVersion="24A348" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="NO" userDefinedModelVersionIdentifier="">
+    <entity name="CourseEntity" representedClassName="CourseEntity" syncable="YES">
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="name" attributeType="String" defaultValueString=""/>
+        <attribute name="examDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="examDurationMinutes" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="examLocation" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="difficulty" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="colorKey" attributeType="String" defaultValueString=""/>
+        <attribute name="symbol" attributeType="String" defaultValueString=""/>
+        <relationship name="knowledgePoints" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="KnowledgePointEntity" inverseName="course" inverseEntity="KnowledgePointEntity"/>
+        <relationship name="questions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="QuizQuestionEntity" inverseName="course" inverseEntity="QuizQuestionEntity"/>
+    </entity>
+    <entity name="KnowledgePointEntity" representedClassName="KnowledgePointEntity" syncable="YES">
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="chapter" attributeType="String" defaultValueString=""/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
+        <attribute name="difficulty" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mastery" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="status" attributeType="String" defaultValueString="notStarted"/>
+        <relationship name="course" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseEntity" inverseName="knowledgePoints" inverseEntity="CourseEntity"/>
+    </entity>
+    <entity name="QuizQuestionEntity" representedClassName="QuizQuestionEntity" syncable="YES">
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="courseID" attributeType="String" defaultValueString=""/>
+        <attribute name="knowledgePointID" attributeType="String" defaultValueString=""/>
+        <attribute name="type" attributeType="String" defaultValueString=""/>
+        <attribute name="difficulty" attributeType="String" defaultValueString=""/>
+        <attribute name="question" attributeType="String" defaultValueString=""/>
+        <attribute name="options" attributeType="Transformable" valueTransformerName="StringArrayTransformer"/>
+        <attribute name="answer" attributeType="String" defaultValueString=""/>
+        <attribute name="explanation" attributeType="String" defaultValueString=""/>
+        <attribute name="sourceType" attributeType="String" defaultValueString="lecture"/>
+        <attribute name="sourceTitle" attributeType="String" defaultValueString=""/>
+        <attribute name="sourceDetail" attributeType="String" defaultValueString=""/>
+        <attribute name="examValue" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="examPrompt" attributeType="String" defaultValueString=""/>
+        <relationship name="course" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseEntity" inverseName="questions" inverseEntity="CourseEntity"/>
+    </entity>
+    <entity name="StudyTaskEntity" representedClassName="StudyTaskEntity" syncable="YES">
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="track" attributeType="String" defaultValueString="exam"/>
+        <attribute name="bucket" attributeType="String" defaultValueString="must"/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
+        <attribute name="subtitle" attributeType="String" defaultValueString=""/>
+        <attribute name="minutes" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="reason" attributeType="String" defaultValueString=""/>
+        <attribute name="linkedCourseID" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="status" attributeType="String" defaultValueString="pending"/>
+    </entity>
+    <entity name="CareerEventEntity" representedClassName="CareerEventEntity" syncable="YES">
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="company" attributeType="String" defaultValueString=""/>
+        <attribute name="role" attributeType="String" defaultValueString=""/>
+        <attribute name="round" attributeType="String" defaultValueString=""/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="importance" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="preparationStatus" attributeType="String" defaultValueString=""/>
+    </entity>
+    <entity name="SprintPlanDayEntity" representedClassName="SprintPlanDayEntity" syncable="YES">
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="dateLabel" attributeType="String" defaultValueString=""/>
+        <attribute name="weekday" attributeType="String" defaultValueString=""/>
+        <attribute name="phase" attributeType="String" defaultValueString="foundation"/>
+        <attribute name="marker" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="c310Task" attributeType="String" defaultValueString=""/>
+        <attribute name="e320Task" attributeType="String" defaultValueString=""/>
+        <attribute name="output" attributeType="String" defaultValueString=""/>
+        <attribute name="checklist" attributeType="Transformable" valueTransformerName="StringArrayTransformer"/>
+    </entity>
+    <entity name="KnowledgeFlashcardEntity" representedClassName="KnowledgeFlashcardEntity" syncable="YES">
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="courseID" attributeType="String" defaultValueString=""/>
+        <attribute name="knowledgePointID" attributeType="String" defaultValueString=""/>
+        <attribute name="dayLabel" attributeType="String" defaultValueString=""/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
+        <attribute name="prompt" attributeType="String" defaultValueString=""/>
+        <attribute name="answer" attributeType="String" defaultValueString=""/>
+        <attribute name="examHint" attributeType="String" defaultValueString=""/>
+        <attribute name="sourceTitle" attributeType="String" defaultValueString=""/>
+        <attribute name="tags" attributeType="Transformable" valueTransformerName="StringArrayTransformer"/>
+        <attribute name="priority" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="QuizAttemptEntity" representedClassName="QuizAttemptEntity" syncable="YES">
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="questionID" attributeType="String" defaultValueString=""/>
+        <attribute name="knowledgePointID" attributeType="String" defaultValueString=""/>
+        <attribute name="selectedAnswer" attributeType="String" defaultValueString=""/>
+        <attribute name="isCorrect" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="confidence" attributeType="String" defaultValueString="medium"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="DailyStudyRecordEntity" representedClassName="DailyStudyRecordEntity" syncable="YES">
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="totalMinutes" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="completedTasks" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="correctAnswers" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="totalAnswers" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" defaultValueString=""/>
+    </entity>
+    <elements>
+        <element name="CourseEntity" positionX="-63" positionY="-18" width="128" height="194"/>
+        <element name="KnowledgePointEntity" positionX="-54" positionY="9" width="128" height="149"/>
+        <element name="QuizQuestionEntity" positionX="-36" positionY="27" width="128" height="269"/>
+        <element name="StudyTaskEntity" positionX="-18" positionY="45" width="128" height="194"/>
+        <element name="CareerEventEntity" positionX="0" positionY="63" width="128" height="149"/>
+        <element name="SprintPlanDayEntity" positionX="18" positionY="81" width="128" height="194"/>
+        <element name="KnowledgeFlashcardEntity" positionX="36" positionY="99" width="128" height="209"/>
+        <element name="QuizAttemptEntity" positionX="54" positionY="117" width="128" height="149"/>
+        <element name="DailyStudyRecordEntity" positionX="72" positionY="135" width="128" height="149"/>
+    </elements>
+</model>

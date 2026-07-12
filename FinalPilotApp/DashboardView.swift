@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 struct DashboardView: View {
@@ -502,15 +503,22 @@ struct KnowledgeFlashcardsView: View {
 
         return DisclosureGroup {
             VStack(alignment: .leading, spacing: 12) {
-                Text(card.answer)
+                Text(readableFlashcardText(card.answer))
                     .font(.subheadline)
                     .foregroundStyle(AppTheme.ink)
+                    .lineSpacing(5)
                     .fixedSize(horizontal: false, vertical: true)
 
-                Label(card.examHint, systemImage: "target")
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(tint)
-                    .fixedSize(horizontal: false, vertical: true)
+                HStack(alignment: .top, spacing: 8) {
+                    Image(systemName: "target")
+                        .font(.caption.weight(.semibold))
+                        .padding(.top, 1)
+                    Text(readableFlashcardText(card.examHint, compact: true))
+                        .font(.caption.weight(.semibold))
+                        .lineSpacing(3)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .foregroundStyle(tint)
 
                 VStack(alignment: .leading, spacing: 6) {
                     Label("重要程度：\(importanceText(card.priority))", systemImage: "flag.fill")
@@ -549,6 +557,7 @@ struct KnowledgeFlashcardsView: View {
                     Text(card.prompt)
                         .font(.caption)
                         .foregroundStyle(AppTheme.secondaryText)
+                        .lineSpacing(2)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
@@ -560,6 +569,37 @@ struct KnowledgeFlashcardsView: View {
 
     private func tagRow(_ tags: [String], tint: Color) -> some View {
         FlowTags(tags: tags, tint: tint)
+    }
+
+    private func readableFlashcardText(_ text: String, compact: Bool = false) -> String {
+        let paragraphBreak = compact ? "\n" : "\n\n"
+        var formatted = text
+
+        for marker in ["。", "？", "！"] {
+            formatted = formatted.replacingOccurrences(of: marker, with: "\(marker)\(paragraphBreak)")
+        }
+        formatted = formatted.replacingOccurrences(of: "；", with: "；\n")
+        formatted = formatted.replacingOccurrences(of: "。\(paragraphBreak)）", with: "。）")
+        formatted = formatted.replacingOccurrences(
+            of: #"\s+(\d+\.\s)"#,
+            with: paragraphBreak + "$1",
+            options: .regularExpression
+        )
+        formatted = formatted.replacingOccurrences(
+            of: #"\s+(Q\d+[.．、]\s*)"#,
+            with: paragraphBreak + "$1",
+            options: .regularExpression
+        )
+        formatted = formatted.replacingOccurrences(
+            of: #"\s+(A\d+[.．、：:]\s*)"#,
+            with: paragraphBreak + "$1",
+            options: .regularExpression
+        )
+
+        while formatted.contains("\n\n\n") {
+            formatted = formatted.replacingOccurrences(of: "\n\n\n", with: "\n\n")
+        }
+        return formatted.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     private func courseTint(for card: KnowledgeFlashcard) -> Color {

@@ -1,4 +1,5 @@
 import Foundation
+import CoreData
 
 final class FinalPilotStore: ObservableObject {
     @Published var courses: [Course]
@@ -7,6 +8,11 @@ final class FinalPilotStore: ObservableObject {
     @Published var sprintPlanDays: [SprintPlanDay]
     @Published var flashcards: [KnowledgeFlashcard]
     @Published var attempts: [QuizAttempt]
+    
+    // MARK: - Core Data Context
+    private var context: NSManagedObjectContext? {
+        DataController.shared.viewContext
+    }
 
     init(
         courses: [Course] = SeedData.courses,
@@ -74,13 +80,27 @@ final class FinalPilotStore: ObservableObject {
 
     func toggleTask(_ task: StudyTask) {
         guard let index = tasks.firstIndex(where: { $0.id == task.id }) else { return }
-        tasks[index].status = tasks[index].status == .done ? .pending : .done
+        let wasDone = tasks[index].status == .done
+        tasks[index].status = wasDone ? .pending : .done
+        
+        // Core Data 持久化
+        persistTask(tasks[index])
+        
+        // 通知反馈
+        if !wasDone {
+            StudyReminderScheduler.shared.sendTaskCompletionEncouragement(task: task)
+        }
+        
+        // Widget 同步
+        syncToWidget()
     }
 
     func deferTask(_ task: StudyTask) {
         guard let index = tasks.firstIndex(where: { $0.id == task.id }) else { return }
         tasks[index].status = .deferred
         tasks[index].bucket = .skip
+        persistTask(tasks[index])
+        syncToWidget()
     }
 
     @discardableResult
@@ -101,6 +121,17 @@ final class FinalPilotStore: ObservableObject {
         attempts.insert(attempt, at: 0)
         updateMastery(for: question, isCorrect: isCorrect, confidence: confidence)
         scheduleFollowUpIfNeeded(question: question, isCorrect: isCorrect, confidence: confidence)
+        
+        // Core Data 持久化
+        persistQuizAttempt(attempt)
+        
+        // 连续答对鼓励
+        let recentCorrect = attempts.prefix(3).allSatisfy { $0.isCorrect }
+        if recentCorrect {
+            StudyReminderScheduler.shared.sendStreakEncouragement(correctCount: 3)
+        }
+        
+        syncToWidget()
         return attempt
     }
 
@@ -115,6 +146,7 @@ final class FinalPilotStore: ObservableObject {
             preparationStatus: "等待准备"
         )
         careerEvents.append(event)
+        syncToWidget()
     }
 
     func daysUntil(_ date: Date?, from now: Date = Date()) -> Int? {
@@ -124,6 +156,86 @@ final class FinalPilotStore: ObservableObject {
         let start = calendar.startOfDay(for: now)
         let end = calendar.startOfDay(for: date)
         return calendar.dateComponents([.day], from: start, to: end).day
+    }
+
+    // MARK: - Widget Sync
+    
+    func syncToWidget() {
+        // 同步考试信息
+        let examInfos = courses.compactMap { course -> WidgetExamInfo? in
+            guard let days = daysUntil(course.examDate) else { return nil }
+            return WidgetExamInfo(
+                id: course.id,
+                name: course.name.prefixName,
+                daysUntil: days,
+                examDate: course.examDate ?? Date()
+            )
+        }
+        WidgetDataProvider.shared.saveExams(examInfos)
+        
+        // 同步任务
+        let taskInfos = tasks.filter { $0.bucket == .must && $0.status != .done }.map { task -> WidgetTaskInfo in
+            WidgetTaskInfo(
+                id: task.id,
+                title: task.title,
+                subtitle: task.subtitle,
+                minutes: task.minutes,
+                isCompleted: task.status == .done
+            )
+        }
+        WidgetDataProvider.shared.saveTasks(taskInfos)
+        
+        // 同步进度
+        let progress = WidgetProgressInfo(
+            completionRate: completionRate,
+            studyMinutes: totalStudyMinutes,
+            totalTasks: tasks.filter { $0.bucket != .skip }.count,
+            completedTasks: tasks.filter { $0.status == .done }.count
+        )
+        WidgetDataProvider.shared.saveProgress(progress)
+    }
+
+    // MARK: - Core Data Persistence
+    
+    private func persistTask(_ task: StudyTask) {
+        guard let context = context else { return }
+        let fetchRequest: NSFetchRequest<StudyTaskEntity> = StudyTaskEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", task.id)
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            let entity = results.first ?? StudyTaskEntity(context: context)
+            entity.id = task.id
+            entity.track = task.track.rawValue
+            entity.bucket = task.bucket.rawValue
+            entity.title = task.title
+            entity.subtitle = task.subtitle
+            entity.minutes = Int32(task.minutes)
+            entity.reason = task.reason
+            entity.linkedCourseID = task.linkedCourseID
+            entity.status = task.status.rawValue
+            try context.save()
+        } catch {
+            print("Persist task error: \(error)")
+        }
+    }
+    
+    private func persistQuizAttempt(_ attempt: QuizAttempt) {
+        guard let context = context else { return }
+        let entity = QuizAttemptEntity(context: context)
+        entity.id = attempt.id
+        entity.questionID = attempt.questionID
+        entity.knowledgePointID = attempt.knowledgePointID
+        entity.selectedAnswer = attempt.selectedAnswer
+        entity.isCorrect = attempt.isCorrect
+        entity.confidence = attempt.confidence.rawValue
+        entity.createdAt = attempt.createdAt
+        
+        do {
+            try context.save()
+        } catch {
+            print("Persist attempt error: \(error)")
+        }
     }
 
     private func updateMastery(for question: QuizQuestion, isCorrect: Bool, confidence: ConfidenceLevel) {
@@ -148,6 +260,26 @@ final class FinalPilotStore: ObservableObject {
             point.status = .inProgress
         }
         courses[courseIndex].knowledgePoints[pointIndex] = point
+        
+        // 持久化知识点掌握度
+        persistKnowledgePoint(point, courseID: question.courseID)
+    }
+    
+    private func persistKnowledgePoint(_ point: KnowledgePoint, courseID: String) {
+        guard let context = context else { return }
+        let fetchRequest: NSFetchRequest<KnowledgePointEntity> = KnowledgePointEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", point.id)
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let entity = results.first {
+                entity.mastery = point.mastery
+                entity.status = point.status.rawValue
+                try context.save()
+            }
+        } catch {
+            print("Persist knowledge point error: \(error)")
+        }
     }
 
     private func scheduleFollowUpIfNeeded(question: QuizQuestion, isCorrect: Bool, confidence: ConfidenceLevel) {
@@ -168,6 +300,10 @@ final class FinalPilotStore: ObservableObject {
             status: .pending
         )
         tasks.insert(task, at: 0)
+        persistTask(task)
+        
+        // 错题回顾通知
+        StudyReminderScheduler.shared.scheduleMistakeReviewReminders(store: self)
     }
 
     private func bucketOrder(_ bucket: TaskBucket) -> Int {
