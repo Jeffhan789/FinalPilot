@@ -1,11 +1,5 @@
 # 学呀学 FinalPilot 期末复习 App 项目资料
 
-项目名称：学呀学
-工程代号：FinalPilot
-项目定位：基于多智能体协作、云计算与神经网络分析的 iOS 期末复习助手  
-当前阶段：v0.1 本地 MVP 已构建  
-创建日期：2026-05-01
-GitHub 仓库：https://github.com/Jeffhan789/FinalPilot_App
 
 ## 项目目标
 
