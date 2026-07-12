@@ -4,25 +4,23 @@ struct CareerView: View {
     @EnvironmentObject private var store: FinalPilotStore
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    SectionHeader(title: "校招保温", subtitle: "C310/E320 考前只做最低准备，不展开大工程")
-                    nextInterview
-                    minimumPack
-                    projectPitch
-                    careerTimeline
-                }
-                .padding()
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                SectionHeader(title: "校招保温", subtitle: "C310/E320 考前只做最低准备，不展开大工程")
+                nextInterview
+                minimumPack
+                projectPitch
+                careerTimeline
             }
-            .background(AppTheme.background.ignoresSafeArea())
-            .navigationTitle("校招")
-            .toolbar {
-                Button {
-                    store.addMockInterview()
-                } label: {
-                    Image(systemName: "plus")
-                }
+            .padding()
+        }
+        .background(AppTheme.background.ignoresSafeArea())
+        .navigationTitle("校招")
+        .toolbar {
+            Button {
+                store.addMockInterview()
+            } label: {
+                Image(systemName: "plus")
             }
         }
     }
@@ -67,7 +65,7 @@ struct CareerView: View {
             let items = [
                 ("1 分钟自我介绍", "person.text.rectangle"),
                 ("2 分钟 学呀学 项目介绍", "app.badge"),
-                ("3 个技术亮点：多智能体、云端、掌握度预测", "sparkles"),
+                ("3 个技术亮点：多智能体、本地快照、掌握度预测", "sparkles"),
                 ("3 个常见问题回答", "questionmark.bubble"),
                 ("1 个反问面试官的问题", "arrowshape.turn.up.left")
             ]
@@ -94,7 +92,7 @@ struct CareerView: View {
             VStack(alignment: .leading, spacing: 12) {
                 pitchLine(number: "1", title: "背景", text: "期末考试和校招面试并行，用户需要冲刺调度。")
                 pitchLine(number: "2", title: "核心", text: "Exam Track 优先，Career Track 保温。")
-                pitchLine(number: "3", title: "技术", text: "SwiftUI + 云端同步 + 多智能体 + 掌握度预测。")
+                pitchLine(number: "3", title: "技术", text: "SwiftUI + 本地快照 + 多智能体 + 掌握度预测。")
                 pitchLine(number: "4", title: "亮点", text: "ConflictAgent 自动处理任务冲突。")
             }
             .padding(16)

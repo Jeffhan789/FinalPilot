@@ -5,22 +5,24 @@ struct CoursesView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 14) {
-                    SectionHeader(title: "课程状态", subtitle: "先看薄弱点，再决定今天是否追加练习")
+            TimelineView(.periodic(from: Date(), by: 60)) { timeline in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 14) {
+                        SectionHeader(title: "课程状态", subtitle: "先看薄弱点，再决定今天是否追加练习")
 
-                    ForEach(store.courses) { course in
-                        NavigationLink {
-                            CourseDetailView(courseID: course.id)
-                        } label: {
-                            CourseCard(course: course, daysUntilExam: store.daysUntil(course.examDate))
+                        ForEach(store.courses) { course in
+                            NavigationLink {
+                                CourseDetailView(courseID: course.id)
+                            } label: {
+                                CourseCard(course: course, daysUntilExam: store.daysUntil(course.examDate, from: timeline.date))
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
                     }
+                    .padding()
                 }
-                .padding()
+                .background(AppTheme.background.ignoresSafeArea())
             }
-            .background(AppTheme.background.ignoresSafeArea())
             .navigationTitle("课程")
         }
     }
@@ -35,33 +37,35 @@ struct CourseDetailView: View {
     }
 
     var body: some View {
-        ScrollView {
-            if let course {
-                VStack(alignment: .leading, spacing: 16) {
-                    CourseCard(course: course, daysUntilExam: store.daysUntil(course.examDate))
+        TimelineView(.periodic(from: Date(), by: 60)) { timeline in
+            ScrollView {
+                if let course {
+                    VStack(alignment: .leading, spacing: 16) {
+                        CourseCard(course: course, daysUntilExam: store.daysUntil(course.examDate, from: timeline.date))
 
-                    SectionHeader(title: "知识点", subtitle: "掌握度低于 38% 会被标记为薄弱")
-                    ForEach(course.knowledgePoints) { point in
-                        knowledgePointRow(point, color: AppTheme.courseColor(course.colorKey))
-                    }
+                        SectionHeader(title: "知识点", subtitle: "掌握度低于 38% 会被标记为薄弱")
+                        ForEach(course.knowledgePoints) { point in
+                            knowledgePointRow(point, color: AppTheme.courseColor(course.colorKey))
+                        }
 
-                    SectionHeader(title: "推荐动作", subtitle: "把错题和项目话术合并处理")
-                    VStack(alignment: .leading, spacing: 8) {
-                        Label("薄弱知识点先做 15 分钟主动回忆，再看解释。", systemImage: "brain.head.profile")
-                        Label("能用于校招项目讲解的概念，额外整理 3 句口语化说明。", systemImage: "briefcase")
+                        SectionHeader(title: "推荐动作", subtitle: "把错题和项目话术合并处理")
+                        VStack(alignment: .leading, spacing: 8) {
+                            Label("薄弱知识点先做 15 分钟主动回忆，再看解释。", systemImage: "brain.head.profile")
+                            Label("能用于校招项目讲解的概念，额外整理 3 句口语化说明。", systemImage: "briefcase")
+                        }
+                        .font(.subheadline)
+                        .foregroundStyle(AppTheme.ink)
+                        .padding(14)
+                        .background(AppTheme.card, in: RoundedRectangle(cornerRadius: 8))
                     }
-                    .font(.subheadline)
-                    .foregroundStyle(AppTheme.ink)
-                    .padding(14)
-                    .background(AppTheme.card, in: RoundedRectangle(cornerRadius: 8))
-                }
-                .padding()
-            } else {
-                EmptyStateView(title: "没有找到课程", message: "课程数据稍后会从本地种子或云端同步。", icon: "books.vertical")
                     .padding()
+                } else {
+                    EmptyStateView(title: "没有找到课程", message: "课程数据会优先使用本地种子和内置快照。", icon: "books.vertical")
+                        .padding()
+                }
             }
+            .background(AppTheme.background.ignoresSafeArea())
         }
-        .background(AppTheme.background.ignoresSafeArea())
         .navigationTitle(course?.name ?? "课程")
     }
 
