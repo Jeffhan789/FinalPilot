@@ -29,6 +29,7 @@ const scoreRules = [
   [/每日任务看板/i, 110, "daily_board"],
   [/06-.*每日具体任务|每日具体任务安排/i, 100, "daily_plan"],
   [/README-总计划|总计划/i, 92, "master_plan"],
+  [/双列课件笔记优化版|课件笔记优化版/i, 126, "flashcard_source"],
   [/A4-两周复习进度规划表/i, 88, "a4_plan"],
   [/执行清单|今日复习记录|Day\d|Day[一二三四五六七八九十]/i, 82, "execution_log"],
   [/真题矩阵|错题|错因|复盘/i, 74, "practice_feedback"],
@@ -77,7 +78,7 @@ function scoreFile(filePath) {
   if (normalized.includes("/复习规划同步/")) score += 36;
   if (normalized.includes("00-C310_E320-高效复习总控")) score += 24;
   if (normalized.includes("/C310-0-期末考试") || normalized.includes("/E320-0-期末考试")) score += 18;
-  if (ext === ".pdf" && !/A4-两周复习进度规划表|Day|讲义|指南/i.test(normalized)) score -= 30;
+  if (ext === ".pdf" && !/A4-两周复习进度规划表|Day|双列课件笔记|课件笔记|讲义|指南/i.test(normalized)) score -= 30;
 
   if (score <= 0) return null;
   return { score, kind };
@@ -225,7 +226,7 @@ function buildSnapshot() {
     generatedAt,
     localServiceUrl: `http://127.0.0.1:${defaultPort}/study-sync-snapshot.json`,
     syncMode: "local_fixed_paths",
-    selectionPolicy: "优先同步每日任务看板、总计划、每日具体安排、A4 两周规划、真题矩阵、错题和执行清单；普通课件 PDF 只做低优先级元数据。",
+    selectionPolicy: "优先同步每日任务看板、总计划、每日具体安排、最新双列课件笔记、A4 两周规划、真题矩阵、错题和执行清单；普通课件 PDF 只做低优先级元数据。",
     sources: sourceSummaries,
     metrics: {
       selectedFiles: selectedFiles.length,

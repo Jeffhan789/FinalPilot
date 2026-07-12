@@ -58,6 +58,11 @@ struct StudySyncFile: Decodable, Identifiable {
 
 enum StudySyncLoader {
     static let liveURL = URL(string: "http://127.0.0.1:8787/study-sync-snapshot.json")!
+    #if targetEnvironment(simulator)
+    static let supportsLiveRefresh = true
+    #else
+    static let supportsLiveRefresh = false
+    #endif
 
     static func loadBundled() throws -> StudySyncSnapshot {
         guard let url = Bundle.main.url(forResource: "StudySyncSnapshot", withExtension: "json") else {
@@ -68,9 +73,13 @@ enum StudySyncLoader {
     }
 
     static func loadLive() async throws -> StudySyncSnapshot {
+        guard supportsLiveRefresh else {
+            throw URLError(.unsupportedURL)
+        }
+
         var request = URLRequest(url: liveURL)
         request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
-        request.timeoutInterval = 2
+        request.timeoutInterval = 1
         let (data, _) = try await URLSession.shared.data(for: request)
         return try decode(data)
     }
@@ -84,17 +93,17 @@ enum StudySyncLoader {
 
 struct StudySyncPanel: View {
     @State private var snapshot: StudySyncSnapshot?
-    @State private var sourceLabel = "内置快照"
-    @State private var message = "正在读取同步快照"
+    @State private var sourceLabel = "离线快照"
+    @State private var message = "正在读取离线快照"
     @State private var isRefreshing = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            SectionHeader(title: "固定路径同步", subtitle: "从 C310 / E320 / 总控目录挑选进度数据")
+            SectionHeader(title: "固定路径同步", subtitle: "默认使用 App 内置快照，离线也可查看进度数据")
 
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    Label(sourceLabel, systemImage: sourceLabel == "实时服务" ? "dot.radiowaves.left.and.right" : "shippingbox")
+                    Label(sourceLabel, systemImage: sourceLabel == "实时服务" ? "dot.radiowaves.left.and.right" : "wifi.slash")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(sourceLabel == "实时服务" ? AppTheme.green : AppTheme.primary)
                         .lineLimit(1)
@@ -102,11 +111,11 @@ struct StudySyncPanel: View {
                     Button {
                         Task { await refresh(preferLive: true) }
                     } label: {
-                        Label("刷新", systemImage: "arrow.clockwise")
+                        Label(StudySyncLoader.supportsLiveRefresh ? "实时刷新" : "离线可用", systemImage: StudySyncLoader.supportsLiveRefresh ? "arrow.clockwise" : "checkmark.seal")
                             .font(.caption.weight(.semibold))
                     }
                     .buttonStyle(.bordered)
-                    .disabled(isRefreshing)
+                    .disabled(isRefreshing || !StudySyncLoader.supportsLiveRefresh)
                 }
 
                 if let snapshot {
@@ -126,7 +135,7 @@ struct StudySyncPanel: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .task {
-            await refresh(preferLive: true)
+            await refresh(preferLive: false)
         }
     }
 
@@ -141,16 +150,17 @@ struct StudySyncPanel: View {
                 message = "已从本地同步服务读取最新数据"
                 return
             } catch {
-                message = "实时服务未开启，显示 App 内置快照"
+                message = "实时服务不可用，继续显示离线快照"
             }
         }
 
         do {
             snapshot = try StudySyncLoader.loadBundled()
-            sourceLabel = "内置快照"
+            sourceLabel = "离线快照"
         } catch {
             snapshot = nil
-            message = "还没有同步快照，请先运行 tools/sync_study_sources.mjs --write"
+            sourceLabel = "离线快照"
+            message = "未找到内置同步快照；其他课程、计划和练习数据仍可离线使用"
         }
     }
 

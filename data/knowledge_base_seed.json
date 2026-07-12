@@ -1,9 +1,31 @@
 {
   "project": "FinalPilot",
-  "version": "0.2",
+  "version": "0.8",
   "created_at": "2026-05-01",
-  "updated_at": "2026-05-01",
+  "updated_at": "2026-05-02",
   "source_plan": "本机 C310 复习规划同步目录",
+  "flashcard_source_library": [
+    {
+      "course_code": "C310",
+      "day_label": "C310 D1",
+      "title": "C310-第一天-C1C2-双列课件笔记优化版.pdf",
+      "relative_path": "C310-多智能体/04-复习计划与打印版/C310-第一天-C1C2-双列课件笔记优化版.pdf",
+      "source_type": "double_column_course_note",
+      "status": "active_flashcard_source",
+      "covered_sections": ["0", "1.1", "1.2", "2.1", "2.2", "2.3", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"],
+      "flashcard_count": 38
+    },
+    {
+      "course_code": "C310",
+      "day_label": "C310 D2",
+      "title": "C310-第二天-C3C4-双列课件笔记优化版.pdf",
+      "relative_path": "C310-多智能体/04-复习计划与打印版/C310-第二天-C3C4-双列课件笔记优化版.pdf",
+      "source_type": "double_column_course_note",
+      "status": "active_flashcard_source",
+      "covered_sections": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"],
+      "flashcard_count": 47
+    }
+  ],
   "exam_window": [
     {
       "course_code": "C310",
