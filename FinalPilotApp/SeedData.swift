@@ -1,4 +1,4 @@
-// swiftlint:disable type_body_length file_length line_length
+// swiftlint:disable type_body_length file_length line_length function_parameter_count
 import Foundation
 
 enum SeedData {
