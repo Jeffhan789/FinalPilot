@@ -6,21 +6,7 @@ import XCTest
 /// 覆盖任务状态切换、答题提交、掌握度更新、日期计算和任务桶排序。
 final class StoreLogicTests: XCTestCase {
 
-    private var store: FinalPilotStore!
-
-    override func setUp() {
-        super.setUp()
-        MainActor.assumeIsolated {
-            store = FinalPilotStore()
-        }
-    }
-
-    override func tearDown() {
-        MainActor.assumeIsolated {
-            store = nil
-        }
-        super.tearDown()
-    }
+    @MainActor private lazy var store = FinalPilotStore()
 
     // MARK: - toggleTask 测试
 
@@ -199,7 +185,7 @@ final class StoreLogicTests: XCTestCase {
         // 给定：一个初始掌握度为 0.70 的知识点（答对+高自信度后应为 0.78）
         let question = questionForKnowledgePoint(initialMastery: 0.70)
         guard let question = question else {
-            XCTSkip("未找到合适的测试知识点")
+            XCTFail("测试种子中缺少可用知识点")
             return
         }
 
@@ -219,7 +205,7 @@ final class StoreLogicTests: XCTestCase {
         // 给定：一个初始掌握度为 0.35 的知识点（答错+高自信度后应为 0.19）
         let question = questionForKnowledgePoint(initialMastery: 0.35)
         guard let question = question else {
-            XCTSkip("未找到合适的测试知识点")
+            XCTFail("测试种子中缺少可用知识点")
             return
         }
 
@@ -239,7 +225,7 @@ final class StoreLogicTests: XCTestCase {
         // 给定：一个初始掌握度为 0.50 的知识点
         let question = questionForKnowledgePoint(initialMastery: 0.50)
         guard let question = question else {
-            XCTSkip("未找到合适的测试知识点")
+            XCTFail("测试种子中缺少可用知识点")
             return
         }
 
@@ -257,7 +243,7 @@ final class StoreLogicTests: XCTestCase {
         // 给定：初始掌握度 0.64，答对+高自信度 (+0.08) = 0.72
         let question = questionForKnowledgePoint(initialMastery: 0.64)
         guard let question = question else {
-            XCTSkip("未找到合适的测试知识点")
+            XCTFail("测试种子中缺少可用知识点")
             return
         }
 
@@ -275,7 +261,7 @@ final class StoreLogicTests: XCTestCase {
         // 给定：初始掌握度 0.48，答错+高自信度 (-0.16) = 0.32
         let question = questionForKnowledgePoint(initialMastery: 0.48)
         guard let question = question else {
-            XCTSkip("未找到合适的测试知识点")
+            XCTFail("测试种子中缺少可用知识点")
             return
         }
 
@@ -294,7 +280,7 @@ final class StoreLogicTests: XCTestCase {
         // 给定：初始掌握度 0.98 的知识点
         let question = questionForKnowledgePoint(initialMastery: 0.98)
         guard let question = question else {
-            XCTSkip("未找到合适的测试知识点")
+            XCTFail("测试种子中缺少可用知识点")
             return
         }
 
@@ -313,7 +299,7 @@ final class StoreLogicTests: XCTestCase {
         // 给定：初始掌握度 0.05 的知识点
         let question = questionForKnowledgePoint(initialMastery: 0.05)
         guard let question = question else {
-            XCTSkip("未找到合适的测试知识点")
+            XCTFail("测试种子中缺少可用知识点")
             return
         }
 

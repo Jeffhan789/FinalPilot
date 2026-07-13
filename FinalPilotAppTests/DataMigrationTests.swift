@@ -7,24 +7,8 @@ import CoreData
 /// 覆盖实体创建、属性映射、关系建立和迁移幂等性。
 final class DataMigrationTests: XCTestCase {
 
-    private var dataController: DataController!
-    private var context: NSManagedObjectContext!
-
-    override func setUp() {
-        super.setUp()
-        MainActor.assumeIsolated {
-            dataController = DataController(inMemory: true)
-            context = dataController.viewContext
-        }
-    }
-
-    override func tearDown() {
-        MainActor.assumeIsolated {
-            context = nil
-            dataController = nil
-        }
-        super.tearDown()
-    }
+    @MainActor private lazy var dataController = DataController(inMemory: true)
+    @MainActor private lazy var context = dataController.viewContext
 
     // MARK: - 迁移执行
 
