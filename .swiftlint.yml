@@ -1,0 +1,211 @@
+# ============================================
+# FinalPilot (学呀学) - SwiftLint 代码规范配置
+# ============================================
+# SwiftLint 版本要求: >= 0.50.0
+# 使用方式: swiftlint lint / swiftlint --fix
+# ============================================
+
+# ---- 基础规则集 ----
+# 以 SwiftLint 推荐规则集为基础，再根据项目需求调整
+opt_in_rules:
+  # 代码质量与安全性
+  - array_init                    # 优先使用 Array(seq) 而非 seq.map { $0 }
+  - contains_over_first_not_nil   # 用 contains 替代 first(where:) != nil
+  - empty_count                   # 用 isEmpty 替代 count == 0
+  - empty_string                  # 用 isEmpty 替代 == ""
+  - first_where                   # 优先使用 first(where:) 替代 filter + first
+  - flatmap_over_map_reduce       # 用 flatMap 替代 map + reduce
+  - force_unwrapping              # 强制解包检查（错误级别）
+  - identical_operands            # 禁止 x == x 等无意义比较
+  - implicitly_unwrapped_optional # 隐式解包可选值检查
+  - joined_default_parameter      # joined(separator: "") 简化为 joined()
+  - literal_expression_end_indentation  # 多行字面量缩进对齐
+  - lower_acl_than_parent         # 子类访问控制不应高于父类
+  - no_grouping_extension         # 禁止用 extension 做代码分组
+  - operator_usage_whitespace     # 运算符前后空格
+  - overridden_super_call         # 重写方法应调用 super
+  - override_in_extension         # 禁止在 extension 中 override
+  - private_action                # IBOutlet 的 action 应为 private
+  - private_outlet                # IBOutlet 应为 private
+  - prohibited_super_call         # 禁止不应调用 super 的地方调用 super
+  - redundant_nil_init            # 移除冗余的 = nil 初始化
+  - redundant_type_annotation     # 移除冗余类型注解
+  - sorted_first_last             # 用 min/max 替代 sorted().first/last
+  - static_operator               # 运算符应声明为 static
+  - toggle_bool                   # 用 toggle() 替代 !bool
+  - unneeded_parentheses_in_closure_argument  # 闭包参数多余括号
+  - unused_declaration            # 未使用的声明
+  - yoda_condition                # 禁止尤达条件（如 42 == x）
+
+  # 代码风格与可读性
+  - closure_body_length           # 闭包体长度限制
+  - closure_end_indentation       # 闭包结束括号缩进
+  - closure_spacing               # 闭包签名空格
+  - collection_alignment          # 集合元素对齐
+  - colon                         # 冒号空格规范
+  - comma                         # 逗号后空格
+  - control_statement             # 控制语句条件括号
+  - explicit_init                 # 禁止冗余的 .init
+  - explicit_self                 # 显式 self 使用（可选开启）
+  - extension_access_modifier     # extension 统一访问控制
+  - fatal_error_message           # fatalError 应包含消息
+  - file_header                   # 文件头格式规范
+  - function_default_parameter_at_end  # 默认参数放最后
+  - ibinspectable_in_extension    # 禁止在 extension 中用 @IBInspectable
+  - indentation_width             # 缩进宽度检查
+  - leading_whitespace            # 文件开头无空行
+  - let_var_whitespace            # let/var 声明间空行
+  - multiline_arguments           # 多行参数格式
+  - multiline_parameters          # 多行参数格式
+  - number_separator              # 大数字千位分隔符
+  - object_literal                # 优先使用 #imageLiteral 等
+  - pattern_matching_keywords     # 模式匹配关键字位置
+  - prefer_self_type_over_type_of_self  # 优先用 Self.type
+  - redundant_set_access_control  # 移除冗余访问控制
+  - redundant_void_return         # 移除冗余 -> Void
+  - return_arrow_whitespace       # 返回箭头空格
+  - single_test_class             # 单个测试类 per 文件
+  - switch_case_on_newline        # switch case 换行
+  - trailing_closure              # 尾随闭包风格
+  - trailing_comma                # 尾随逗号
+  - trailing_newline              # 文件末尾空行
+  - untyped_error_in_catch        # catch 应指定错误类型
+  - vertical_parameter_alignment  # 参数垂直对齐
+  - vertical_whitespace_closing_braces  # 闭括号前空行
+  - vertical_whitespace_opening_braces  # 开括号后空行
+  - void_return                   # 用 -> Void 替代 -> ()
+
+  # SwiftUI / iOS 最佳实践
+  - accessibility_label_for_image  # Image 应设 accessibilityLabel
+  - accessibility_trait_for_button  # Button 应设 accessibilityTrait
+
+# ---- 禁用规则 ----
+disabled_rules:
+  # 禁用 trailing_whitespace，交由 SwiftFormat 处理
+  - trailing_whitespace
+
+# ---- 规则参数配置 ----
+line_length:
+  warning: 200      # 警告阈值：200 字符
+  error: 250        # 错误阈值：250 字符
+  ignores_urls: true           # 忽略 URL 长度
+  ignores_function_declarations: false
+  ignores_comments: true       # 忽略注释长度
+  ignores_interpolated_strings: false
+
+type_body_length:
+  warning: 300      # 类型体长度警告
+  error: 500        # 类型体长度错误
+
+function_body_length:
+  warning: 60       # 函数体长度警告
+  error: 100        # 函数体长度错误
+
+function_parameter_count:
+  warning: 5        # 参数数量警告
+  error: 8          # 参数数量错误
+
+cyclomatic_complexity:
+  warning: 10       # 圈复杂度警告
+  error: 20         # 圈复杂度错误
+
+nesting:
+  type_level:
+    warning: 2      # 类型嵌套层级
+  statement_level:
+    warning: 5      # 语句嵌套层级
+
+identifier_name:
+  min_length:
+    warning: 2      # 标识符最少 2 个字符（允许 id, x, y 等常见短名）
+    error: 1
+  max_length:
+    warning: 50     # 标识符最大长度
+    error: 60
+  excluded:
+    - id            # 允许 id 作为标识符
+    - x             # 允许坐标 x
+    - y             # 允许坐标 y
+    - i             # 允许循环变量 i
+    - j             # 允许循环变量 j
+    - k             # 允许循环变量 k
+    - vc            # 允许 ViewController 缩写 vc
+    - vm            # 允许 ViewModel 缩写 vm
+
+file_length:
+  warning: 500      # 文件行数警告
+  error: 800        # 文件行数错误
+  ignore_comment_only_lines: true
+
+# force_try / force_cast 启用警告级别
+force_try:
+  severity: warning
+
+force_cast:
+  severity: warning
+
+# 缩进宽度（与 SwiftFormat 保持一致）
+indentation_width:
+  indentation_width: 4
+  include_compiler_directives: false
+
+# 尾随逗号规则（多行集合）
+trailing_comma:
+  mandatory_comma: false
+
+# 闭包体长度
+closure_body_length:
+  warning: 30
+  error: 50
+
+# ---- 排除目录 ----
+# 不检查第三方依赖和构建产物
+excluded:
+  - Pods                          # CocoaPods 依赖
+  - .build                        # Swift Package Manager 构建目录
+  - .swiftpm                      # SPM 工作区
+  - DerivedData                   # Xcode 派生数据
+  - build                         # 通用构建目录
+  - "**/Generated/*"              # 生成的代码文件
+  - "**/*.generated.swift"        # 生成的 Swift 文件
+  - FinalPilotApp.xcodeproj       # Xcode 工程文件
+  - tools                         # 工具脚本目录
+  - docs                          # 文档目录
+  - data                          # 数据文件目录
+  - design                        # 设计资源目录
+  - records                       # 记录目录
+
+# ---- 自定义规则 ----
+custom_rules:
+  # 禁止在代码中遗留 print 调试语句（生产代码应使用日志框架）
+  no_print:
+    name: "禁止 print 调试"
+    regex: '(?<!\/)print\s*\(.*?\)'
+    message: "请使用 OSLog 或自定义日志框架替代 print"
+    severity: warning
+
+  # 禁止在代码中遗留 TODO 标记为 FIXME 的未完成事项
+  todo_format:
+    name: "TODO 格式检查"
+    regex: '(?<!\/)\/\/\s*TODO:'
+    message: "TODO 格式应为 // TODO: (作者) 描述"
+    severity: warning
+
+  # 禁止 NSObject 无意义继承
+  no_ns_object_unnecessary:
+    name: "不必要的 NSObject 继承"
+    regex: 'class\s+\w+:\s*NSObject\s*\{[^}]*\}'
+    message: "仅在使用 KVO、Target-Action 等 Objective-C 特性时才继承 NSObject"
+    severity: warning
+    match_kinds:
+      - keyword
+
+  # 优先使用 Swift 原生错误处理，避免返回可选值 + 错误元组
+  prefer_throws:
+    name: "优先使用 throws"
+    regex: '->\s*\(.*Error\?.*\)'
+    message: "优先使用 throws 函数替代返回 Error? 元组"
+    severity: warning
+
+# ---- 报告设置 ----
+reporter: "xcode"  # 报告格式: xcode / json / csv / checkstyle / junit / html

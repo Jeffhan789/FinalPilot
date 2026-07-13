@@ -1,0 +1,185 @@
+# ============================================
+# FinalPilot (学呀学) - Pre-commit 钩子配置
+# ============================================
+# 使用方式:
+#   1. 安装 pre-commit: pip install pre-commit 或 brew install pre-commit
+#   2. 安装钩子: pre-commit install
+#   3. 手动运行: pre-commit run --all-files
+# ============================================
+
+# 最低版本要求
+minimum_pre_commit_version: '3.0.0'
+
+# 默认属性（所有钩子共用）
+default_stages: [pre-commit, pre-push]
+default_language_version:
+  python: python3.11
+
+# 文件过滤（不检查非 Swift 文件和第三方代码）
+files: '\.(swift|m|h)$'
+exclude: |
+  (?x)^(
+    Pods/|
+    .build/|
+    .swiftpm/|
+    DerivedData/|
+    build/|
+    .*\.generated\.swift|
+    tools/|
+    docs/|
+    data/|
+    design/|
+    records/
+  )
+
+# 提交消息模板（可选）
+commit-msg:
+  stages: [commit-msg]
+
+# ---- 钩子配置 ----
+repos:
+  # ============================================
+  # 基础元数据检查
+  # ============================================
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # 检查文件末尾是否有空行
+      - id: end-of-file-fixer
+        name: "文件末尾空行修复"
+        description: "确保所有文本文件末尾有空行"
+        stages: [pre-commit]
+
+      # 去除行尾空格（与 SwiftLint 的 trailing_whitespace 互补）
+      - id: trailing-whitespace
+        name: "行尾空格清理"
+        description: "去除行尾多余空格"
+        stages: [pre-commit]
+        args: [--markdown-linebreak-ext=md]
+
+      # 检查文件大小（防止提交大文件）
+      - id: check-added-large-files
+        name: "大文件检查"
+        description: "阻止提交超过 500KB 的文件"
+        stages: [pre-commit]
+        args: ['--maxkb=500']
+
+      # 检查 YAML 文件格式
+      - id: check-yaml
+        name: "YAML 格式检查"
+        description: "检查 YAML 文件语法正确性"
+        stages: [pre-commit]
+        files: '\.(yml|yaml)$'
+
+      # 检查 JSON 文件格式
+      - id: check-json
+        name: "JSON 格式检查"
+        description: "检查 JSON 文件语法正确性"
+        stages: [pre-commit]
+        files: '\.json$'
+
+      # 检查合并冲突标记
+      - id: check-merge-conflict
+        name: "合并冲突标记检查"
+        description: "检查是否遗留合并冲突标记（<<<<<<<, =======, >>>>>>>）"
+        stages: [pre-commit]
+
+      # 检查 Unicode 替代字符（Copy-Paste 常见问题）
+      - id: fix-byte-order-marker
+        name: "BOM 修复"
+        description: "移除 UTF-8 文件的 BOM 标记"
+        stages: [pre-commit]
+
+  # ============================================
+  # SwiftLint 静态检查（核心钩子）
+  # ============================================
+  - repo: https://github.com/realm/SwiftLint
+    rev: 0.54.0
+    hooks:
+      # 在提交前运行 SwiftLint 检查
+      - id: swiftlint
+        name: "SwiftLint 代码检查"
+        description: "运行 SwiftLint 静态分析，检查 Swift 代码规范"
+        stages: [pre-commit]
+        entry: swiftlint
+        args:
+          - lint
+          - --quiet
+          - --config
+          - .swiftlint.yml
+        language: system
+        types: [swift]
+        pass_filenames: false
+        require_serial: true
+
+      # 在提交前尝试自动修复（--fix 模式）
+      - id: swiftlint-fix
+        name: "SwiftLint 自动修复"
+        description: "尝试自动修复 SwiftLint 发现的可修复问题"
+        stages: [pre-commit]
+        entry: swiftlint
+        args:
+          - --fix
+          - --quiet
+          - --config
+          - .swiftlint.yml
+        language: system
+        types: [swift]
+        pass_filenames: false
+        require_serial: true
+        # 允许失败（因为 fix 后可能仍有无法自动修复的问题）
+        verbose: true
+
+  # ============================================
+  # SwiftFormat 格式化（可选，若需要可取消注释）
+  # ============================================
+  # - repo: local
+  #   hooks:
+  #     - id: swiftformat
+  #       name: "SwiftFormat 代码格式化"
+  #       description: "使用 SwiftFormat 自动格式化 Swift 代码"
+  #       stages: [pre-commit]
+  #       entry: swiftformat
+  #       args:
+  #         - --config
+  #         - .swiftformat
+  #       language: system
+  #       types: [swift]
+  #       pass_filenames: false
+  #       require_serial: true
+
+  # ============================================
+  # 提交消息规范（可选）
+  # ============================================
+  # 使用 Commitlint 风格或自定义提交消息检查
+  # - repo: https://github.com/commitizen-tools/commitizen
+  #   rev: v3.13.0
+  #   hooks:
+  #     - id: commitizen
+  #       name: "提交消息规范检查"
+  #       description: "检查提交消息是否符合 Conventional Commits 规范"
+  #       stages: [commit-msg]
+  #       language: system
+  #       entry: cz
+  #       args: [check, --commit-msg-file]
+  #       pass_filenames: true
+
+# ============================================
+# 使用说明
+# ============================================
+# 1. 首次设置：
+#    $ pre-commit install
+#    $ pre-commit install --hook-type commit-msg
+#
+# 2. 手动运行所有检查：
+#    $ pre-commit run --all-files
+#
+# 3. 手动运行特定钩子：
+#    $ pre-commit run swiftlint --all-files
+#
+# 4. 跳过钩子（紧急修复时）：
+#    $ git commit --no-verify -m "紧急修复"
+#
+# 5. 更新钩子版本：
+#    $ pre-commit autoupdate
+# ============================================

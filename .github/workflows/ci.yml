@@ -1,0 +1,71 @@
+# ==========================================
+# FinalPilot（学呀学）GitHub Actions CI 工作流
+# 用途：自动构建验证 + 代码规范检查
+# ==========================================
+
+name: CI
+
+# 触发条件：main 分支的 push 和 pull_request
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# 取消同一分支上的旧工作流，节省资源
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # 主构建任务
+  build-and-lint:
+    # 使用 macOS 运行器，自带 Xcode 环境
+    runs-on: macos-15
+
+    # 设置超时，防止异常挂起
+    timeout-minutes: 30
+
+    steps:
+      # 步骤 1：检出代码
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      # 步骤 2：选择 Xcode 版本（确保支持 iPhone 16 模拟器）
+      - name: 设置 Xcode 版本
+        run: |
+          sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
+          xcodebuild -version
+
+      # 步骤 3：显示环境信息（方便排错）
+      - name: 打印环境信息
+        run: |
+          echo "=== Swift 版本 ==="
+          swift --version
+          echo "=== Xcode 版本 ==="
+          xcodebuild -version
+          echo "=== 可用模拟器 ==="
+          xcrun simctl list devices available | grep -i "iPhone 16" || true
+
+      # 步骤 4：构建验证（使用 iPhone 16 模拟器，无需代码签名）
+      - name: 构建验证（xcodebuild）
+        run: |
+          xcodebuild \
+            -project FinalPilotApp.xcodeproj \
+            -scheme FinalPilotApp \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -derivedDataPath ${{ runner.temp }}/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      # 步骤 5：代码规范检查（仅当 .swiftlint.yml 存在时执行）
+      - name: 安装 SwiftLint
+        if: hashFiles('.swiftlint.yml') != ''
+        run: brew install swiftlint
+
+      - name: 执行 SwiftLint 检查
+        if: hashFiles('.swiftlint.yml') != ''
+        run: swiftlint lint --reporter github-actions-logging
+        # 使用 github-actions-logging 报告器，可在 PR 中直接显示警告位置
