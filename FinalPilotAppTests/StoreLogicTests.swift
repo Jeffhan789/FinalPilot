@@ -6,7 +6,7 @@ import XCTest
 /// 覆盖任务状态切换、答题提交、掌握度更新、日期计算和任务桶排序。
 final class StoreLogicTests: XCTestCase, @unchecked Sendable {
 
-    @MainActor private lazy var store = FinalPilotStore()
+    @MainActor private lazy var store = FinalPilotStore(sideEffectsEnabled: false)
 
     // MARK: - toggleTask 测试
 
@@ -84,7 +84,7 @@ final class StoreLogicTests: XCTestCase, @unchecked Sendable {
                 linkedCourseID: nil,
                 status: .pending
             )
-            let singleStore = FinalPilotStore(tasks: [singleTask])
+            let singleStore = FinalPilotStore(tasks: [singleTask], sideEffectsEnabled: false)
 
             // 当：toggle
             singleStore.toggleTask(singleTask)
@@ -401,7 +401,7 @@ final class StoreLogicTests: XCTestCase, @unchecked Sendable {
                 id: "t_should", track: .exam, bucket: .should,
                 title: "Should", subtitle: "", minutes: 10, reason: "", linkedCourseID: nil, status: .pending
             )
-            let mixedStore = FinalPilotStore(tasks: [shouldTask, mustTask])
+            let mixedStore = FinalPilotStore(tasks: [shouldTask, mustTask], sideEffectsEnabled: false)
 
             // 当：获取 exam track 的任务列表
             let sorted = mixedStore.tasks(track: .exam)
@@ -424,7 +424,7 @@ final class StoreLogicTests: XCTestCase, @unchecked Sendable {
                 id: "t_skip", track: .exam, bucket: .skip,
                 title: "Skip", subtitle: "", minutes: 10, reason: "", linkedCourseID: nil, status: .deferred
             )
-            let mixedStore = FinalPilotStore(tasks: [skipTask, mustTask])
+            let mixedStore = FinalPilotStore(tasks: [skipTask, mustTask], sideEffectsEnabled: false)
 
             let sorted = mixedStore.tasks(track: .exam)
 
@@ -445,7 +445,7 @@ final class StoreLogicTests: XCTestCase, @unchecked Sendable {
                 id: "t_long", track: .exam, bucket: .must,
                 title: "Long", subtitle: "", minutes: 60, reason: "", linkedCourseID: nil, status: .pending
             )
-            let mixedStore = FinalPilotStore(tasks: [shortTask, longTask])
+            let mixedStore = FinalPilotStore(tasks: [shortTask, longTask], sideEffectsEnabled: false)
 
             let sorted = mixedStore.tasks(track: .exam)
 
@@ -490,12 +490,16 @@ final class StoreLogicTests: XCTestCase, @unchecked Sendable {
     @MainActor
     private func questionForKnowledgePoint(initialMastery: Double) -> QuizQuestion? {
         // 尝试在 SeedData 中找到第一个有问题的课程
-        guard let seedCourse = SeedData.courses.first(where: { !$0.questions.isEmpty && !$0.knowledgePoints.isEmpty }) else {
+        guard let seedCourse = SeedData.courses.first(where: { !$0.questions.isEmpty && !$0.knowledgePoints.isEmpty }),
+              let question = seedCourse.questions.first,
+              let pointIndex = seedCourse.knowledgePoints.firstIndex(where: {
+                  $0.id == question.knowledgePointID
+              }) else {
             return nil
         }
 
         // 创建修改后的知识点（设置目标掌握度）
-        let targetPoint = seedCourse.knowledgePoints[0]
+        let targetPoint = seedCourse.knowledgePoints[pointIndex]
         let modifiedPoint = KnowledgePoint(
             id: targetPoint.id,
             chapter: targetPoint.chapter,
@@ -507,7 +511,7 @@ final class StoreLogicTests: XCTestCase, @unchecked Sendable {
 
         // 创建修改后的课程
         var modifiedPoints = seedCourse.knowledgePoints
-        modifiedPoints[0] = modifiedPoint
+        modifiedPoints[pointIndex] = modifiedPoint
         let modifiedCourse = Course(
             id: seedCourse.id,
             name: seedCourse.name,
@@ -526,9 +530,14 @@ final class StoreLogicTests: XCTestCase, @unchecked Sendable {
         if let index = modifiedCourses.firstIndex(where: { $0.id == seedCourse.id }) {
             modifiedCourses[index] = modifiedCourse
         }
-        store = FinalPilotStore(courses: modifiedCourses, tasks: SeedData.tasks, attempts: [])
+        store = FinalPilotStore(
+            courses: modifiedCourses,
+            tasks: SeedData.tasks,
+            attempts: [],
+            sideEffectsEnabled: false
+        )
 
         // 返回与该知识点关联的题目
-        return modifiedCourse.questions.first { $0.knowledgePointID == targetPoint.id }
+        return question
     }
 }
