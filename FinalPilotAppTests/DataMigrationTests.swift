@@ -5,16 +5,31 @@ import CoreData
 // MARK: - DataMigrationTests
 /// 测试 SeedData 到 Core Data 的迁移逻辑。
 /// 覆盖实体创建、属性映射、关系建立和迁移幂等性。
-@MainActor
 final class DataMigrationTests: XCTestCase {
 
-    // Each test-case instance owns an in-memory Core Data stack.
-    private let dataController = DataController(inMemory: true)
-    private lazy var context = dataController.viewContext
+    private var dataController: DataController!
+    private var context: NSManagedObjectContext!
+
+    override func setUp() {
+        super.setUp()
+        MainActor.assumeIsolated {
+            dataController = DataController(inMemory: true)
+            context = dataController.viewContext
+        }
+    }
+
+    override func tearDown() {
+        MainActor.assumeIsolated {
+            context = nil
+            dataController = nil
+        }
+        super.tearDown()
+    }
 
     // MARK: - 迁移执行
 
     /// 测试：执行迁移后 CourseEntity 应正确创建
+    @MainActor
     func testMigrateSeedData_CourseEntityCreated() {
         // 当：执行迁移
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
@@ -26,6 +41,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：课程实体的属性映射应完整准确
+    @MainActor
     func testMigrateSeedData_CoursePropertiesMapped() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 
@@ -46,6 +62,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：课程与知识点的关系应正确建立
+    @MainActor
     func testMigrateSeedData_KnowledgePointRelationship() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 
@@ -60,6 +77,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：知识点的属性映射应正确
+    @MainActor
     func testMigrateSeedData_KnowledgePointPropertiesMapped() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 
@@ -76,6 +94,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：课程与题目的关系应正确建立
+    @MainActor
     func testMigrateSeedData_QuestionRelationship() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 
@@ -90,6 +109,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：题目的属性映射应正确
+    @MainActor
     func testMigrateSeedData_QuestionPropertiesMapped() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 
@@ -107,6 +127,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：StudyTaskEntity 应正确创建
+    @MainActor
     func testMigrateSeedData_TaskEntityCreated() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 
@@ -116,6 +137,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：任务实体的属性映射应正确
+    @MainActor
     func testMigrateSeedData_TaskPropertiesMapped() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 
@@ -133,6 +155,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：CareerEventEntity 应正确创建
+    @MainActor
     func testMigrateSeedData_CareerEventEntityCreated() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 
@@ -142,6 +165,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：职业事件属性映射应正确
+    @MainActor
     func testMigrateSeedData_CareerEventPropertiesMapped() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 
@@ -150,14 +174,15 @@ final class DataMigrationTests: XCTestCase {
         let entity = try? context.fetch(fetchRequest).first
 
         XCTAssertNotNil(entity)
-        XCTAssertEqual(entity?.company, "示例科技")
-        XCTAssertEqual(entity?.role, "iOS / AI 应用开发实习")
-        XCTAssertEqual(entity?.round, "技术一面")
+        XCTAssertEqual(entity?.company, "学呀学 v2")
+        XCTAssertEqual(entity?.role, "公开测试版本")
+        XCTAssertEqual(entity?.round, "发布检查")
         XCTAssertEqual(entity?.importance, 4)
         XCTAssertEqual(entity?.preparationStatus, "最低准备包已建立")
     }
 
     /// 测试：SprintPlanDayEntity 应正确创建
+    @MainActor
     func testMigrateSeedData_SprintPlanDayEntityCreated() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 
@@ -167,6 +192,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：冲刺计划属性映射应正确
+    @MainActor
     func testMigrateSeedData_SprintPlanDayPropertiesMapped() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 
@@ -184,6 +210,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：KnowledgeFlashcardEntity 应正确创建
+    @MainActor
     func testMigrateSeedData_FlashcardEntityCreated() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 
@@ -193,6 +220,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：闪卡属性映射应正确
+    @MainActor
     func testMigrateSeedData_FlashcardPropertiesMapped() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 
@@ -209,6 +237,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：迁移是幂等的——重复执行不应重复创建数据
+    @MainActor
     func testMigrateSeedData_IdempotentMigration() {
         // 当：第一次迁移
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
@@ -234,6 +263,7 @@ final class DataMigrationTests: XCTestCase {
     // MARK: - 往返转换测试
 
     /// 测试：CourseEntity 的 fromCourse/toCourse 往返转换应保持数据一致
+    @MainActor
     func testCourseEntity_RoundTripConversion() {
         let seedCourse = SeedData.courses[0]
         let entity = CourseEntity.fromCourse(seedCourse, context: context)
@@ -252,6 +282,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：KnowledgePointEntity 的往返转换应保持数据一致
+    @MainActor
     func testKnowledgePointEntity_RoundTripConversion() {
         let seedPoint = SeedData.courses[0].knowledgePoints[0]
         let entity = KnowledgePointEntity.fromKnowledgePoint(seedPoint, context: context)
@@ -266,6 +297,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：QuizQuestionEntity 的往返转换应保持数据一致
+    @MainActor
     func testQuizQuestionEntity_RoundTripConversion() {
         let seedQuestion = SeedData.courses[0].questions[0]
         let entity = QuizQuestionEntity.fromQuizQuestion(seedQuestion, context: context)
@@ -280,6 +312,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：StudyTaskEntity 的往返转换应保持数据一致
+    @MainActor
     func testStudyTaskEntity_RoundTripConversion() {
         let seedTask = SeedData.tasks[0]
         let entity = StudyTaskEntity.fromStudyTask(seedTask, context: context)
@@ -294,6 +327,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：CareerEventEntity 的往返转换应保持数据一致
+    @MainActor
     func testCareerEventEntity_RoundTripConversion() {
         let seedEvent = SeedData.careerEvents[0]
         let entity = CareerEventEntity.fromCareerEvent(seedEvent, context: context)
@@ -306,6 +340,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：SprintPlanDayEntity 的往返转换应保持数据一致
+    @MainActor
     func testSprintPlanDayEntity_RoundTripConversion() {
         let seedDay = SeedData.sprintPlanDays[0]
         let entity = SprintPlanDayEntity.fromSprintPlanDay(seedDay, context: context)
@@ -318,6 +353,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：KnowledgeFlashcardEntity 的往返转换应保持数据一致
+    @MainActor
     func testKnowledgeFlashcardEntity_RoundTripConversion() {
         let seedCard = SeedData.flashcards[0]
         let entity = KnowledgeFlashcardEntity.fromKnowledgeFlashcard(seedCard, context: context)
@@ -330,6 +366,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：CourseEntity 的计算属性 masteryAverage 应正确
+    @MainActor
     func testCourseEntity_MasteryAverageCalculation() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 
@@ -346,6 +383,7 @@ final class DataMigrationTests: XCTestCase {
     }
 
     /// 测试：CourseEntity 的 weakPoints 应正确筛选 mastery < 0.38 的知识点
+    @MainActor
     func testCourseEntity_WeakPointsFilter() {
         CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: context)
 

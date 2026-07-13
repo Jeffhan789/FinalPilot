@@ -4,7 +4,6 @@ import XCTest
 // MARK: - AlgorithmTests
 /// 测试 StudyStatistics 中的纯算法逻辑。
 /// 覆盖艾宾浩斯遗忘曲线、学习热力图、掌握度变化模拟、正确率趋势等统计方法。
-@MainActor
 final class AlgorithmTests: XCTestCase {
 
     // MARK: - 艾宾浩斯遗忘曲线复习建议测试
@@ -337,6 +336,7 @@ final class AlgorithmTests: XCTestCase {
     // MARK: - 从 Store 生成每日记录测试
 
     /// 测试：无答题记录时从 Store 生成单条今日记录
+    @MainActor
     func testGenerateDailyRecords_NoAttempts() {
         let store = FinalPilotStore(attempts: [])
         let records = StudyStatistics.generateDailyRecords(from: store)
@@ -346,6 +346,7 @@ final class AlgorithmTests: XCTestCase {
     }
 
     /// 测试：有答题记录时按日期分组
+    @MainActor
     func testGenerateDailyRecords_WithAttempts() {
         let today = Calendar.current.startOfDay(for: Date())
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: today)!

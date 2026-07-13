@@ -173,15 +173,15 @@ final class FinalPilotStore: ObservableObject {
         return attempt
     }
 
-    func addMockInterview() {
+    func addSampleMilestone() {
         let event = CareerEvent(
             id: UUID().uuidString,
-            company: "新增公司",
-            role: "iOS 开发实习",
-            round: "模拟技术面",
+            company: "新增里程碑",
+            role: "自定义事务",
+            round: "待执行",
             date: .finalPilotDate(month: 5, day: 10, hour: 15),
             importance: 3,
-            preparationStatus: "等待准备"
+            preparationStatus: "等待拆解"
         )
         careerEvents.append(event)
         syncToWidget()

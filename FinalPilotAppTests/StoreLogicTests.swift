@@ -4,16 +4,28 @@ import XCTest
 // MARK: - StoreLogicTests
 /// 测试 FinalPilotStore 的核心业务逻辑。
 /// 覆盖任务状态切换、答题提交、掌握度更新、日期计算和任务桶排序。
-@MainActor
 final class StoreLogicTests: XCTestCase {
 
-    // XCTest creates a fresh test-case instance for each test method, so this
-    // actor-isolated store remains independent without nonisolated setup hooks.
-    private var store = FinalPilotStore()
+    private var store: FinalPilotStore!
+
+    override func setUp() {
+        super.setUp()
+        MainActor.assumeIsolated {
+            store = FinalPilotStore()
+        }
+    }
+
+    override func tearDown() {
+        MainActor.assumeIsolated {
+            store = nil
+        }
+        super.tearDown()
+    }
 
     // MARK: - toggleTask 测试
 
     /// 测试：任务从 pending 切换为 done
+    @MainActor
     func testToggleTask_PendingToDone() {
         // 给定：找到一个 pending 状态的任务
         let task = store.tasks.first { $0.status == .pending }!
@@ -28,6 +40,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：任务从 done 切换回 pending
+    @MainActor
     func testToggleTask_DoneToPending() {
         // 给定：先将一个任务设为 done
         let task = store.tasks.first { $0.status == .pending }!
@@ -44,6 +57,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：toggle 不存在的任务时不应崩溃，且任务列表不变
+    @MainActor
     func testToggleTask_NotFound() {
         // 给定：一个不存在的任务
         let fakeTask = StudyTask(
@@ -67,6 +81,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：只有一个任务时的 toggle 边界条件
+    @MainActor
     func testToggleTask_SingleTaskBoundary() {
         // 给定：只有一个任务的 Store
         let singleTask = StudyTask(
@@ -93,6 +108,7 @@ final class StoreLogicTests: XCTestCase {
     // MARK: - submitAnswer 测试
 
     /// 测试：正确答案 + 高自信度，掌握度应增加 0.08
+    @MainActor
     func testSubmitAnswer_CorrectHighConfidence() {
         // 给定：一道已知答案的题目
         let question = store.allQuestions.first!
@@ -109,6 +125,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：正确答案 + 低自信度，掌握度应增加 0.04
+    @MainActor
     func testSubmitAnswer_CorrectLowConfidence() {
         let question = store.allQuestions.first!
         let initialMastery = masteryFor(question: question)
@@ -122,6 +139,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：错误答案 + 高自信度，掌握度应减少 0.16
+    @MainActor
     func testSubmitAnswer_WrongHighConfidence() {
         let question = store.allQuestions.first!
         let initialMastery = masteryFor(question: question)
@@ -135,6 +153,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：错误答案 + 低自信度，掌握度应减少 0.10
+    @MainActor
     func testSubmitAnswer_WrongLowConfidence() {
         let question = store.allQuestions.first!
         let initialMastery = masteryFor(question: question)
@@ -148,6 +167,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：答案去除首尾空白后仍能正确匹配
+    @MainActor
     func testSubmitAnswer_AnswerTrimming() {
         let question = store.allQuestions.first!
 
@@ -160,6 +180,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：提交答题后 attempts 列表应插入到首位
+    @MainActor
     func testSubmitAnswer_InsertAtFront() {
         let question = store.allQuestions.first!
         let initialAttemptsCount = store.attempts.count
@@ -173,6 +194,7 @@ final class StoreLogicTests: XCTestCase {
     // MARK: - updateMastery 阈值测试（通过 submitAnswer 间接验证）
 
     /// 测试：掌握度超过 0.72 后状态变为 mastered
+    @MainActor
     func testUpdateMastery_ThresholdAbove0_72() {
         // 给定：一个初始掌握度为 0.70 的知识点（答对+高自信度后应为 0.78）
         let question = questionForKnowledgePoint(initialMastery: 0.70)
@@ -192,6 +214,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：掌握度低于 0.38 后状态变为 weak
+    @MainActor
     func testUpdateMastery_ThresholdBelow0_38() {
         // 给定：一个初始掌握度为 0.35 的知识点（答错+高自信度后应为 0.19）
         let question = questionForKnowledgePoint(initialMastery: 0.35)
@@ -211,6 +234,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：掌握度在 0.38 到 0.72 之间时状态为 inProgress
+    @MainActor
     func testUpdateMastery_BetweenThresholds() {
         // 给定：一个初始掌握度为 0.50 的知识点
         let question = questionForKnowledgePoint(initialMastery: 0.50)
@@ -228,6 +252,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：边界值——掌握度刚好达到 0.72 时状态变为 mastered
+    @MainActor
     func testUpdateMastery_BoundaryAt0_72() {
         // 给定：初始掌握度 0.64，答对+高自信度 (+0.08) = 0.72
         let question = questionForKnowledgePoint(initialMastery: 0.64)
@@ -245,6 +270,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：边界值——掌握度刚好低于 0.38 时状态变为 weak
+    @MainActor
     func testUpdateMastery_BoundaryAt0_38() {
         // 给定：初始掌握度 0.48，答错+高自信度 (-0.16) = 0.32
         let question = questionForKnowledgePoint(initialMastery: 0.48)
@@ -263,6 +289,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：掌握度不会溢出超过 1.0
+    @MainActor
     func testUpdateMastery_UpperBound() {
         // 给定：初始掌握度 0.98 的知识点
         let question = questionForKnowledgePoint(initialMastery: 0.98)
@@ -281,6 +308,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：掌握度不会下溢低于 0.0
+    @MainActor
     func testUpdateMastery_LowerBound() {
         // 给定：初始掌握度 0.05 的知识点
         let question = questionForKnowledgePoint(initialMastery: 0.05)
@@ -301,6 +329,7 @@ final class StoreLogicTests: XCTestCase {
     // MARK: - daysUntil 测试
 
     /// 测试：同一天的日期差应为 0
+    @MainActor
     func testDaysUntil_SameDay() {
         let now = Date.finalPilotDate(month: 5, day: 10, hour: 10)
         let target = Date.finalPilotDate(month: 5, day: 10, hour: 18)
@@ -311,6 +340,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：未来日期应返回正数
+    @MainActor
     func testDaysUntil_Future() {
         let now = Date.finalPilotDate(month: 5, day: 10, hour: 10)
         let target = Date.finalPilotDate(month: 5, day: 13, hour: 10)
@@ -321,6 +351,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：过去日期应返回负数
+    @MainActor
     func testDaysUntil_Past() {
         let now = Date.finalPilotDate(month: 5, day: 13, hour: 10)
         let target = Date.finalPilotDate(month: 5, day: 10, hour: 10)
@@ -331,12 +362,14 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：nil 日期应返回 nil
+    @MainActor
     func testDaysUntil_Nil() {
         let days = store.daysUntil(nil)
         XCTAssertNil(days)
     }
 
     /// 测试：跨月份的日期计算
+    @MainActor
     func testDaysUntil_CrossMonth() {
         let now = Date.finalPilotDate(month: 5, day: 30, hour: 10)
         let target = Date.finalPilotDate(month: 6, day: 3, hour: 10)
@@ -349,6 +382,7 @@ final class StoreLogicTests: XCTestCase {
     // MARK: - bucketOrder 测试（通过 tasks(track:) 间接验证）
 
     /// 测试：must 桶的任务排在 should 桶之前
+    @MainActor
     func testBucketOrder_MustBeforeShould() {
         // 给定：创建 must 和 should 的混合任务
         let mustTask = StudyTask(
@@ -371,6 +405,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：skip 桶的任务排在最后
+    @MainActor
     func testBucketOrder_SkipLast() {
         let mustTask = StudyTask(
             id: "t_must", track: .exam, bucket: .must,
@@ -390,6 +425,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：同 bucket 内按 minutes 降序排列
+    @MainActor
     func testBucketOrder_SameBucketByMinutesDesc() {
         let shortTask = StudyTask(
             id: "t_short", track: .exam, bucket: .must,
@@ -409,6 +445,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 测试：tasks(track:bucket:) 按指定 bucket 过滤
+    @MainActor
     func testTasks_FilterByBucket() {
         let mustTasks = store.tasks(track: .exam, bucket: .must)
         XCTAssertTrue(mustTasks.allSatisfy { $0.bucket == .must })
@@ -417,6 +454,7 @@ final class StoreLogicTests: XCTestCase {
     // MARK: - 辅助方法
 
     /// 获取与题目关联的知识点的当前掌握度
+    @MainActor
     private func masteryFor(question: QuizQuestion) -> Double {
         guard let course = store.courses.first(where: { $0.id == question.courseID }),
               let point = course.knowledgePoints.first(where: { $0.id == question.knowledgePointID }) else {
@@ -426,6 +464,7 @@ final class StoreLogicTests: XCTestCase {
     }
 
     /// 获取与题目关联的知识点的当前状态
+    @MainActor
     private func statusFor(question: QuizQuestion) -> KnowledgeStatus {
         guard let course = store.courses.first(where: { $0.id == question.courseID }),
               let point = course.knowledgePoints.first(where: { $0.id == question.knowledgePointID }) else {
@@ -436,6 +475,7 @@ final class StoreLogicTests: XCTestCase {
 
     /// 在 Store 中查找或构造一个具有指定初始掌握度的测试题目
     /// 由于 SeedData 是只读的，此方法通过替换整个 Course 来构造测试数据
+    @MainActor
     private func questionForKnowledgePoint(initialMastery: Double) -> QuizQuestion? {
         // 尝试在 SeedData 中找到第一个有问题的课程
         guard let seedCourse = SeedData.courses.first(where: { !$0.questions.isEmpty && !$0.knowledgePoints.isEmpty }) else {
