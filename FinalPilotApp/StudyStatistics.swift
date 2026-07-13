@@ -160,6 +160,7 @@ struct StudyStatistics {
     // MARK: - 从 Store 生成每日记录
     /// 从 FinalPilotStore 的现有数据生成 DailyStudyRecord 数组。
     /// 用于在尚未接入 Core Data 时，从 attempts 和 tasks 反推每日学习数据。
+    @MainActor
     static func generateDailyRecords(from store: FinalPilotStore) -> [DailyStudyRecord] {
         var records: [DailyStudyRecord] = []
         let calendar = Calendar.current

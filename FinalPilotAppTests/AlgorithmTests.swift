@@ -4,6 +4,7 @@ import XCTest
 // MARK: - AlgorithmTests
 /// 测试 StudyStatistics 中的纯算法逻辑。
 /// 覆盖艾宾浩斯遗忘曲线、学习热力图、掌握度变化模拟、正确率趋势等统计方法。
+@MainActor
 final class AlgorithmTests: XCTestCase {
 
     // MARK: - 艾宾浩斯遗忘曲线复习建议测试

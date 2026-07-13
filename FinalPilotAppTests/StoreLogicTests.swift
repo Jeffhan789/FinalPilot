@@ -4,6 +4,7 @@ import XCTest
 // MARK: - StoreLogicTests
 /// 测试 FinalPilotStore 的核心业务逻辑。
 /// 覆盖任务状态切换、答题提交、掌握度更新、日期计算和任务桶排序。
+@MainActor
 final class StoreLogicTests: XCTestCase {
 
     private var store: FinalPilotStore!

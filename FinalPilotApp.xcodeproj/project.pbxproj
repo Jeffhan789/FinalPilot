@@ -39,6 +39,7 @@
 		9CF3B86ED00917926FAB63A4 /* WidgetDataProvider+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123F2A7DA394ED5865F7F95A /* WidgetDataProvider+App.swift */; };
 		9F0116A25BEF9BB01BF22BC8 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA0573CF97A45153CFA910 /* Models.swift */; };
 		A3CF3652438199584EDA33E2 /* WidgetDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E057E081EF0DBD2862C2A /* WidgetDataProvider.swift */; };
+		F1A1B2C3D4E5F60718293A4B /* WidgetDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E057E081EF0DBD2862C2A /* WidgetDataProvider.swift */; };
 		A58DE90C25E70BD10363FA19 /* EmptyStateIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DC8EDA327C016443A95827 /* EmptyStateIllustrations.swift */; };
 		A82C40539A55E027498F11E8 /* DailyProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10828CF19735CD5B5783B /* DailyProgressWidget.swift */; };
 		B3F4336ABA0719DC938EBA02 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D815E04738AC5CC787A200C /* Foundation.framework */; };
@@ -410,6 +411,7 @@
 				30B7AA113DD5D4E33B9C1D49 /* StudySyncSnapshot.swift in Sources */,
 				0698617C0D81C576E41FAEF9 /* Theme.swift in Sources */,
 				9CF3B86ED00917926FAB63A4 /* WidgetDataProvider+App.swift in Sources */,
+				F1A1B2C3D4E5F60718293A4B /* WidgetDataProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

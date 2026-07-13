@@ -5,6 +5,7 @@ import CoreData
 // MARK: - DataMigrationTests
 /// 测试 SeedData 到 Core Data 的迁移逻辑。
 /// 覆盖实体创建、属性映射、关系建立和迁移幂等性。
+@MainActor
 final class DataMigrationTests: XCTestCase {
 
     private var dataController: DataController!
