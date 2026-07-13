@@ -195,7 +195,7 @@ struct StudyStatistics {
                 formatter.dateFormat = "yyyy-MM-dd"
                 let date = formatter.date(from: dateKey) ?? calendar.startOfDay(for: Date())
 
-                let proportion = store.attempts.count > 0 ? Double(total) / Double(store.attempts.count) : 0
+                let proportion = !store.attempts.isEmpty ? Double(total) / Double(store.attempts.count) : 0
                 let estimatedMinutes = Int(Double(totalTaskMinutes) * proportion)
                 let estimatedTasks = max(Int(Double(totalTaskCount) * proportion), total > 0 ? 1 : 0)
 
