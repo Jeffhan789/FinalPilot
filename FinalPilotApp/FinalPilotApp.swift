@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreData
+import UserNotifications
 
 @main
 struct FinalPilotApp: App {
@@ -81,4 +82,3 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         completionHandler()
     }
 }
-

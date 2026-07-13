@@ -1,8 +1,8 @@
 # FinalPilot（学呀学）
 
 ![Version](https://img.shields.io/badge/version-v2.0.0-orange?style=flat-square)
-![Swift](https://img.shields.io/badge/Swift-5.9+-f05138?style=flat-square&logo=swift)
-![iOS](https://img.shields.io/badge/iOS-17+-007AFF?style=flat-square&logo=apple)
+![Swift](https://img.shields.io/badge/Swift-6.0-f05138?style=flat-square&logo=swift)
+![iOS](https://img.shields.io/badge/iOS-18+-007AFF?style=flat-square&logo=apple)
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-blue?style=flat-square&logo=swift)
 ![CoreData](https://img.shields.io/badge/Core%20Data-green?style=flat-square)
 ![WidgetKit](https://img.shields.io/badge/WidgetKit-purple?style=flat-square)
@@ -43,7 +43,7 @@
 Project Name: XueYaXue (Learn & Learn)
 Project Codename: FinalPilot
 Project Positioning: iOS Final Exam Sprint Decision System based on Multi-Agent Collaboration, Cloud Computing, and Neural Network Analysis
-Current Stage: v0.1 Local MVP Built
+Current Stage: v2.0 engineering stabilization (app, widgets, persistence, notifications, and unit tests)
 Creation Date: 2026-05-01
 GitHub Repository: https://github.com/Jeffhan789/FinalPilot
 
@@ -143,7 +143,7 @@ I will continue to maintain:
 - Dual-track scheduling design for exam review and spring campus recruitment interviews added.
 - SwiftUI iOS project `FinalPilotApp.xcodeproj` created.
 - v0.1 Local MVP implemented: Today, Plan, Courses, Practice, and Career tabs.
-- Build verification passed on generic iOS device.
+- The shared Xcode scheme builds the app and widget extension and runs the unit-test target in CI.
 - Real exam dates synced: C310 set to 2026-05-13, E320 set to 2026-05-14, C315 set to 2026-05-26.
 - Today's tasks adjusted to prioritize C310 / E320 dual exams; C315 enters main review after May 14.
 - Mobile desktop display name changed to `学呀学`.
@@ -202,11 +202,7 @@ xcodebuild -project FinalPilotApp.xcodeproj \
   build
 ```
 
-Current verification result:
-
-```text
-BUILD SUCCEEDED
-```
+The same build and unit-test command is enforced by `.github/workflows/ci.yml`; failures are not suppressed.
 
 ---
 
@@ -219,7 +215,7 @@ BUILD SUCCEEDED
 项目名称：学呀学
 工程代号：FinalPilot
 项目定位：基于多智能体协作、云计算与神经网络分析的 iOS 期末复习冲刺决策系统
-当前阶段：v0.1 本地 MVP 已构建
+当前阶段：v2.0 工程化稳定阶段（App、Widget、持久化、通知与单元测试）
 创建日期：2026-05-01
 GitHub 仓库：https://github.com/Jeffhan789/FinalPilot
 
@@ -319,7 +315,7 @@ FinalPilot_期末复习App/
 - 已新增考试复习与春季校招面试并行的双轨调度设计。
 - 已创建 SwiftUI iOS 工程 `FinalPilotApp.xcodeproj`。
 - 已实现 v0.1 本地 MVP：今日、计划、课程、练习、校招五个 Tab。
-- 已通过 generic iOS device 构建验证。
+- 共享 Xcode Scheme 已纳入 App、Widget Extension 与单元测试 Target，并由 CI 执行真实构建和测试。
 - 已根据真实规划同步考试日期：C310 为 2026-05-13，E320 为 2026-05-14，C315 为 2026-05-26。
 - 已把今日任务改为 C310 / E320 双考试优先，C315 在 5 月 14 日后进入主复习。
 - 已将手机桌面显示名称改为 `学呀学`。
@@ -378,11 +374,7 @@ xcodebuild -project FinalPilotApp.xcodeproj \
   build
 ```
 
-当前验证结果：
-
-```text
-BUILD SUCCEEDED
-```
+同一套构建与单元测试命令由 `.github/workflows/ci.yml` 强制执行，失败不会被忽略。
 
 
 ---
