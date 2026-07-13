@@ -261,7 +261,7 @@ final class StudyReminderScheduler: ObservableObject {
     //        但如果有多个错题，不能同时发多条通知（用户会被轰炸），所以用 `index * 30` 错开发送：
     //        第 1 题 60 分钟后、第 2 题 90 分钟后、第 3 题 120 分钟后……保证用户一次只收到一条回顾提醒，有足够精力处理。
     //        只取最近 5 条错题（`prefix(5)`），是因为：1) 错题太多时分批处理更高效；2) 太旧的错题可能已经通过其他方式复习过了。
-    private func scheduleMistakeReviewReminders(store: FinalPilotStore) {
+    func scheduleMistakeReviewReminders(store: FinalPilotStore) {
         let wrongAttempts = store.attempts.filter { !$0.isCorrect }.prefix(5)
 
         for (index, attempt) in wrongAttempts.enumerated() {

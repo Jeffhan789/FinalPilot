@@ -1,6 +1,7 @@
 import Foundation
 import CoreData
 
+@MainActor
 final class FinalPilotStore: ObservableObject {
     @Published var courses: [Course]
     @Published var tasks: [StudyTask]
