@@ -4,6 +4,7 @@ import SwiftUI
 
 /// 本地通知管理器，负责权限请求、通知调度与取消
 /// 所有通知内容均为中文，适配 FinalPilot 学呀学考试冲刺场景
+@MainActor
 final class NotificationManager: ObservableObject {
     static let shared = NotificationManager()
 

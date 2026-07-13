@@ -216,41 +216,6 @@ final class FinalPilotStore: ObservableObject {
     //        2) 待办任务列表（WidgetTaskInfo）；3) 学习进度统计（WidgetProgressInfo）。
     //        选择 UserDefaults 而非 Core Data 共享容器的原因是：Widget 数据量小、结构简单、更新频繁，
     //        UserDefaults 的键值读写性能更优，且避免了 Core Data 并发上下文的复杂性。
-    func syncToWidget() {
-        // 同步考试信息
-        let examInfos = courses.compactMap { course -> WidgetExamInfo? in
-            guard let days = daysUntil(course.examDate) else { return nil }
-            return WidgetExamInfo(
-                id: course.id,
-                name: course.name.prefixName,
-                daysUntil: days,
-                examDate: course.examDate ?? Date()
-            )
-        }
-        WidgetDataProvider.shared.saveExams(examInfos)
-        
-        // 同步任务
-        let taskInfos = tasks.filter { $0.bucket == .must && $0.status != .done }.map { task -> WidgetTaskInfo in
-            WidgetTaskInfo(
-                id: task.id,
-                title: task.title,
-                subtitle: task.subtitle,
-                minutes: task.minutes,
-                isCompleted: task.status == .done
-            )
-        }
-        WidgetDataProvider.shared.saveTasks(taskInfos)
-        
-        // 同步进度
-        let progress = WidgetProgressInfo(
-            completionRate: completionRate,
-            studyMinutes: totalStudyMinutes,
-            totalTasks: tasks.filter { $0.bucket != .skip }.count,
-            completedTasks: tasks.filter { $0.status == .done }.count
-        )
-        WidgetDataProvider.shared.saveProgress(progress)
-    }
-
     // MARK: - Core Data Persistence
     
     // MARK: persistTask - Core Data 任务持久化（Upsert 模式）

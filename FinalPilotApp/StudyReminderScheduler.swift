@@ -7,6 +7,7 @@ import UserNotifications
 // UserNotifications 框架是系统级服务，UNUserNotificationCenter 是单例（`UNUserNotificationCenter.current()`）。
 //        本调度器作为 App 层的通知管理门面（Facade），封装了：权限检查、内容生成、时机计算、通知调度四大职责。
 //        所有通知操作都经过这里，避免分散在各业务逻辑中，便于统一管理通知 ID 命名规范、防止重复调度、控制频率配额。
+@MainActor
 final class StudyReminderScheduler: ObservableObject {
     static let shared = StudyReminderScheduler()
 
