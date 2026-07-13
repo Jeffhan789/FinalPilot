@@ -8,23 +8,9 @@ import CoreData
 @MainActor
 final class DataMigrationTests: XCTestCase {
 
-    private var dataController: DataController!
-    private var context: NSManagedObjectContext!
-
-    // MARK: - 生命周期
-
-    override func setUp() {
-        super.setUp()
-        // 使用内存存储，避免污染真实数据库
-        dataController = DataController(inMemory: true)
-        context = dataController.viewContext
-    }
-
-    override func tearDown() {
-        context = nil
-        dataController = nil
-        super.tearDown()
-    }
+    // Each test-case instance owns an in-memory Core Data stack.
+    private let dataController = DataController(inMemory: true)
+    private lazy var context = dataController.viewContext
 
     // MARK: - 迁移执行
 
@@ -85,7 +71,7 @@ final class DataMigrationTests: XCTestCase {
         XCTAssertEqual(entity?.title, "Agent 标准定义三要素")
         XCTAssertEqual(entity?.chapter, "C1-C2")
         XCTAssertEqual(entity?.difficulty, 3)
-        XCTAssertEqual(entity?.mastery, 0.30, accuracy: 0.001)
+        XCTAssertEqual(entity?.mastery ?? -1, 0.30, accuracy: 0.001)
         XCTAssertEqual(entity?.status, KnowledgeStatus.weak.rawValue)
     }
 

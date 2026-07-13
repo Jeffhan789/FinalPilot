@@ -7,20 +7,9 @@ import XCTest
 @MainActor
 final class StoreLogicTests: XCTestCase {
 
-    private var store: FinalPilotStore!
-
-    // MARK: - 生命周期
-
-    override func setUp() {
-        super.setUp()
-        // 使用纯内存 SeedData 初始化 Store，避免依赖 Core Data 持久化
-        store = FinalPilotStore()
-    }
-
-    override func tearDown() {
-        store = nil
-        super.tearDown()
-    }
+    // XCTest creates a fresh test-case instance for each test method, so this
+    // actor-isolated store remains independent without nonisolated setup hooks.
+    private var store = FinalPilotStore()
 
     // MARK: - toggleTask 测试
 

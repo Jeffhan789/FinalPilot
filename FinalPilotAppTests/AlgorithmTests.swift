@@ -218,7 +218,7 @@ final class AlgorithmTests: XCTestCase {
         let days = 7
 
         let points = StudyStatistics.masteryHistoryPoints(courses: [course], days: days)
-            .filter { $0.courseName == course.name.prefixName || $0.courseName == course.name }
+            .filter { $0.colorKey == course.colorKey }
 
         XCTAssertEqual(points.count, days)
         let dayIndices = points.map { $0.dayIndex }.sorted()
