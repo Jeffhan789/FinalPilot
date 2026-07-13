@@ -74,7 +74,7 @@ struct ConfettiView: View {
 
                     guard opacity > 0, y < size.height + 50, y > -50, x > -50, x < size.width + 50 else { continue }
 
-                    var transform = CGAffineTransform.identity
+                    let transform = CGAffineTransform.identity
                         .translatedBy(x: x, y: y)
                         .rotated(by: rotation)
 
