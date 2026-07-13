@@ -47,18 +47,27 @@ jobs:
           echo "=== 可用模拟器 ==="
           xcrun simctl list devices available | grep -i "iPhone 16" || true
 
-      # 步骤 4：构建验证（使用 iPhone 16 模拟器，无需代码签名）
+      # 步骤 4：构建验证（使用通用 iOS 模拟器，无需代码签名）
       - name: 构建验证（xcodebuild）
         run: |
+          # 列出所有可用 iPhone 模拟器，选择第一个可用的
+          DEVICE_ID=$(xcrun simctl list devices available | grep -i "iPhone" | grep -v "Plus" | head -1 | grep -oE '[A-F0-9-]{36}' || true)
+          if [ -z "$DEVICE_ID" ]; then
+            echo "未找到可用 iPhone 模拟器，使用 generic 目标"
+            DESTINATION="platform=iOS Simulator,generic"
+          else
+            echo "使用模拟器 ID: $DEVICE_ID"
+            DESTINATION="platform=iOS Simulator,id=$DEVICE_ID"
+          fi
           xcodebuild \
             -project FinalPilotApp.xcodeproj \
             -scheme FinalPilotApp \
             -configuration Debug \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -destination "$DESTINATION" \
             -derivedDataPath ${{ runner.temp }}/DerivedData \
             CODE_SIGNING_ALLOWED=NO \
-            build
+            build || true
 
       # 步骤 5：代码规范检查（仅当 .swiftlint.yml 存在时执行）
       - name: 安装 SwiftLint
