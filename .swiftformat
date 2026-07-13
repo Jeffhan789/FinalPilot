@@ -1,0 +1,184 @@
+# ============================================
+# FinalPilot (学呀学) - SwiftFormat 代码格式化配置
+# ============================================
+# SwiftFormat 版本要求: >= 0.52.0
+# 使用方式: swiftformat --config .swiftformat .
+# ============================================
+
+# ---- 基础设置 ----
+--swiftversion 5.9
+
+# ---- 缩进 ----
+--indent 4
+--indentcase false
+--indentstrings spaced
+--ifdef indent
+--xcodeindentation enabled
+
+# ---- 分号 ----
+--semicolons inline
+
+# ---- self 使用 ----
+--self remove              # 移除冗余的 self
+--selfrequired 
+--initcodernil false
+
+# ---- 参数换行 ----
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first
+--wrapconditions before-first
+--wrapreturntype preserve
+--wrapternary default
+--wraptypealiases before-first
+
+# ---- 声明组织 ----
+--organizetypes class,struct,enum,extension,actor
+--organizeexports never
+--organizeheaders alpha
+--organizeimports alpha
+--organizeclassaccessories alphabetize
+--organizecomputedaccessories alphabetize
+--organizeenumcases alphabetize
+--organizefunctions alphabetize
+--organizeproperties alphabetize
+--organizetypealiases alphabetize
+--organizevariables alphabetize
+
+# ---- 排序 ----
+--sortedimports always
+--sortedpatterns never
+
+# ---- 换行 ----
+--allman false
+--closingparen balanced
+--commas always
+--decimalgrouping 3,4
+--elseposition same-line
+--emptybraces spaced
+--exponentcase lowercase
+--exponentgrouping disabled
+--fractiongrouping disabled
+--guardelse next-line
+--hexgrouping 4,8
+--hexliteralcase uppercase
+--importgrouping alpha
+--linebreaks lf
+--modifierorder
+--nospaceoperators ..<, ...
+--operatorfunc spaced
+--patternlet hoist
+--shortoptionals always
+--stripunusedargs closure-only
+--trailingclosures
+--trimwhitespace always
+--voidtype tuple
+
+# ---- 空格 ----
+--spacearoundoperators enabled
+--spacearounddelimiters balanced
+--spacerangeoperators always
+--spacenefore typecolon
+--spacewithinparens disabled
+--spacewithinbrackets disabled
+--spacewithinbraces disabled
+--spacewithingenerics disabled
+--spacewithincollectordisabled
+--spacearoundbraces disabled
+--spaceinsidebrackets disabled
+--spaceinsidebraces disabled
+--spaceinsidecomments disabled
+--spacearoundgenerics disabled
+
+# ---- 格式化规则开关 ----
+--enable blankLinesAroundMark
+--enable blankLinesAtEndOfScope
+--enable blankLinesAtStartOfScope
+--enable blankLinesBetweenImports
+--enable blankLinesBetweenScopes
+--enable braces
+--enable consecutiveBlankLines
+--enable consecutiveSpaces
+--enable duplicateImports
+--enable elseOnSameLine
+--enable emptyBraces
+--enable extensionAccessControl
+--enable hoistPatternLet
+--enable initCoderUnavailable
+--enable isEmpty
+--enable markTypes
+--enable modifierOrder
+--enable organizeDeclarations
+--enable redundantBacktick
+--enable redundantBreak
+--enable redundantClosure
+--enable redundantExtensionACL
+--enable redundantFileprivate
+--enable redundantGet
+--enable redundantInit
+--enable redundantLet
+--enable redundantLetError
+--enable redundantNilInit
+--enable redundantObjc
+--enable redundantParens
+--enable redundantPattern
+--enable redundantRawValues
+--enable redundantReturn
+--enable redundantSelf
+--enable redundantType
+--enable redundantVoidReturnType
+--enable semicolons
+--enable sortedImports
+--enable spaceAroundBraces
+--enable spaceAroundBrackets
+--enable spaceAroundComments
+--enable spaceAroundGenerics
+--enable spaceAroundOperators
+--enable spaceAroundParens
+--enable strongifiedSelf
+--enable trailingClosures
+--enable trailingCommas
+--enable trailingSpace
+--enable typeSugar
+--enable unusedArguments
+--enable void
+--enable wrap
+--enable wrapArguments
+--enable wrapAttributes
+--enable wrapConditionalBodies
+--enable wrapEnumCases
+--enable wrapMultilineStatementBraces
+--enable wrapSwitchCases
+--enable wrapTernaryBodies
+--enable yodaConditions
+
+# ---- 禁用规则（与项目风格冲突或不适用） ----
+--disable blankLinesBetweenScopes
+--disable fileHeader
+--disable numberFormatting
+--disable preferKeyPath
+--disable wrapMultilineStatementBraces
+--disable andOperator
+--disable assertionFailures
+--disable anyObjectProtocol
+--disable acronyms
+--disable duplicateImports
+--disable genericExtensions
+--disable headerFileName
+--disable leadingDelimiters
+--disable linebreakAtEndOfFile
+--disable linebreaks
+--disable opaqueGenericParameters
+--disable preferForLoop
+--disable preferDoubleQuotes
+--disable redundantType
+--disable sortedSwitchCases
+--disable strongOutlets
+--disable todos
+--disable typeSugar
+--disable unusedArguments
+--disable wrapConditionalBodies
+--disable wrapEnumCases
+--disable wrapSwitchCases
+--disable wrapTernaryBodies
+--disable yodaConditions

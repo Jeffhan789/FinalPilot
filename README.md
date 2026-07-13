@@ -8,6 +8,7 @@
 ![WidgetKit](https://img.shields.io/badge/WidgetKit-purple?style=flat-square)
 ![Charts](https://img.shields.io/badge/Charts-Framework-pink?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+![CI](https://github.com/Jeffhan789/FinalPilot/actions/workflows/ci.yml/badge.svg?branch=main)
 
 > English first. 中文版见后文。
 
