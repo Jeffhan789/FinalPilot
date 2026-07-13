@@ -105,7 +105,9 @@ final class DataController: ObservableObject {
             object: nil,
             queue: .main
         ) { [weak self] _ in
-            self?.save()
+            Task { @MainActor [weak self] in
+                self?.save()
+            }
         }
 
         NotificationCenter.default.addObserver(
@@ -113,7 +115,9 @@ final class DataController: ObservableObject {
             object: nil,
             queue: .main
         ) { [weak self] _ in
-            self?.save()
+            Task { @MainActor [weak self] in
+                self?.save()
+            }
         }
     }
 
