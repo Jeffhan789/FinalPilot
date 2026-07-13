@@ -5,8 +5,18 @@ import UserNotifications
 @main
 struct FinalPilotApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @StateObject private var dataController = DataController.shared
-    @StateObject private var store = FinalPilotStore()
+    @StateObject private var dataController: DataController
+    @StateObject private var store: FinalPilotStore
+    private let isRunningTests: Bool
+
+    init() {
+        let isRunningTests = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+        self.isRunningTests = isRunningTests
+        _dataController = StateObject(
+            wrappedValue: isRunningTests ? DataController(inMemory: true) : DataController.shared
+        )
+        _store = StateObject(wrappedValue: FinalPilotStore())
+    }
 
     var body: some Scene {
         WindowGroup {
@@ -15,6 +25,9 @@ struct FinalPilotApp: App {
                 .environmentObject(dataController)
                 .environment(\.managedObjectContext, dataController.viewContext)
                 .onAppear {
+                    // Unit tests run inside the application process. Keep the test
+                    // host deterministic and avoid permission prompts or widget IO.
+                    guard !isRunningTests else { return }
                     // 首次启动：从 SeedData 迁移到 Core Data
                     CoreDataMigrationHelper.migrateSeedDataIfNeeded(context: dataController.viewContext)
                     // 同步 Widget 数据

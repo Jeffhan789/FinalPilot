@@ -48,14 +48,29 @@ jobs:
 
       - name: 构建并执行单元测试
         run: |
+          set +e
           xcodebuild \
             -project FinalPilotApp.xcodeproj \
             -scheme FinalPilotApp \
             -configuration Debug \
             -destination "platform=iOS Simulator,id=${{ steps.simulator.outputs.id }}" \
             -derivedDataPath "${{ runner.temp }}/DerivedData" \
+            -resultBundlePath "${{ runner.temp }}/FinalPilotTests.xcresult" \
             CODE_SIGNING_ALLOWED=NO \
             test
+          status=$?
+          set -e
+
+          if [ "$status" -ne 0 ]; then
+            echo "::group::XCTest result summary"
+            xcrun xcresulttool get test-results summary \
+              --path "${{ runner.temp }}/FinalPilotTests.xcresult" || true
+            xcrun xcresulttool get test-results tests \
+              --path "${{ runner.temp }}/FinalPilotTests.xcresult" || true
+            echo "::endgroup::"
+          fi
+
+          exit "$status"
 
   lint:
     runs-on: macos-15
